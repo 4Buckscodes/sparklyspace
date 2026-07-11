@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -117,6 +118,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
+        <Analytics />
         
         {/* Floating Quick Action Contacts for Mobile */}
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-200 px-4 py-3 flex gap-3 shadow-lg">
