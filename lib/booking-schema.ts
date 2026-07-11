@@ -1,0 +1,51 @@
+import { z } from "zod";
+
+export const BookingSchema = z.object({
+  serviceId: z.string().min(1, "Please select a service"),
+  postcode: z.string().min(3, "Postcode must be at least 3 characters"),
+  address1: z.string().min(3, "Please enter your address"),
+  address2: z.string().optional(),
+  city: z.string().min(2, "Please enter your city or town"),
+  propertyType: z.string().min(1, "Please select your property type"),
+  bedrooms: z.number().min(0, "Bedrooms cannot be negative").max(10, "For properties with more than 10 bedrooms, please contact us directly"),
+  bathrooms: z.number().min(0, "Bathrooms cannot be negative").max(10, "For properties with more than 10 bathrooms, please contact us directly"),
+  preferredDate: z.string().min(1, "Please select a date"),
+  timeWindow: z.string().min(1, "Please select a preferred time window"),
+  frequency: z.enum(["one-off", "weekly", "bi-weekly", "monthly"]),
+  extras: z.array(z.string()),
+  ecoFriendly: z.boolean(),
+  parking: z.string().min(1, "Please specify parking details"),
+  access: z.string().min(1, "Please specify how we can access your property"),
+  name: z.string().min(2, "Full name must be at least 2 characters"),
+  phone: z.string().min(10, "Please enter a valid UK phone number (at least 10 digits)"),
+  email: z.string().email("Please enter a valid email address"),
+  notes: z.string().optional(),
+  referralSource: z.string().optional(),
+  marketingConsent: z.boolean(),
+});
+
+export type BookingFormData = z.infer<typeof BookingSchema>;
+
+export const defaultBookingValues: BookingFormData = {
+  serviceId: "residential",
+  postcode: "",
+  address1: "",
+  address2: "",
+  city: "Bournemouth",
+  propertyType: "Flat/Apartment",
+  bedrooms: 2,
+  bathrooms: 1,
+  preferredDate: "",
+  timeWindow: "morning",
+  frequency: "one-off",
+  extras: [],
+  ecoFriendly: true,
+  parking: "free-onsite",
+  access: "someone-home",
+  name: "",
+  phone: "",
+  email: "",
+  notes: "",
+  referralSource: "",
+  marketingConsent: false,
+};
