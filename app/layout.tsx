@@ -35,8 +35,22 @@ export const metadata: Metadata = {
     description: "Professional, reliable, and eco-friendly cleaning services in Bournemouth, Christchurch, and Poole.",
     url: "https://sparklyspace.co.uk",
     siteName: "Sparkly Space Cleaning Services",
+    images: [
+      {
+        url: "https://sparklyspace.co.uk/logo.png",
+        width: 600,
+        height: 900,
+        alt: "Sparkly Space Cleaning Services Logo",
+      },
+    ],
     locale: "en_GB",
     type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Sparkly Space Cleaning Services | Bournemouth, Poole & Christchurch",
+    description: "Professional, reliable, and eco-friendly cleaning services in Bournemouth, Christchurch, and Poole.",
+    images: ["https://sparklyspace.co.uk/logo.png"],
   },
   robots: {
     index: true,
