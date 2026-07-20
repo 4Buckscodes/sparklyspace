@@ -26,10 +26,10 @@ export default function ContactPage() {
             <span>Here to Help</span>
           </span>
           <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight sm:text-5xl">
-            Contact Sparkly Space
+            Get in Touch with Sparkly Space
           </h1>
           <p className="mt-4 text-lg text-slate-500">
-            Have questions about our services, pricing, or want to discuss a custom clean? We'd love to hear from you.
+            Have questions about our cleaning standards, pricing structure, or custom options? We are here to provide clear answers and tailored solutions.
           </p>
         </div>
 
@@ -123,9 +123,9 @@ export default function ContactPage() {
               </div>
 
               <div className="mt-8 bg-sky-50 border border-sky-100 rounded-2xl p-6 text-center">
-                <h3 className="text-sky-800 font-bold mb-2">Outside Our Postcode Area?</h3>
+                <h3 className="text-sky-800 font-bold mb-2">Outside Our standard Postcode Area?</h3>
                 <p className="text-sky-700/80 text-sm leading-relaxed mb-4">
-                  If your property postcode falls outside BH1-BH23, feel free to drop us a message anyway! We occasionally travel further for larger deep cleans or commercial assignments.
+                  If your property falls outside BH1-BH23, please get in touch anyway! We frequently accommodate custom deep cleans, office contracts, and holiday let portfolios across Dorset.
                 </p>
                 <Link
                   href="/book"

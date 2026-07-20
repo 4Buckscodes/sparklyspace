@@ -21,23 +21,23 @@ export interface FAQItem {
 export const coreValues: CoreValue[] = [
   {
     iconName: "ShieldCheck",
-    title: "100% Insured & Vetted",
-    description: "Our professionals are fully background-checked, insured, and thoroughly trained to clean with absolute care.",
+    title: "Vetted & Fully Insured",
+    description: "Your peace of mind is our priority. Every team member undergoes rigorous background checks and comprehensive training, backed by full public liability insurance.",
   },
   {
     iconName: "Leaf",
-    title: "Eco-Friendly Products",
-    description: "We offer non-toxic, child-safe, and pet-friendly cleaning options to protect your home and the local environment.",
+    title: "Eco-Conscious & Child-Safe",
+    description: "We exclusively use non-toxic, child-safe, and pet-friendly cleaning agents. Your home stays fresh and spotless while protecting the local Dorset environment.",
   },
   {
     iconName: "Heart",
-    title: "Customized Priority",
-    description: "You decide what we focus on. Add priority rooms, custom parking instructions, or pet alerts to your schedule.",
+    title: "Tailored to Your Home",
+    description: "Every home is unique. Customize your clean by specifying priority tasks, adding entry/parking details, and sharing guidance on pets for a truly personal service.",
   },
   {
     iconName: "CheckCircle2",
-    title: "Satisfied Guarantee",
-    description: "We are committed to perfection. If any corner is not cleaned to your standards, we will make it right.",
+    title: "Our Spotless Guarantee",
+    description: "We hold ourselves to the highest standards. If any corner does not meet your expectations, let us know within 24 hours and we will re-clean it free of charge.",
   },
 ];
 
@@ -48,7 +48,7 @@ export const testimonials: Testimonial[] = [
     initials: "SM",
     service: "Weekly Clean",
     rating: 5,
-    comment: "Sparkly Space has been cleaning our home weekly for three months. It is absolutely spotless, and the team is so friendly and careful around our golden retriever!",
+    comment: "Finding a reliable cleaner was a challenge until we found Sparkly Space. They have been cleaning our home weekly, and the attention to detail is remarkable. Polite, punctual, and brilliant with our dog!",
   },
   {
     name: "James D.",
@@ -56,7 +56,7 @@ export const testimonials: Testimonial[] = [
     initials: "JD",
     service: "End of Tenancy",
     rating: 5,
-    comment: "Outstanding End-of-Tenancy clean. The inventory checkout went through without a single issue, and I got my full deposit back. Well worth it!",
+    comment: "Absolutely flawless End-of-Tenancy clean. The team left the flat looking brand new. The inventory inspection went through without a single issue, securing my deposit back in full.",
   },
   {
     name: "Helen P.",
@@ -64,25 +64,25 @@ export const testimonials: Testimonial[] = [
     initials: "HP",
     service: "Eco Residential",
     rating: 5,
-    comment: "I love the option to request eco-friendly products. The cleaning is top-tier, and booking through the website onto WhatsApp was incredibly quick and seamless.",
+    comment: "I love that their eco-friendly products are safe for children and pets. The booking wizard is incredibly simple, and the WhatsApp confirmation took less than two minutes. Highly recommended!",
   },
 ];
 
 export const faqs: FAQItem[] = [
   {
     q: "Do I need to be home for the clean?",
-    a: "No! Many of our clients leave keys in a secure lockbox or leave them with neighbors. You can specify access instructions directly in the booking wizard.",
+    a: "Not at all. Many of our regular clients are out during their scheduled cleans. You can safely provide lockbox codes, key exchange locations, or entry instructions in the booking wizard, which are securely handled by our vetted staff.",
   },
   {
-    q: "Are cleaning products and equipment included?",
-    a: "Yes, our cleaners bring their own professional cleaning supplies and state-of-the-art vacuums. If you have specific preferences (such as using your own vacuum or calling for eco-friendly supplies), we accommodate them at no extra charge.",
+    q: "Are professional cleaning products and equipment provided?",
+    a: "Yes, our specialists arrive fully equipped with professional-grade, eco-friendly supplies and advanced vacuum filtration systems. If you have specialized products or appliances you prefer we use, simply specify it in your booking request.",
   },
   {
-    q: "How does the pricing and WhatsApp checkout work?",
-    a: "You select your service and room count. The website calculates an estimate based on standard properties. Once finalized, the form compiles a structured text message and hands it to WhatsApp. We confirm availability, coordinate access, and agree on the final quotation with you.",
+    q: "How do the pricing estimate and booking handoff work?",
+    a: "We believe in transparency. Select your property metrics to get an instant, honest estimate. Confirming your request packages the details into a pre-filled WhatsApp text directly to our team. We then confirm availability and finalise slot timings with you.",
   },
   {
-    q: "Is there a minimum booking charge?",
-    a: "Yes, our minimum charge is £50 for Residential cleaning, £60 for Airbnb cleaning, £80 for Deep cleaning, and £120 for End-of-Tenancy. This ensures we can compensate our professional cleaning teams fairly for travel and setup.",
+    q: "Why do you have minimum booking charges?",
+    a: "Our minimum charges (e.g. £50 for Residential, £60 for Airbnb, £80 for Deep Cleaning) ensure we can compensate our professional cleaners fairly, cover travel costs, and maintain high standards of training, insurance, and service consistency.",
   },
 ];

@@ -26,10 +26,10 @@ export default function AboutPage() {
             <span>Our Story</span>
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-6">
-            We Clean, So You Can Focus on What Matters.
+            Immaculate Spaces. More Free Time. Complete Peace of Mind.
           </h1>
           <p className="text-lg sm:text-xl text-sky-100 max-w-2xl mx-auto font-light leading-relaxed">
-            At Sparkly Space, we believe a clean home is a happy, healthy space. We provide premium domestic and commercial cleaning services across Bournemouth, Christchurch, and Poole.
+            At Sparkly Space, we elevate standard domestic and commercial cleaning into a premium, worry-free service across Bournemouth, Christchurch, and Poole. We manage the details, so you can enjoy your environment.
           </p>
         </div>
       </section>
@@ -52,13 +52,13 @@ export default function AboutPage() {
           {/* Left Column */}
           <div className="space-y-6">
             <h2 className="text-3xl font-bold text-slate-900 tracking-tight">
-              Premium Clean. Reliable Service. Trustworthy Team.
+              Pristine Standards. Consistent Quality. Trustworthy Care.
             </h2>
             <p className="text-slate-600 leading-relaxed text-base">
-              Sparkly Space was founded to take the stress out of household chores. We understood that in today's fast-paced world, your time is extremely valuable. Spending weekends vacuuming, dusting, and scrubbing bathrooms is time taken away from family, hobbies, and personal growth.
+              Sparkly Space was established to take the burden out of household chore routines. In a busy, modern world, your weekends shouldn't be spent scrubbing bathrooms or dusting cabinets. We exist to hand you back your valuable free time so you can spend it with family, hobbies, and what truly matters.
             </p>
             <p className="text-slate-600 leading-relaxed text-base">
-              That's why we built a service centered around convenience, trust, and immaculate detail. We train our cleaning specialists to meet high cleaning standards, ensuring every corner sparkles.
+              That's why our cleaning services are designed around three core pillars: convenience, absolute trust, and meticulous attention to detail. Every member of our team is fully vetted and trained to exceed standard housekeeping metrics, ensuring every space sparkles.
             </p>
             <div className="pt-4 flex flex-wrap gap-4">
               <Link
@@ -82,9 +82,9 @@ export default function AboutPage() {
               <div className="h-10 w-10 bg-sky-50 rounded-xl flex items-center justify-center text-sky-600 mb-4">
                 <ShieldCheck className="h-5 w-5" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2">100% Trustworthy</h3>
+              <h3 className="text-base font-bold text-slate-900 mb-2">Vetted & Insured</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                All our cleaners are fully vetted, background checked, and highly trained. Your home is safe in our hands.
+                All cleaners are fully vetted, background checked, and highly trained. Your home is covered by our comprehensive insurance policy.
               </p>
             </div>
 
@@ -92,9 +92,9 @@ export default function AboutPage() {
               <div className="h-10 w-10 bg-emerald-50 rounded-xl flex items-center justify-center text-emerald-600 mb-4">
                 <Leaf className="h-5 w-5" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2">Eco-Friendly First</h3>
+              <h3 className="text-base font-bold text-slate-900 mb-2">Eco-Conscious Cleaning</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                We prioritize safe, biodegradable cleaning solutions that protect children, pets, and our beautiful Dorset environment.
+                We prioritize biodegradable, plant-based products. Safe for children and pets, gentle on the Dorset environment.
               </p>
             </div>
 
@@ -102,9 +102,9 @@ export default function AboutPage() {
               <div className="h-10 w-10 bg-pink-50 rounded-xl flex items-center justify-center text-pink-600 mb-4">
                 <Heart className="h-5 w-5" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2">Customer Care</h3>
+              <h3 className="text-base font-bold text-slate-900 mb-2">Bespoke Customization</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                We tailor our routines to your needs. Priority areas, parking instructions, and pet directions are always respected.
+                We customize our cleans to your property. Leave instructions on priority rooms, parking, lockbox codes, or pets.
               </p>
             </div>
 
@@ -112,9 +112,9 @@ export default function AboutPage() {
               <div className="h-10 w-10 bg-amber-50 rounded-xl flex items-center justify-center text-amber-600 mb-4">
                 <Check className="h-5 w-5" />
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-2">Spotless Standard</h3>
+              <h3 className="text-base font-bold text-slate-900 mb-2">Our Spotless Standard</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                We clean under furniture, inside cabinets, and along crevices. If something is not perfect, we make it right.
+                We clean behind, under, and around. If a detail doesn't meet your expectations, let us know within 24 hours and we'll re-clean it free.
               </p>
             </div>
           </div>

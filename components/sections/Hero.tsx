@@ -12,15 +12,15 @@ export default function Hero() {
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Trust Signal Badge */}
         <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-300 border border-sky-500/20 mb-6 animate-fade-in-up">
-          <span>Premium Home Cleaning in Bournemouth, Poole & Christchurch</span>
+          <span>Your Trusted Local Cleaning Specialists in Bournemouth, Poole & Christchurch</span>
         </span>
 
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight max-w-4xl mx-auto">
-          We Clean, So You Can Focus on <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-300">What Matters.</span>
+          Step Into a Spotless Space. <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-300">Reclaim Your Time.</span>
         </h1>
 
         <p className="text-lg sm:text-xl text-slate-300 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
-          Professional, fully vetted local cleaners. Dynamic configuration, eco-friendly options, and pre-filled WhatsApp handoff for fast, hassle-free booking.
+          Professional, vetted, and fully insured cleaning specialists. Get a transparent price estimate and book via WhatsApp in under two minutes.
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
