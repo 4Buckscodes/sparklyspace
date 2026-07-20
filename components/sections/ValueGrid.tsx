@@ -21,7 +21,7 @@ export default function ValueGrid({ items }: ValueGridProps) {
           Why Choose Sparkly Space?
         </h2>
         <p className="mt-4 text-slate-500 text-sm">
-          We are dedicated to providing a trustworthy, premium local service with dynamic customization.
+          We offer reliable, top-quality Cleaning services tailored just for you.
         </p>
       </div>
 
