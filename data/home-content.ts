@@ -75,7 +75,7 @@ export const faqs: FAQItem[] = [
   },
   {
     q: "Are professional cleaning products and equipment provided?",
-    a: "Yes, our specialists arrive fully equipped with professional-grade supplies and advanced vacuum filtration systems. You can also opt-in to request eco-friendly, non-toxic products when specifying your booking preferences.",
+    a: "As part of our safety services, we encourage homes to provide their equipments to prevent the spread of germs, Meanwhile our specialists are more than happy to arrive fully equipped with professional-grade supplies and advanced vacuum filtration systems. You can also opt-in to request eco-friendly, non-toxic products when specifying your booking preferences.",
   },
   {
     q: "How do the pricing estimate and booking handoff work?",

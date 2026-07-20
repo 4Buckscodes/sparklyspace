@@ -32,27 +32,27 @@ export default function Footer() {
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Our Services</h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link href="/services/residential-cleaning" className="hover:text-white transition-colors duration-200">
+                <Link href="/services" className="hover:text-white transition-colors duration-200">
                   Residential Cleaning
                 </Link>
               </li>
               <li>
-                <Link href="/services/deep-cleaning" className="hover:text-white transition-colors duration-200">
+                <Link href="/services" className="hover:text-white transition-colors duration-200">
                   Deep Cleaning
                 </Link>
               </li>
               <li>
-                <Link href="/services/end-of-tenancy-cleaning" className="hover:text-white transition-colors duration-200">
+                <Link href="/services" className="hover:text-white transition-colors duration-200">
                   End of Tenancy
                 </Link>
               </li>
               <li>
-                <Link href="/services/airbnb-cleaning" className="hover:text-white transition-colors duration-200">
+                <Link href="/services" className="hover:text-white transition-colors duration-200">
                   Airbnb &amp; Holiday Let
                 </Link>
               </li>
               <li>
-                <Link href="/services/commercial-cleaning" className="hover:text-white transition-colors duration-200">
+                <Link href="/services" className="hover:text-white transition-colors duration-200">
                   Commercial Cleaning
                 </Link>
               </li>
