@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Sparkly Space Cleaning Services",
     default: "Sparkly Space Cleaning Services | Bournemouth, Christchurch & Poole",
   },
-  description: "Sparkly Space provides professional, reliable, and eco-friendly cleaning services in Bournemouth, Christchurch, and Poole. Get an instant estimate and book via WhatsApp in minutes.",
+  description: "Sparkly Space provides professional, reliable cleaning services with eco-friendly options in Bournemouth, Christchurch, and Poole. Get an instant estimate and book via WhatsApp in minutes.",
   metadataBase: new URL("https://sparklyspace.co.uk"),
   alternates: {
     canonical: "/",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "Sparkly Space Cleaning Services",
-    description: "Professional, reliable, and eco-friendly cleaning services in Bournemouth, Christchurch, and Poole.",
+    description: "Professional, reliable cleaning services with optional eco-friendly products in Bournemouth, Christchurch, and Poole.",
     url: "https://sparklyspace.co.uk",
     siteName: "Sparkly Space Cleaning Services",
     images: [
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Sparkly Space Cleaning Services | Bournemouth, Poole & Christchurch",
-    description: "Professional, reliable, and eco-friendly cleaning services in Bournemouth, Christchurch, and Poole.",
+    description: "Professional, reliable cleaning services with optional eco-friendly products in Bournemouth, Christchurch, and Poole.",
     images: ["https://sparklyspace.co.uk/logo.png"],
   },
   robots: {

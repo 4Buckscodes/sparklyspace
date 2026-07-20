@@ -26,8 +26,8 @@ export const coreValues: CoreValue[] = [
   },
   {
     iconName: "Leaf",
-    title: "Eco-Conscious & Child-Safe",
-    description: "We exclusively use non-toxic, child-safe, and pet-friendly cleaning agents. Your home stays fresh and spotless while protecting the local Dorset environment.",
+    title: "Optional Eco-Conscious Products",
+    description: "We offer the option to specify non-toxic, child-safe, and pet-friendly cleaning agents for your booking, keeping your family and the Dorset environment protected.",
   },
   {
     iconName: "Heart",
@@ -62,9 +62,9 @@ export const testimonials: Testimonial[] = [
     name: "Helen P.",
     location: "Christchurch (BH23)",
     initials: "HP",
-    service: "Eco Residential",
+    service: "Residential (Eco Option)",
     rating: 5,
-    comment: "I love that their eco-friendly products are safe for children and pets. The booking wizard is incredibly simple, and the WhatsApp confirmation took less than two minutes. Highly recommended!",
+    comment: "I love that we can easily opt for eco-friendly products. The booking wizard is incredibly simple, and the WhatsApp confirmation took less than two minutes. Highly recommended!",
   },
 ];
 
@@ -75,7 +75,7 @@ export const faqs: FAQItem[] = [
   },
   {
     q: "Are professional cleaning products and equipment provided?",
-    a: "Yes, our specialists arrive fully equipped with professional-grade, eco-friendly supplies and advanced vacuum filtration systems. If you have specialized products or appliances you prefer we use, simply specify it in your booking request.",
+    a: "Yes, our specialists arrive fully equipped with professional-grade supplies and advanced vacuum filtration systems. You can also opt-in to request eco-friendly, non-toxic products when specifying your booking preferences.",
   },
   {
     q: "How do the pricing estimate and booking handoff work?",

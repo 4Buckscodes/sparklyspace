@@ -94,7 +94,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-base font-bold text-slate-900 mb-2">Eco-Conscious Cleaning</h3>
               <p className="text-slate-500 text-sm leading-relaxed">
-                We prioritize biodegradable, plant-based products. Safe for children and pets, gentle on the Dorset environment.
+                We offer the option to request biodegradable, plant-based products—safe for children and pets, and gentle on the Dorset environment.
               </p>
             </div>
 

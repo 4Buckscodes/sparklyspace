@@ -39,7 +39,7 @@ export const defaultBookingValues: BookingFormData = {
   timeWindow: "morning",
   frequency: "one-off",
   extras: [],
-  ecoFriendly: true,
+  ecoFriendly: false,
   parking: "free-onsite",
   access: "someone-home",
   name: "",

@@ -115,7 +115,7 @@ SCHEDULE
 
 OPTIONS & ACCESS
 ---------------------------------
-- Eco-friendly Products: ${data.ecoFriendly ? "Yes (Preferred)" : "No preference"}
+- Eco-friendly Products: ${data.ecoFriendly ? "Yes (Requested)" : "No (Standard products)"}
 - Parking: ${parkingLabel}
 - Access: ${accessLabel}
 ${extrasSection}

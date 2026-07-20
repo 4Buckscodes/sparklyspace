@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Book Online | Sparkly Space Cleaning Services",
-  description: "Get an instant cleaning estimate and configure your booking details. Vetted cleaners and eco-friendly preferences in Bournemouth, Poole & Christchurch.",
+  description: "Get an instant cleaning estimate and configure your booking details. Vetted cleaners and optional eco-friendly products in Bournemouth, Poole & Christchurch.",
 };
 
 export default function BookPage() {
