@@ -53,6 +53,14 @@ assert(price2.subtotal === 195, "Subtotal is £195 for 3 bed 2 bath deep clean w
 assert(price2.total === 195, "Total is £195 (no discount, above minimum)", `Expected 195, got ${price2.total}`);
 assert(price2.minimumApplied === false, "Minimum charge not applied");
 
+// Airbnb Clean: Base £50, bed: +£20, bath: +£20, bi-weekly (15% off). Extras: key-exchange (£10), laundry (£30).
+// Subtotal = Base (50) + 2 * bed (40) + 1 * bath (20) + key-exchange (10) + laundry (30) = 150.
+const priceAirbnb = calculatePricing("airbnb", 3, 2, "bi-weekly", ["key-exchange", "laundry"]);
+assert(priceAirbnb.subtotal === 150, "Subtotal is £150 for 3 bed 2 bath Airbnb clean with key-exchange/laundry", `Expected 150, got ${priceAirbnb.subtotal}`);
+assert(priceAirbnb.discountAmount === 22.5, "15% bi-weekly discount is £22.50", `Expected 22.5, got ${priceAirbnb.discountAmount}`);
+assert(priceAirbnb.total === 127.5, "Total is £127.50 after discount", `Expected 127.5, got ${priceAirbnb.total}`);
+assert(priceAirbnb.minimumApplied === false, "Minimum charge not applied for Airbnb clean above minimum");
+
 // Commercial Clean: Quote-only
 const price3 = calculatePricing("commercial", 2, 2, "weekly", []);
 assert(price3.isQuoteOnly === true, "Commercial cleaning is flagged as quote-only");

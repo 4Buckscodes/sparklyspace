@@ -23,7 +23,7 @@ export default function Footer() {
               <Logo iconOnly={false} className="h-9 w-auto" lightText={true} />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mt-4">
-              Premium residential, deep, end of tenancy, and commercial cleaning services across Bournemouth, Christchurch, and Poole. We clean, so you can focus on what matters.
+              Premium residential, deep, end of tenancy, Airbnb, and commercial cleaning services across Bournemouth, Christchurch, and Poole. We clean, so you can focus on what matters.
             </p>
           </div>
 
@@ -44,6 +44,11 @@ export default function Footer() {
               <li>
                 <Link href="/services/end-of-tenancy-cleaning" className="hover:text-white transition-colors duration-200">
                   End of Tenancy
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/airbnb-cleaning" className="hover:text-white transition-colors duration-200">
+                  Airbnb &amp; Holiday Let
                 </Link>
               </li>
               <li>

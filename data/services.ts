@@ -88,7 +88,7 @@ export const services: ServiceItem[] = [
     minimumCharge: 120,
     isQuoteOnly: false,
     includedScope: [
-      "Complete deep clean of all rooms and appliances (Oven and Fridge included!)",
+      "Complete deep clean of all rooms and appliances (Fridge included!)",
       "Cleaning internal windows, frames, and sills",
       "Limescale removal from sinks, baths, and showers",
       "Thorough cleaning of all cupboards inside and out",
@@ -96,7 +96,38 @@ export const services: ServiceItem[] = [
       "Wall spot cleaning (minor scuffs)"
     ],
     extras: [
+      { id: "oven", name: "Inside Oven", description: "Deep cleaning of grease, burnt food, and racks", price: 30 },
       { id: "carpet", name: "Carpet Deep Clean", description: "Professional hot water extraction for a single room", price: 40 },
+      { id: "balcony", name: "Balcony / Patio Sweep", description: "Sweeping debris and wiping handrails", price: 15 }
+    ]
+  },
+  {
+    id: "airbnb",
+    name: "Airbnb & Holiday Let Cleaning",
+    slug: "airbnb-cleaning",
+    tagline: "5-star guest readiness, automated and hassle-free.",
+    description: "Specialized turnover cleaning tailored for short-term rentals and holiday lets. We ensure your property is check-in ready with immaculate hygiene, restocked essentials, and reporting.",
+    basePrice: 50,
+    pricePerBedroom: 20,
+    pricePerBathroom: 20,
+    minimumCharge: 60,
+    isQuoteOnly: false,
+    includedScope: [
+      "Full sanitization and turnover cleaning between guests",
+      "Making beds with fresh linens and towels (if left out or laundered)",
+      "Kitchen cleaning including washing dishes and cleaning the microwave",
+      "Restroom sanitization and presentation of guest toiletries",
+      "Visual inspections for property damage and reporting issues",
+      "Checking and restocking of welcome items (tea, coffee, toilet paper)",
+      "Emptying all bins and replacing liners",
+      "Vacuuming and mopping all floors"
+    ],
+    extras: [
+      { id: "key-exchange", name: "Key Exchange Coordination", description: "Retrieving or dropping off keys from a secure lockbox or local point", price: 10 },
+      { id: "laundry", name: "Linen & Towel Laundry Service", description: "Offsite washing, drying, and ironing of sheets and towels", price: 30 },
+      { id: "oven", name: "Inside Oven", description: "Deep cleaning of grease, burnt food, and racks", price: 30 },
+      { id: "fridge", name: "Inside Fridge", description: "Detailed cleaning and disinfection of shelves and drawers", price: 20 },
+      { id: "windows", name: "Interior Windows", description: "Wiping glass, frames, and sills from the inside", price: 25 },
       { id: "balcony", name: "Balcony / Patio Sweep", description: "Sweeping debris and wiping handrails", price: 15 }
     ]
   },

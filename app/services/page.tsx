@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Our Services | Sparkly Space Cleaning",
-  description: "Explore our premium cleaning catalog: Residential, Deep Clean, End of Tenancy, and Commercial office cleaning in Bournemouth, Poole, and Christchurch.",
+  description: "Explore our premium cleaning catalog: Residential, Deep Clean, End of Tenancy, Airbnb & Holiday Let, and Commercial office cleaning in Bournemouth, Poole, and Christchurch.",
 };
 
 export default function ServicesPage() {

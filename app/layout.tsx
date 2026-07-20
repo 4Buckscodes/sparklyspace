@@ -28,6 +28,8 @@ export const metadata: Metadata = {
     "office cleaning Bournemouth",
     "deep clean Dorset",
     "end of tenancy cleaning Poole",
+    "airbnb cleaning Bournemouth",
+    "holiday let cleaning Poole",
     "carpet cleaning Christchurch",
     "eco friendly cleaning",
   ],
@@ -69,7 +71,7 @@ export default function RootLayout({
     "@type": "HouseCleaning",
     "name": "Sparkly Space Cleaning Services",
     "image": "https://sparklyspace.co.uk/logo-gold.png",
-    "description": "Sparkly Space provides premium residential, deep cleaning, end of tenancy, and commercial office cleaning services.",
+    "description": "Sparkly Space provides premium residential, deep cleaning, end of tenancy, Airbnb, and commercial office cleaning services.",
     "telephone": "+447552427880",
     "email": "sparklyspace01@gmail.com",
     "address": {
@@ -114,7 +116,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans pb-16 md:pb-0">
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans pb-16 md:pb-0" suppressHydrationWarning>
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
