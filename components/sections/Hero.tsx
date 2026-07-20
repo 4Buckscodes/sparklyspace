@@ -16,7 +16,7 @@ export default function Hero() {
         </span>
 
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight max-w-4xl mx-auto">
-          Step Into a Spotless Space. <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-300">Reclaim Your Time.</span>
+          We Clean, So You Can Focus on <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-300">What Matters.</span>
         </h1>
 
         <p className="text-lg sm:text-xl text-slate-300 font-light max-w-2xl mx-auto mb-10 leading-relaxed">

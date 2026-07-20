@@ -27,7 +27,7 @@ export const coreValues: CoreValue[] = [
   {
     iconName: "Leaf",
     title: "Optional Eco-Conscious Products",
-    description: "We offer the option to specify non-toxic, child-safe, and pet-friendly cleaning agents for your booking, keeping your family and the Dorset environment protected.",
+    description: "Our safety services include non-toxic, child-safe, and pet-friendly options.",
   },
   {
     iconName: "Heart",
