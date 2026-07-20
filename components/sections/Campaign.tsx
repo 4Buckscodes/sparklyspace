@@ -10,7 +10,7 @@ export default function Campaign() {
             Summer Special Offer
           </span>
           <h2 className="text-xl sm:text-2xl font-black text-slate-900">
-            Save 20% on Weekly Cleaning Services
+            Save 10% on Weekly Cleaning Services
           </h2>
           <p className="text-slate-500 text-sm">
             Book a weekly domestic clean today and receive a recurring 20% discount on every visit!

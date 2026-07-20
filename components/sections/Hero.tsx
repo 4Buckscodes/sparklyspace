@@ -20,7 +20,7 @@ export default function Hero() {
         </h1>
 
         <p className="text-lg sm:text-xl text-slate-300 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
-          Professional, vetted, and fully insured cleaning specialists. Get a transparent price estimate and book via WhatsApp in under two minutes.
+          Professional, vetted, and fully insured cleaning specialists. Get a transparent price estimate and book via WhatsApp.
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
