@@ -86,6 +86,10 @@ export default function RootLayout({
       "longitude": "-1.8796"
     },
     "url": "https://sparklyspace.co.uk",
+    "sameAs": [
+      "https://www.instagram.com/sparklyspace01",
+      "https://www.tiktok.com/@sparklyspace"
+    ],
     "priceRange": "££",
     "areaServed": [
       { "@type": "AdministrativeArea", "name": "Bournemouth" },

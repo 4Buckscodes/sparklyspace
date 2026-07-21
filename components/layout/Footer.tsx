@@ -113,7 +113,7 @@ export default function Footer() {
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Follow Us</h3>
             <div className="flex gap-4 mb-5">
               <a
-                href="https://www.instagram.com/sparklyspace"
+                href="https://www.instagram.com/sparklyspace01?utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => handleContactClick("instagram")}
@@ -127,7 +127,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://www.tiktok.com/@sparklyspace01"
+                href="https://www.tiktok.com/@sparklyspace?_r=1&_t=ZN-98BbZfhfR8o"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => handleContactClick("tiktok")}

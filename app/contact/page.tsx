@@ -95,6 +95,27 @@ export default function ContactPage() {
                     <p className="text-sm text-slate-500">8:00 AM – 8:00 PM</p>
                   </div>
                 </div>
+
+                {/* Social Channels */}
+                <div className="pt-4 border-t border-slate-100 flex items-center gap-3 px-4">
+                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Follow Us:</span>
+                  <a
+                    href="https://www.instagram.com/sparklyspace01?utm_source=qr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-sky-600 bg-slate-50 hover:bg-sky-50 px-3 py-1.5 rounded-xl border border-slate-200/80 transition-colors"
+                  >
+                    Instagram
+                  </a>
+                  <a
+                    href="https://www.tiktok.com/@sparklyspace?_r=1&_t=ZN-98BbZfhfR8o"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-sky-600 bg-slate-50 hover:bg-sky-50 px-3 py-1.5 rounded-xl border border-slate-200/80 transition-colors"
+                  >
+                    TikTok
+                  </a>
+                </div>
               </div>
             </div>
           </div>
