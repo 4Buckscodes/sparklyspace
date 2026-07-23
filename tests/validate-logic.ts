@@ -37,37 +37,21 @@ assert(!pc5.isValid && pc5.error !== undefined, "Outside service area postcode B
 
 // 2. Pricing Tests
 console.log("\n--- Testing Pricing Calculations ---");
-// Residential Clean: Base: £40 (covers 1 bed, 1 bath). Add bed: £15, Add bath: £15. Minimum charge: £50.
-// Let's test 1 bed, 1 bath residential clean (should subtotal £40. Weekly discount 20% -> £32. Apply minimum -> £50)
+// All services should now be flagged as isQuoteOnly: true
 const price1 = calculatePricing("residential", 1, 1, "weekly", []);
-assert(price1.subtotal === 40, "Subtotal is £40 for 1 bed 1 bath", `Expected 40, got ${price1.subtotal}`);
-assert(price1.discountAmount === 8, "20% discount is £8", `Expected 8, got ${price1.discountAmount}`);
-assert(price1.total === 50, "Weekly total is corrected to £50 minimum charge", `Expected 50, got ${price1.total}`);
-assert(price1.minimumApplied === true, "Minimum charge applied flag is set");
+assert(price1.isQuoteOnly === true, "Residential cleaning is flagged as quote-only");
 
-// Let's test 3 bed, 2 bath deep clean, one-off, with inside oven (£30) and inside fridge (£20)
-// Deep Clean: Base £70 (covers 1 bed, 1 bath), bed: +£25, bath: +£25. Minimum £80.
-// Subtotal = Base (70) + 2 * bed (50) + 1 * bath (25) + oven (30) + fridge (20) = 195. One-off -> no discount.
 const price2 = calculatePricing("deep-clean", 3, 2, "one-off", ["oven", "fridge"]);
-assert(price2.subtotal === 195, "Subtotal is £195 for 3 bed 2 bath deep clean with oven/fridge", `Expected 195, got ${price2.subtotal}`);
-assert(price2.total === 195, "Total is £195 (no discount, above minimum)", `Expected 195, got ${price2.total}`);
-assert(price2.minimumApplied === false, "Minimum charge not applied");
+assert(price2.isQuoteOnly === true, "Deep cleaning is flagged as quote-only");
 
-// Airbnb Clean: Base £50, bed: +£20, bath: +£20, bi-weekly (15% off). Extras: key-exchange (£10), laundry (£30).
-// Subtotal = Base (50) + 2 * bed (40) + 1 * bath (20) + key-exchange (10) + laundry (30) = 150.
 const priceAirbnb = calculatePricing("airbnb", 3, 2, "bi-weekly", ["key-exchange", "laundry"]);
-assert(priceAirbnb.subtotal === 150, "Subtotal is £150 for 3 bed 2 bath Airbnb clean with key-exchange/laundry", `Expected 150, got ${priceAirbnb.subtotal}`);
-assert(priceAirbnb.discountAmount === 22.5, "15% bi-weekly discount is £22.50", `Expected 22.5, got ${priceAirbnb.discountAmount}`);
-assert(priceAirbnb.total === 127.5, "Total is £127.50 after discount", `Expected 127.5, got ${priceAirbnb.total}`);
-assert(priceAirbnb.minimumApplied === false, "Minimum charge not applied for Airbnb clean above minimum");
+assert(priceAirbnb.isQuoteOnly === true, "Airbnb cleaning is flagged as quote-only");
 
-// Commercial Clean: Quote-only
 const price3 = calculatePricing("commercial", 2, 2, "weekly", []);
 assert(price3.isQuoteOnly === true, "Commercial cleaning is flagged as quote-only");
 
-// Large properties: Quote-only threshold (e.g. > 6 bedrooms)
-const price4 = calculatePricing("residential", 7, 2, "weekly", []);
-assert(price4.isQuoteOnly === true, "7 bedrooms residential clean triggers quote-only threshold");
+const price4 = calculatePricing("custom", 1, 1, "one-off", []);
+assert(price4.isQuoteOnly === true, "Custom/Other cleaning is flagged as quote-only");
 
 // 3. WhatsApp Message Tests
 console.log("\n--- Testing WhatsApp Message Summarizer ---");
@@ -99,11 +83,11 @@ const summary = compileBookingSummary(testBookingData, "SS-260710-XYZ");
 assert(summary.includes("SS-260710-XYZ"), "Summary includes booking reference");
 assert(summary.includes("Jane Smith"), "Summary includes customer name");
 assert(summary.includes("Deep Cleaning"), "Summary includes correct service name");
-assert(summary.includes("Bi-weekly (15% off)"), "Summary includes correct frequency");
+assert(summary.includes("Bi-weekly (5% off)"), "Summary includes correct frequency");
 assert(summary.includes("12 High Street"), "Summary includes address details");
 assert(summary.includes("Please ignore the cat."), "Summary includes notes");
-assert(summary.includes("Inside Oven (£30)"), "Summary includes extras");
-assert(summary.includes("Estimated Total:"), "Summary includes estimated total section");
+assert(summary.includes("Inside Oven"), "Summary includes extras");
+assert(summary.includes("Quote Status:"), "Summary includes quote status section");
 
 console.log(`\n--- Test Results Summary ---`);
 console.log(`Total tests run: ${testsRun}`);

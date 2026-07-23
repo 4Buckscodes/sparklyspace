@@ -29,7 +29,7 @@ export default function Hero() {
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-extrabold px-8 py-4 rounded-2xl shadow-lg shadow-sky-900/30 hover:shadow-sky-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] text-base min-h-[48px]"
           >
             <Calendar className="h-5 w-5" />
-            <span>Get Instant Estimate</span>
+            <span>Request a Quote</span>
           </Link>
           <a
             href="tel:+447552427880"

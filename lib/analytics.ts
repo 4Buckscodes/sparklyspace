@@ -4,12 +4,9 @@
  */
 
 export type FunnelStep = 
-  | "service-select" 
-  | "location-check" 
-  | "property-details" 
-  | "schedule" 
-  | "extras" 
-  | "customer-details" 
+  | "property-service" 
+  | "schedule-extras" 
+  | "contact" 
   | "review";
 
 export interface AnalyticsEvent {
@@ -114,7 +111,7 @@ export const analytics = {
   /**
    * Track clicks on contact actions
    */
-  trackContactClick: (channel: "phone" | "whatsapp" | "email" | "instagram" | "tiktok") => {
+  trackContactClick: (channel: "phone" | "whatsapp" | "email" | "instagram" | "tiktok" | "facebook") => {
     analytics.track("contact_click", {
       category: "outbound_contact",
       channel,

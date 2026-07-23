@@ -46,16 +46,9 @@ export default function ServicesPage() {
                       </p>
                     </div>
                     <div className="text-right">
-                      {service.isQuoteOnly ? (
-                        <span className="inline-flex px-3 py-1 bg-amber-50 text-amber-700 font-semibold text-xs rounded-full border border-amber-100">
-                          Quote Required
-                        </span>
-                      ) : (
-                        <div className="flex flex-col items-end">
-                          <span className="text-xs text-slate-400 font-medium">Starting from</span>
-                          <span className="text-2xl font-extrabold text-sky-600">£{service.basePrice}</span>
-                        </div>
-                      )}
+                      <span className="inline-flex px-3 py-1 bg-amber-50 text-amber-700 font-semibold text-xs rounded-full border border-amber-100">
+                        Quote Required
+                      </span>
                     </div>
                   </div>
 
@@ -93,7 +86,7 @@ export default function ServicesPage() {
                     href={`/book?service=${service.id}`}
                     className="flex-1 flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors duration-200 shadow-md shadow-sky-100 hover:shadow-lg hover:shadow-sky-100 active:scale-[0.98] min-h-[44px]"
                   >
-                    <span>Instant Enquiry</span>
+                    <span>Request a Quote</span>
                   </Link>
                 </div>
               </div>

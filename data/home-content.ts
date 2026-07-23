@@ -78,11 +78,11 @@ export const faqs: FAQItem[] = [
     a: "As part of our safety services, we encourage homes to provide their equipments to prevent the spread of germs, Meanwhile our specialists are more than happy to arrive fully equipped with professional-grade supplies and advanced vacuum filtration systems. You can also opt-in to request eco-friendly, non-toxic products when specifying your booking preferences.",
   },
   {
-    q: "How do the pricing estimate and booking handoff work?",
-    a: "We believe in transparency. Select your property metrics to get an instant, honest estimate. Confirming your request packages the details into a pre-filled WhatsApp text directly to our team. We then confirm availability and finalise slot timings with you.",
+    q: "How does the quote request and booking handoff work?",
+    a: "Select your service type, location, property size, and schedule preferences using our enquiry wizard. Confirming your request packages the details into a formatted summary sent directly to our team via WhatsApp or email. We then review your custom requirements and confirm a personalized quote.",
   },
   {
-    q: "Why do you have minimum booking charges?",
-    a: "Our minimum charges (e.g. £50 for Residential, £60 for Airbnb, £80 for Deep Cleaning) ensure we can compensate our professional cleaners fairly, cover travel costs, and maintain high standards of training, insurance, and service consistency.",
+    q: "Why don't you offer fixed online booking prices?",
+    a: "Every property and cleaning requirement is different. We prepare bespoke quotations based on the type of cleaning, size and condition of the property, the level of work involved, access arrangements, and any additional services requested. This ensures you receive a fair, accurate price tailored exactly to your home's needs without any surprises.",
   },
 ];

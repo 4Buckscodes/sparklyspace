@@ -91,7 +91,7 @@ export default function Header() {
               className="flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm py-2.5 px-5 rounded-xl transition-all shadow-md shadow-sky-200 active:scale-95 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-sky-500 hover:shadow-sky-100 min-h-[44px]"
             >
               <Calendar className="h-4 w-4" />
-              <span>Book Clean</span>
+              <span>Request a Quote</span>
             </Link>
           </div>
 
@@ -144,7 +144,7 @@ export default function Header() {
                 className="w-full flex items-center justify-center gap-2 bg-sky-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-md text-center active:scale-[0.98] transition-all min-h-[48px]"
               >
                 <Calendar className="h-5 w-5" />
-                <span>Book Now</span>
+                <span>Request a Quote</span>
               </Link>
             </div>
           </div>

@@ -9,7 +9,7 @@ import { analytics } from "@/lib/analytics";
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const handleContactClick = (channel: "phone" | "whatsapp" | "email" | "instagram" | "tiktok") => {
+  const handleContactClick = (channel: "phone" | "whatsapp" | "email" | "instagram" | "tiktok" | "facebook") => {
     analytics.trackContactClick(channel);
   };
 
@@ -124,6 +124,18 @@ export default function Footer() {
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                   <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/sparklyspace01"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => handleContactClick("facebook")}
+                aria-label="Follow us on Facebook"
+                className="flex items-center justify-center h-10 w-10 rounded-xl bg-slate-800 hover:bg-sky-600 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-sky-500"
+              >
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
                 </svg>
               </a>
               <a

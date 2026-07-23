@@ -22,9 +22,9 @@ export function compileBookingSummary(data: BookingFormData, reference: string):
 
   const freqLabel = {
     "one-off": "One-off Clean",
-    weekly: "Weekly (20% off)",
-    "bi-weekly": "Bi-weekly (15% off)",
-    monthly: "Monthly (10% off)",
+    weekly: "Weekly (10% off)",
+    "bi-weekly": "Bi-weekly (5% off)",
+    monthly: "Monthly (5% off)",
   }[data.frequency];
 
   const timeLabel = {
@@ -65,7 +65,7 @@ export function compileBookingSummary(data: BookingFormData, reference: string):
   const selectedExtrasNames = data.extras
     .map((extraId) => {
       const extra = service?.extras.find((e) => e.id === extraId);
-      return extra ? `  - ${extra.name} (£${extra.price})` : null;
+      return extra ? `  - ${extra.name}` : null;
     })
     .filter(Boolean)
     .join("\n");
@@ -138,4 +138,10 @@ export function generateWhatsAppUrl(data: BookingFormData, reference: string, ph
   // Clean phone number format for link
   const cleanPhone = phoneNumber.replace(/[^0-9]/g, "");
   return `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
+}
+
+export function generateEmailUrl(data: BookingFormData, reference: string, emailAddress: string = "sparklyspace01@gmail.com"): string {
+  const summary = compileBookingSummary(data, reference);
+  const subject = `Sparkly Space Quote Enquiry - ${reference}`;
+  return `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary)}`;
 }

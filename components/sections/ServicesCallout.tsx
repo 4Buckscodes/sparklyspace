@@ -27,7 +27,6 @@ export default function ServicesCallout() {
                 Popular
               </span>
               <h3 className="text-lg font-bold text-slate-950 mt-3">Residential Clean</h3>
-              <p className="text-xs text-slate-400 font-semibold mt-1">Starting from £40</p>
               <p className="text-slate-500 text-xs leading-relaxed mt-3">
                 Our core housekeeping. Perfect for maintaining kitchens, baths, floors, and general dusting on a weekly or bi-weekly cycle.
               </p>
@@ -36,7 +35,7 @@ export default function ServicesCallout() {
               href="/book?service=residential"
               className="mt-6 w-full text-center bg-white hover:bg-sky-50 text-slate-800 font-bold py-2.5 px-4 rounded-xl border border-slate-200 text-xs block transition-all min-h-[40px]"
             >
-              Estimate &amp; Book
+              Request a Quote
             </Link>
           </div>
 
@@ -47,7 +46,6 @@ export default function ServicesCallout() {
                 Deep Clean
               </span>
               <h3 className="text-lg font-bold text-slate-950 mt-3">Deep Cleaning</h3>
-              <p className="text-xs text-slate-400 font-semibold mt-1">Starting from £70</p>
               <p className="text-slate-500 text-xs leading-relaxed mt-3">
                 A comprehensive reset. Focusing on limescale buildup, skirting boards, high dusting, door frames, and hard-to-reach places.
               </p>
@@ -56,7 +54,7 @@ export default function ServicesCallout() {
               href="/book?service=deep-clean"
               className="mt-6 w-full text-center bg-white hover:bg-sky-50 text-slate-800 font-bold py-2.5 px-4 rounded-xl border border-slate-200 text-xs block transition-all min-h-[40px]"
             >
-              Estimate &amp; Book
+              Request a Quote
             </Link>
           </div>
 
@@ -67,7 +65,6 @@ export default function ServicesCallout() {
                 Inventory checkout
               </span>
               <h3 className="text-lg font-bold text-slate-950 mt-3">End of Tenancy</h3>
-              <p className="text-xs text-slate-400 font-semibold mt-1">Starting from £120</p>
               <p className="text-slate-500 text-xs leading-relaxed mt-3">
                 Fully guaranteed checkout cleaning. Includes inside fridge, internal windows, and cabinets. Meet landlord requirements.
               </p>
@@ -76,7 +73,7 @@ export default function ServicesCallout() {
               href="/book?service=end-of-tenancy"
               className="mt-6 w-full text-center bg-white hover:bg-sky-50 text-slate-800 font-bold py-2.5 px-4 rounded-xl border border-slate-200 text-xs block transition-all min-h-[40px]"
             >
-              Estimate &amp; Book
+              Request a Quote
             </Link>
           </div>
 
@@ -87,7 +84,6 @@ export default function ServicesCallout() {
                 Guest Ready
               </span>
               <h3 className="text-lg font-bold text-slate-900 mt-3">Airbnb &amp; Holiday Let</h3>
-              <p className="text-xs text-slate-400 font-semibold mt-1">Starting from £50</p>
               <p className="text-slate-500 text-xs leading-relaxed mt-3">
                 Tailored turnarounds for short-term rentals. Includes guest-ready presentation, essential restocking, damage checks, and optional professional laundry.
               </p>
@@ -96,7 +92,7 @@ export default function ServicesCallout() {
               href="/book?service=airbnb"
               className="mt-6 w-full text-center bg-white hover:bg-sky-50 text-slate-800 font-bold py-2.5 px-4 rounded-xl border border-slate-200 text-xs block transition-all min-h-[40px]"
             >
-              Estimate &amp; Book
+              Request a Quote
             </Link>
           </div>
         </div>

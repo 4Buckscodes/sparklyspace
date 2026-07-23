@@ -52,7 +52,7 @@ export default function TermsPage() {
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">5. Frequency Discounts</h2>
           <p>
-            Frequency discounts (e.g. 20% for weekly, 15% for bi-weekly, 10% for monthly) are granted on the condition that the client maintains the scheduled frequency of cleans. If a client cancels recurring appointments or drops frequency, Sparkly Space reserves the right to charge standard one-off rates retrospectively.
+            Frequency discounts (e.g. 10% for weekly, 5% for bi-weekly, 5% for monthly) are granted on the condition that the client maintains the scheduled frequency of cleans. If a client cancels recurring appointments or drops frequency, Sparkly Space reserves the right to charge standard one-off rates retrospectively.
           </p>
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">6. Cancellation Policy</h2>

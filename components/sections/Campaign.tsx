@@ -13,7 +13,7 @@ export default function Campaign() {
             Save 10% on Weekly Cleaning Services
           </h2>
           <p className="text-slate-500 text-sm">
-            Book a weekly domestic clean today and receive a recurring 20% discount on every visit!
+            Book a weekly domestic clean today and receive a recurring 10% discount on every visit!
           </p>
         </div>
         <Link

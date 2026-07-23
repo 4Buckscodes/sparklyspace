@@ -88,7 +88,8 @@ export default function RootLayout({
     "url": "https://sparklyspace.co.uk",
     "sameAs": [
       "https://www.instagram.com/sparklyspace01",
-      "https://www.tiktok.com/@sparklyspace"
+      "https://www.tiktok.com/@sparklyspace",
+      "https://www.facebook.com/sparklyspace01"
     ],
     "priceRange": "££",
     "areaServed": [
@@ -138,7 +139,7 @@ export default function RootLayout({
             href="/book"
             className="flex-2 flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-colors duration-200 shadow-md shadow-sky-200 active:scale-95 touch-manipulation min-h-[48px]"
           >
-            <span>Book Now</span>
+            <span>Request a Quote</span>
           </a>
         </div>
       </body>

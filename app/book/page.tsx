@@ -4,8 +4,8 @@ import { Calendar, ShieldCheck, Heart } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Book Online | Sparkly Space Cleaning Services",
-  description: "Get an instant cleaning estimate and configure your booking details. Vetted cleaners and optional eco-friendly products in Bournemouth, Poole & Christchurch.",
+  title: "Request a Personalised Cleaning Quote | Sparkly Space",
+  description: "Every property and cleaning requirement is different. Request a personalised quote for residential, deep clean, tenancy, or custom cleaning in Bournemouth, Poole & Christchurch.",
 };
 
 export default function BookPage() {
@@ -14,13 +14,16 @@ export default function BookPage() {
       {/* Upper Info */}
       <div className="text-center max-w-2xl mx-auto mb-10">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-700 border border-sky-200 mb-3">
-          <span>Fast 2-Minute Setup</span>
+          <span>Bespoke Quoting Process</span>
         </span>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Book Your Sparkly Clean
+          Request a Personalised Cleaning Quote
         </h1>
-        <p className="mt-2.5 text-sm text-slate-500 max-w-lg mx-auto">
-          Fill in your property metrics below to receive a live price estimate. Confirm via WhatsApp to lock in your date.
+        <p className="mt-4 text-sm text-slate-550 leading-relaxed max-w-xl mx-auto font-medium">
+          Every property and cleaning requirement is different. We prepare quotations based on the type of cleaning required, the size and condition of the property, the level of work involved, access arrangements and any additional services requested.
+        </p>
+        <p className="mt-3.5 text-xs text-slate-450 max-w-xl mx-auto">
+          Please complete the enquiry form and provide as much information as possible. We may request photographs, a short video or a property walkthrough before confirming the final quotation.
         </p>
       </div>
 

@@ -10,14 +10,14 @@ export default function FinalCTA() {
           Experience the Cleanliness You Deserve
         </h2>
         <p className="text-slate-300 font-light max-w-xl mx-auto mb-8 text-sm leading-relaxed">
-          Ready to configure your clean? It takes less than 2 minutes, provides an estimated pricing immediately, and sends it directly to our team on WhatsApp.
+          Ready to request your quote? It takes less than 2 minutes, compiles your enquiry details, and sends it directly to our team via WhatsApp or email.
         </p>
         <Link
           href="/book"
           className="inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-extrabold px-8 py-4 rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] text-base min-h-[48px]"
         >
           <Calendar className="h-5 w-5" />
-          <span>Configure Booking Enquiry</span>
+          <span>Request a Quote</span>
         </Link>
       </div>
     </section>

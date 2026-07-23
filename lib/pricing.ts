@@ -80,11 +80,11 @@ export function calculatePricing(
   // Frequency discounts (frequency discounts apply to the subtotal)
   let discountRate = 0;
   if (frequency === "weekly") {
-    discountRate = 0.20; // 20% off
-  } else if (frequency === "bi-weekly") {
-    discountRate = 0.15; // 15% off
-  } else if (frequency === "monthly") {
     discountRate = 0.10; // 10% off
+  } else if (frequency === "bi-weekly") {
+    discountRate = 0.05; // 5% off
+  } else if (frequency === "monthly") {
+    discountRate = 0.05; // 5% off
   }
 
   const discountAmount = Math.round(subtotal * discountRate * 100) / 100;

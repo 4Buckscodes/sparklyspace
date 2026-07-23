@@ -73,33 +73,25 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <div className="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-100">
             <h2 className="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
               <AlertCircle className="h-4 w-4 text-sky-500" />
-              <span>Pricing & Rate Structures</span>
+              <span>Personalised Quoting Process</span>
             </h2>
-            {service.isQuoteOnly ? (
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Commercial spaces and complex properties require bespoke quotes. Our team will contact you to discuss details and provide a competitive pricing proposal.
+            <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
+              <p>
+                Every property and cleaning requirement is different. We prepare quotations based on the type of cleaning required, the size and condition of the property, the level of work involved, access arrangements and any additional services requested.
               </p>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
-                <div>
-                  <p className="text-slate-400 font-medium">Base Charge (1 Bed, 1 Bath)</p>
-                  <p className="text-xl font-extrabold text-slate-800 mt-1">£{service.basePrice}</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 font-medium">Additional Bedroom / Bathroom</p>
-                  <p className="text-xl font-extrabold text-slate-800 mt-1">+£{service.pricePerBedroom} / each</p>
-                </div>
-                <div>
-                  <p className="text-slate-400 font-medium">Minimum Booking Fee</p>
-                  <p className="text-xl font-extrabold text-sky-600 mt-1">£{service.minimumCharge}</p>
-                </div>
-              </div>
-            )}
-            {!service.isQuoteOnly && (
-              <p className="text-xs text-slate-400 mt-4 leading-normal italic">
-                *Note: Rates are subject to frequency discounts (up to 20% off for weekly cleans). Calculations are dynamically output in the checkout wizard.
+              <p>
+                We may request photographs, a short video or a property walkthrough before confirming the final quotation. This ensures our team is perfectly prepared and provides an accurate, honest price for your service.
               </p>
-            )}
+              {!service.isQuoteOnly && (
+                <div className="pt-3 border-t border-slate-200/60 flex flex-wrap gap-x-4 gap-y-1.5 text-xs font-semibold text-slate-500">
+                  <span>Guide Price: From £{service.basePrice}</span>
+                  <span className="text-slate-300">|</span>
+                  <span>Minimum booking: £{service.minimumCharge}</span>
+                  <span className="text-slate-300">|</span>
+                  <span>Discounts: Up to 10% off for regular schedules</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Inclusions */}
@@ -147,15 +139,15 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           {/* Call to Action Banner */}
           <div className="border-t border-slate-100 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
-              <p className="font-bold text-slate-800">Ready to book your clean?</p>
-              <p className="text-xs text-slate-400 mt-1">Takes less than 2 minutes to select options and send via WhatsApp.</p>
+              <p className="font-bold text-slate-800">Ready to request your personalised quote?</p>
+              <p className="text-xs text-slate-400 mt-1">Takes less than 2 minutes to compile your request details.</p>
             </div>
             <Link
               href={`/book?service=${service.id}`}
               className="w-full sm:w-auto flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-extrabold py-3 px-8 rounded-xl shadow-md shadow-sky-100 hover:shadow-lg transition-all active:scale-[0.98] min-h-[44px]"
             >
               <Calendar className="h-5 w-5" />
-              <span>Configure Cleaning Request</span>
+              <span>Request a Quote</span>
             </Link>
           </div>
 
