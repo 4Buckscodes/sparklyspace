@@ -23,7 +23,7 @@ export default function Footer() {
               <Logo iconOnly={false} className="h-9 w-auto" lightText={true} />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mt-4">
-              Sparkly Space Cleaning Services provides professional domestic, deep-cleaning, end-of-tenancy, Airbnb and commercial cleaning services across Bournemouth Poole and Christchurch. Every quotation is tailored to the property, its condition and the level of cleaning required.
+              Professional cleaning services for domestic homes, deep cleaning, end-of-tenancy, Airbnb, and commercial properties across Bournemouth, Poole, and Christchurch. Every quote is tailored to your property's size, condition, and cleaning requirements.
             </p>
           </div>
 
