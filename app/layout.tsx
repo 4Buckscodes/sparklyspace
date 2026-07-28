@@ -91,11 +91,74 @@ export default function RootLayout({
       "https://www.tiktok.com/@sparklyspace",
       "https://www.facebook.com/sparklyspace01"
     ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "48",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "knowsAbout": [
+      "Domestic Cleaning",
+      "Deep Cleaning",
+      "End of Tenancy Deposit Guarantee Cleaning",
+      "Airbnb & Holiday Let Turnover Cleaning",
+      "Commercial & Office Sanitization",
+      "Eco-Friendly Non-Toxic Cleaning",
+      "Bournemouth Poole Christchurch BH Postcodes Cleaning"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Cleaning Services Catalog",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Residential & Domestic Cleaning",
+            "description": "Regular home cleaning tailored to client routines."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Deep Cleaning",
+            "description": "Top-to-bottom intense clean targeting limescale and built-up dust."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "End of Tenancy Cleaning",
+            "description": "Agency-approved checkout clean designed for 100% deposit returns."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Airbnb & Holiday Let Cleaning",
+            "description": "Turnover cleans, linen laundry, and guest amenity restocking."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Commercial & Office Cleaning",
+            "description": "Flexible scheduled cleaning for commercial and office spaces."
+          }
+        }
+      ]
+    },
     "priceRange": "££",
     "areaServed": [
       { "@type": "AdministrativeArea", "name": "Bournemouth" },
       { "@type": "AdministrativeArea", "name": "Christchurch" },
-      { "@type": "AdministrativeArea", "name": "Poole" }
+      { "@type": "AdministrativeArea", "name": "Poole" },
+      { "@type": "AdministrativeArea", "name": "Dorset BH Postcodes (BH1-BH23)" }
     ],
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
