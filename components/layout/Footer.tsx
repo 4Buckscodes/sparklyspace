@@ -90,12 +90,12 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:sparklyspace01@gmail.com"
+                  href="mailto:info@sparklyspace.co.uk"
                   onClick={() => handleContactClick("email")}
                   className="flex items-center gap-3 hover:text-white transition-colors min-h-[30px]"
                 >
                   <Mail className="h-4 w-4 text-sky-500 flex-shrink-0" />
-                  <span className="break-all">sparklyspace01@gmail.com</span>
+                  <span className="break-all">info@sparklyspace.co.uk</span>
                 </a>
               </li>
               <li className="flex items-start gap-3">

@@ -140,7 +140,7 @@ export function generateWhatsAppUrl(data: BookingFormData, reference: string, ph
   return `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
 }
 
-export function generateEmailUrl(data: BookingFormData, reference: string, emailAddress: string = "sparklyspace01@gmail.com"): string {
+export function generateEmailUrl(data: BookingFormData, reference: string, emailAddress: string = "info@sparklyspace.co.uk"): string {
   const summary = compileBookingSummary(data, reference);
   const subject = `Sparkly Space Quote Enquiry - ${reference}`;
   return `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary)}`;

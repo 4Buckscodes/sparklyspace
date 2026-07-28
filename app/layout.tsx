@@ -73,7 +73,7 @@ export default function RootLayout({
     "image": "https://sparklyspace.co.uk/logo-gold.png",
     "description": "Sparkly Space provides premium residential, deep cleaning, end of tenancy, Airbnb, and commercial office cleaning services.",
     "telephone": "+447552427880",
-    "email": "sparklyspace01@gmail.com",
+    "email": "info@sparklyspace.co.uk",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Bournemouth",

@@ -68,7 +68,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">6. Your Rights</h2>
           <p>
-            Under the UK General Data Protection Regulation (GDPR), you have the right to request access to, correction of, or deletion of the personal data we hold about you in our business communication logs. To make a request, contact us at <a href="mailto:sparklyspace01@gmail.com" className="text-sky-600 hover:underline">sparklyspace01@gmail.com</a>.
+            Under the UK General Data Protection Regulation (GDPR), you have the right to request access to, correction of, or deletion of the personal data we hold about you in our business communication logs. To make a request, contact us at <a href="mailto:info@sparklyspace.co.uk" className="text-sky-600 hover:underline">info@sparklyspace.co.uk</a>.
           </p>
         </div>
       </div>

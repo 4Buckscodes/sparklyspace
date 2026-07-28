@@ -73,7 +73,7 @@ export default function ContactPage() {
                 </a>
 
                 <a
-                  href="mailto:sparklyspace01@gmail.com"
+                  href="mailto:info@sparklyspace.co.uk"
                   className="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors min-h-[48px]"
                 >
                   <div className="h-11 w-11 bg-sky-50 rounded-xl flex items-center justify-center text-sky-600 flex-shrink-0">
@@ -81,7 +81,7 @@ export default function ContactPage() {
                   </div>
                   <div className="min-w-0">
                     <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Email</p>
-                    <p className="text-base font-bold text-slate-800 mt-0.5 break-all">sparklyspace01@gmail.com</p>
+                    <p className="text-base font-bold text-slate-800 mt-0.5 break-all">info@sparklyspace.co.uk</p>
                   </div>
                 </a>
 
