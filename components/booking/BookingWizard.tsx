@@ -188,11 +188,11 @@ export default function BookingWizard() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           reference: bookingRef,
-          customer_name: `${data.firstName || ""} ${data.lastName || ""}`.trim() || "Valued Customer",
+          customer_name: data.name || "Valued Customer",
           email: data.email,
           phone: data.phone,
           postcode: data.postcode,
-          address: data.address,
+          address: `${data.address1 || ""}${data.address2 ? ", " + data.address2 : ""}${data.city ? ", " + data.city : ""}`,
           service_type: data.serviceId,
           property_details: {
             bedrooms: data.bedrooms,
