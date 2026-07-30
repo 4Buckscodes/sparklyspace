@@ -181,9 +181,40 @@ export default function BookingWizard() {
     window.scrollTo({ top: 180, behavior: "smooth" });
   };
 
+  const saveBookingToApi = (data: BookingFormData) => {
+    try {
+      fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reference: bookingRef,
+          customer_name: `${data.firstName || ""} ${data.lastName || ""}`.trim() || "Valued Customer",
+          email: data.email,
+          phone: data.phone,
+          postcode: data.postcode,
+          address: data.address,
+          service_type: data.serviceId,
+          property_details: {
+            bedrooms: data.bedrooms,
+            bathrooms: data.bathrooms,
+            frequency: data.frequency,
+            extras: data.extras,
+            notes: data.notes,
+          },
+          scheduled_start: data.preferredDate ? new Date(data.preferredDate).toISOString() : new Date().toISOString(),
+          status: "pending",
+          notes: data.notes,
+        }),
+      }).catch((e) => console.error("Async booking save error:", e));
+    } catch (err) {
+      console.error("Booking API save error:", err);
+    }
+  };
+
   // 6. Handle Handoff
   const handleWhatsAppHandoff = (data: BookingFormData) => {
     analytics.trackWhatsAppHandoff(data.serviceId, pricing.total, pricing.isQuoteOnly);
+    saveBookingToApi(data);
     
     const waUrl = generateWhatsAppUrl(data, bookingRef);
     
@@ -196,6 +227,7 @@ export default function BookingWizard() {
 
   const handleEmailHandoff = (data: BookingFormData) => {
     analytics.trackContactClick("email");
+    saveBookingToApi(data);
     
     const mailUrl = generateEmailUrl(data, bookingRef);
     
