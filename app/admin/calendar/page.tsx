@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { Calendar as CalendarIcon, CheckCircle2, Clock, XCircle, RefreshCw, ExternalLink, Copy, Check } from "lucide-react";
+import { Calendar as CalendarIcon, CheckCircle2, Clock, XCircle, RefreshCw, ExternalLink, Copy, Check, PlusCircle } from "lucide-react";
 import { Booking, BookingStatus } from "@/lib/types/booking";
 
 export default function AdminCalendarPage() {
@@ -9,6 +9,7 @@ export default function AdminCalendarPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>("all");
   const [copiedFeed, setCopiedFeed] = useState<boolean>(false);
+  const [message, setMessage] = useState<string | null>(null);
 
   const icalUrl = typeof window !== "undefined"
     ? `${window.location.origin}/api/calendar/feed.ics`
@@ -21,9 +22,12 @@ export default function AdminCalendarPage() {
       const data = await res.json();
       if (data.success) {
         setBookings(data.bookings || []);
+      } else {
+        setMessage(`API Error: ${data.error || 'Failed to load'}`);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Failed to load bookings:", err);
+      setMessage(`Network error loading bookings`);
     } finally {
       setLoading(false);
     }
@@ -51,10 +55,54 @@ export default function AdminCalendarPage() {
     }
   };
 
+  const createSampleBooking = async () => {
+    setLoading(true);
+    try {
+      const ref = `SS-DEMO-${Math.floor(1000 + Math.random() * 9000)}`;
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reference: ref,
+          customer_name: "Demo Customer",
+          email: "demo@sparklyspace.co.uk",
+          phone: "07700900123",
+          postcode: "BH1 1AA",
+          address: "12 Beach Road, Bournemouth",
+          service_type: "Residential Cleaning",
+          property_details: { bedrooms: 2, bathrooms: 1, frequency: "weekly" },
+          scheduled_start: new Date().toISOString(),
+          status: "pending",
+          notes: "Sample demo quote added via Admin Panel",
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setMessage(`Demo quote ${ref} created!`);
+        await fetchBookings();
+      }
+    } catch (err) {
+      console.error("Failed to create sample booking:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const copyICalFeed = () => {
     navigator.clipboard.writeText(icalUrl);
     setCopiedFeed(true);
     setTimeout(() => setCopiedFeed(false), 3000);
+  };
+
+  const formatDate = (dateStr?: string) => {
+    if (!dateStr) return "Date pending";
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return "Date pending";
+      return d.toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+    } catch (e) {
+      return "Date pending";
+    }
   };
 
   return (
@@ -79,11 +127,18 @@ export default function AdminCalendarPage() {
           {/* Sync Buttons */}
           <div className="flex flex-wrap gap-3">
             <button
+              onClick={createSampleBooking}
+              className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-4 py-2.5 rounded-xl transition-all shadow-sm active:scale-95"
+            >
+              <PlusCircle className="h-4 w-4" />
+              <span>Add Demo Quote</span>
+            </button>
+            <button
               onClick={copyICalFeed}
               className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs px-4 py-2.5 rounded-xl transition-all shadow-sm active:scale-95"
             >
               {copiedFeed ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
-              <span>{copiedFeed ? "iCal Link Copied!" : "Copy Apple Calendar Feed (.ics)"}</span>
+              <span>{copiedFeed ? "iCal Link Copied!" : "Copy Apple Feed (.ics)"}</span>
             </button>
             <button
               onClick={fetchBookings}
@@ -94,6 +149,13 @@ export default function AdminCalendarPage() {
             </button>
           </div>
         </div>
+
+        {message && (
+          <div className="bg-sky-50 border border-sky-200 text-sky-800 p-4 rounded-2xl text-xs font-semibold flex justify-between items-center">
+            <span>{message}</span>
+            <button onClick={() => setMessage(null)} className="text-sky-600 hover:underline">Dismiss</button>
+          </div>
+        )}
 
         {/* Sync Guidance Panel */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -167,7 +229,7 @@ export default function AdminCalendarPage() {
             </div>
           ) : bookings.length === 0 ? (
             <div className="p-12 text-center text-slate-400 text-sm">
-              No bookings found for the selected status.
+              No bookings found for the selected status. Click <strong>Add Demo Quote</strong> above to test!
             </div>
           ) : (
             <div className="divide-y divide-slate-100">
@@ -210,7 +272,7 @@ export default function AdminCalendarPage() {
                     <div className="text-xs text-slate-400 flex items-center gap-1.5 pt-1">
                       <Clock className="h-3.5 w-3.5 text-slate-400 flex-shrink-0" />
                       <span>
-                        Scheduled: {new Date(booking.scheduled_start).toLocaleString('en-GB', { dateStyle: 'medium', timeStyle: 'short' })}
+                        Scheduled: {formatDate(booking.scheduled_start)}
                       </span>
                     </div>
                   </div>

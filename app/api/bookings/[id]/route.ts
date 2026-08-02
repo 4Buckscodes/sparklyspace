@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { updateGoogleCalendarEvent, deleteGoogleCalendarEvent } from '@/lib/calendar/google';
+import { inMemoryBookings } from '../route';
 
 export async function PATCH(
   request: NextRequest,
@@ -10,6 +11,25 @@ export async function PATCH(
     const { id } = await params;
     const body = await request.json();
     const supabase = getSupabaseServerClient();
+
+    // Check in-memory first
+    const memIndex = inMemoryBookings.findIndex((b) => b.id === id);
+    if (memIndex !== -1) {
+      inMemoryBookings[memIndex] = {
+        ...inMemoryBookings[memIndex],
+        ...body,
+        updated_at: new Date().toISOString(),
+      };
+      const updated = inMemoryBookings[memIndex];
+      if (updated.google_event_id) {
+        if (body.status === 'cancelled') {
+          await deleteGoogleCalendarEvent(updated.google_event_id);
+        } else {
+          await updateGoogleCalendarEvent(updated.google_event_id, updated);
+        }
+      }
+      return NextResponse.json({ success: true, booking: updated });
+    }
 
     if (!supabase) {
       return NextResponse.json({ success: true, message: 'Mock update' });

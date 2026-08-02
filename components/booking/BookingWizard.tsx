@@ -181,9 +181,17 @@ export default function BookingWizard() {
     window.scrollTo({ top: 180, behavior: "smooth" });
   };
 
-  const saveBookingToApi = (data: BookingFormData) => {
+  const saveBookingToApi = async (data: BookingFormData) => {
     try {
-      fetch("/api/bookings", {
+      let scheduledStart = new Date().toISOString();
+      if (data.preferredDate) {
+        const parsed = new Date(data.preferredDate);
+        if (!isNaN(parsed.getTime())) {
+          scheduledStart = parsed.toISOString();
+        }
+      }
+
+      const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -201,35 +209,43 @@ export default function BookingWizard() {
             extras: data.extras,
             notes: data.notes,
           },
-          scheduled_start: data.preferredDate ? new Date(data.preferredDate).toISOString() : new Date().toISOString(),
+          scheduled_start: scheduledStart,
           status: "pending",
           notes: data.notes,
         }),
-      }).catch((e) => console.error("Async booking save error:", e));
+      });
+      const resData = await res.json();
+      console.log("Booking saved response:", resData);
     } catch (err) {
       console.error("Booking API save error:", err);
     }
   };
 
   // 6. Handle Handoff
-  const handleWhatsAppHandoff = (data: BookingFormData) => {
+  const handleWhatsAppHandoff = async (data: BookingFormData) => {
     analytics.trackWhatsAppHandoff(data.serviceId, pricing.total, pricing.isQuoteOnly);
-    saveBookingToApi(data);
     
     const waUrl = generateWhatsAppUrl(data, bookingRef);
     
+    // Open WhatsApp immediately on user click to prevent popup blocker
+    const waWindow = window.open(waUrl, "_blank");
+
+    // Save booking asynchronously
+    await saveBookingToApi(data);
+    
     // Clear draft storage
     localStorage.removeItem(LOCAL_STORAGE_KEY);
-    
-    // Open in new window
-    window.open(waUrl, "_blank");
+
+    if (waWindow && waWindow.focus) {
+      waWindow.focus();
+    }
   };
 
-  const handleEmailHandoff = (data: BookingFormData) => {
+  const handleEmailHandoff = async (data: BookingFormData) => {
     analytics.trackContactClick("email");
-    saveBookingToApi(data);
-    
     const mailUrl = generateEmailUrl(data, bookingRef);
+    
+    await saveBookingToApi(data);
     
     // Clear draft storage
     localStorage.removeItem(LOCAL_STORAGE_KEY);

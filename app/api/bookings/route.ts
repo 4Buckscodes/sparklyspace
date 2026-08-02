@@ -3,28 +3,43 @@ import { getSupabaseServerClient } from '@/lib/supabase/server';
 import { createGoogleCalendarEvent } from '@/lib/calendar/google';
 import { Booking, BookingInsert } from '@/lib/types/booking';
 
+// In-memory fallback cache so bookings work even before database table creation
+export const inMemoryBookings: Booking[] = [];
+
 export async function GET(request: NextRequest) {
   const supabase = getSupabaseServerClient();
   const searchParams = request.nextUrl.searchParams;
   const status = searchParams.get('status');
 
-  if (!supabase) {
-    return NextResponse.json({ success: true, bookings: [], mock: true }, { status: 200 });
+  if (supabase) {
+    let query = supabase.from('bookings').select('*').order('scheduled_start', { ascending: true });
+
+    if (status) {
+      query = query.eq('status', status);
+    }
+
+    const { data, error } = await query;
+
+    if (!error && data) {
+      const dbBookings = data as Booking[];
+      const combined = [...dbBookings];
+      inMemoryBookings.forEach((memB) => {
+        if (!combined.some((b) => b.id === memB.id || b.reference === memB.reference)) {
+          if (!status || memB.status === status) {
+            combined.push(memB);
+          }
+        }
+      });
+      return NextResponse.json({ success: true, bookings: combined }, { status: 200 });
+    }
   }
 
-  let query = supabase.from('bookings').select('*').order('scheduled_start', { ascending: true });
+  // Fallback to in-memory store if Supabase table is not yet created or fails
+  const filtered = status
+    ? inMemoryBookings.filter((b) => b.status === status)
+    : inMemoryBookings;
 
-  if (status) {
-    query = query.eq('status', status);
-  }
-
-  const { data, error } = await query;
-
-  if (error) {
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
-  }
-
-  return NextResponse.json({ success: true, bookings: data }, { status: 200 });
+  return NextResponse.json({ success: true, bookings: filtered, fallback: true }, { status: 200 });
 }
 
 export async function POST(request: NextRequest) {
@@ -52,25 +67,32 @@ export async function POST(request: NextRequest) {
 
     const supabase = getSupabaseServerClient();
     let savedBooking: Booking = {
-      id: `mock-${Date.now()}`,
+      id: `booking-${Date.now()}`,
       ...newBooking,
       status: newBooking.status || 'pending',
       created_at: new Date().toISOString(),
     };
 
+    let insertedToDb = false;
+
     if (supabase) {
       const { data, error } = await supabase.from('bookings').insert([newBooking]).select().single();
       if (error) {
-        console.error('Supabase booking insert error:', error);
+        console.error('Supabase booking insert error:', error.message);
       } else if (data) {
         savedBooking = data as Booking;
+        insertedToDb = true;
       }
+    }
+
+    if (!insertedToDb) {
+      inMemoryBookings.unshift(savedBooking);
     }
 
     // Trigger Google Calendar Sync
     const googleEventId = await createGoogleCalendarEvent(savedBooking);
 
-    if (googleEventId && supabase) {
+    if (googleEventId && supabase && insertedToDb) {
       await supabase.from('bookings').update({ google_event_id: googleEventId }).eq('id', savedBooking.id);
       savedBooking.google_event_id = googleEventId;
     }

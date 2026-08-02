@@ -28,11 +28,26 @@ CREATE INDEX IF NOT EXISTS idx_bookings_reference ON public.bookings(reference);
 ALTER TABLE public.bookings ENABLE ROW LEVEL SECURITY;
 
 -- Allow public service role or anon access to insert booking enquiries
+DROP POLICY IF EXISTS "Allow public booking creation" ON public.bookings;
 CREATE POLICY "Allow public booking creation" ON public.bookings
     FOR INSERT TO anon, authenticated
     WITH CHECK (true);
 
--- Allow authenticated users / service role full read/write access
+-- Allow public reading of bookings for admin calendar view
+DROP POLICY IF EXISTS "Allow public booking reading" ON public.bookings;
+CREATE POLICY "Allow public booking reading" ON public.bookings
+    FOR SELECT TO anon, authenticated
+    USING (true);
+
+-- Allow public updating of bookings (confirm, complete, cancel status)
+DROP POLICY IF EXISTS "Allow public booking updating" ON public.bookings;
+CREATE POLICY "Allow public booking updating" ON public.bookings
+    FOR UPDATE TO anon, authenticated
+    USING (true)
+    WITH CHECK (true);
+
+-- Allow service role full access
+DROP POLICY IF EXISTS "Allow service role full access" ON public.bookings;
 CREATE POLICY "Allow service role full access" ON public.bookings
     FOR ALL TO service_role
     USING (true);
