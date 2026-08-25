@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, Calendar } from "lucide-react";
@@ -10,13 +10,24 @@ import { analytics } from "@/lib/analytics";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 10);
+
+      // Reveal near the top; hide on scroll down, reveal on scroll up.
+      if (currentY < 80) {
+        setHidden(false);
+      } else if (Math.abs(currentY - lastScrollY.current) > 6) {
+        setHidden(currentY > lastScrollY.current);
+      }
+      lastScrollY.current = currentY;
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -43,6 +54,8 @@ export default function Header() {
   return (
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+        hidden && !isOpen ? "-translate-y-full" : "translate-y-0"
+      } ${
         scrolled
           ? "glassmorphism shadow-md py-3"
           : "bg-transparent py-5"
