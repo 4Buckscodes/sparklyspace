@@ -912,7 +912,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(1)}
-                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-2 px-3 bg-white border border-slate-200 rounded-lg min-h-[40px]"
                 >
                   Edit
                 </button>
@@ -931,7 +931,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(1)}
-                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-2 px-3 bg-white border border-slate-200 rounded-lg min-h-[40px]"
                 >
                   Edit
                 </button>
@@ -951,7 +951,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(2)}
-                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-2 px-3 bg-white border border-slate-200 rounded-lg min-h-[40px]"
                 >
                   Edit
                 </button>
@@ -967,7 +967,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(3)}
-                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-2 px-3 bg-white border border-slate-200 rounded-lg min-h-[40px]"
                 >
                   Edit
                 </button>
@@ -989,7 +989,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(2)}
-                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-2 px-3 bg-white border border-slate-200 rounded-lg min-h-[40px]"
                 >
                   Edit
                 </button>
@@ -1091,7 +1091,7 @@ export default function BookingWizard() {
                 <ArrowRight className="h-4 w-4" />
               </button>
             ) : (
-              <div className="w-full flex flex-col sm:flex-row gap-3">
+              <div className="w-full flex flex-col sm:flex-row sm:flex-wrap gap-3">
                 {/* Fallback Copy Summary Button */}
                 <button
                   type="button"

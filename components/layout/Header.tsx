@@ -132,7 +132,7 @@ export default function Header() {
 
       {/* Mobile Drawer Overlay */}
       {isOpen && (
-        <div className="md:hidden animate-fade-in-up fixed inset-x-0 top-[65px] bg-white border-b border-slate-200 shadow-xl z-30">
+        <div className="md:hidden animate-fade-in-up absolute inset-x-0 top-full bg-white border-b border-slate-200 shadow-xl z-30">
           <div className="px-4 pt-3 pb-6 space-y-3">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;

@@ -98,13 +98,13 @@ export default function ContactPage() {
                 </div>
 
                 {/* Social Channels */}
-                <div className="pt-4 border-t border-slate-100 flex items-center gap-3 px-4">
+                <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center gap-2 px-4">
                   <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Follow Us:</span>
                   <a
                     href="https://www.instagram.com/sparklyspace01?utm_source=qr"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-1.5 rounded-xl border border-slate-200/80 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
                   >
                     Instagram
                   </a>
@@ -112,7 +112,7 @@ export default function ContactPage() {
                     href="https://www.facebook.com/sparklyspace01"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-1.5 rounded-xl border border-slate-200/80 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
                   >
                     Facebook
                   </a>
@@ -120,7 +120,7 @@ export default function ContactPage() {
                     href="https://www.tiktok.com/@sparklyspace?_r=1&_t=ZN-98BbZfhfR8o"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-1.5 rounded-xl border border-slate-200/80 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
                   >
                     TikTok
                   </a>

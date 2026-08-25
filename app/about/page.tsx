@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   const stats = [
     { value: "100%", label: "Satisfaction Guarantee" },
-    { value: "5-Star", label: "Client Rated" },
+    { value: "Free", label: "No-Obligation Quotes" },
     { value: "BH1-BH23", label: "Service Area coverage" },
     { value: "Eco-Friendly", label: "Products Available" },
   ];
@@ -20,7 +20,7 @@ export default function AboutPage() {
   return (
     <div className="bg-[#fffdf6] min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-green-900 py-20 text-white text-center">
+      <section className="relative overflow-hidden bg-green-900 py-14 sm:py-20 text-white text-center">
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-500/20 text-green-300 border border-green-500/30 mb-4 animate-fade-in-up">
             <span>Our Story</span>
@@ -39,7 +39,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-100 border border-slate-100">
           {stats.map((stat, idx) => (
             <div key={idx} className="text-center p-3">
-              <p className="text-2xl sm:text-3xl font-extrabold text-green-600">{stat.value}</p>
+              <p className="text-xl sm:text-3xl font-extrabold text-green-600 break-words leading-tight">{stat.value}</p>
               <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">{stat.label}</p>
             </div>
           ))}
@@ -47,7 +47,7 @@ export default function AboutPage() {
       </section>
 
       {/* Content Columns */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Column */}
           <div className="space-y-6">

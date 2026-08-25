@@ -67,7 +67,7 @@ export default function OpengraphImage() {
             color: "#94a3b8",
           }}
         >
-          Vetted &amp; Fully Insured · Eco-Friendly Options · 5-Star Rated
+          Vetted &amp; Fully Insured · Eco-Friendly Options · BH1–BH23
         </div>
       </div>
     ),

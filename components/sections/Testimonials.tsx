@@ -27,16 +27,6 @@ export default function Testimonials({ items }: TestimonialsProps) {
         <p className="mt-3 text-slate-500 text-sm sm:text-base">
           Trusted by households and companies across Bournemouth, Christchurch, and Poole.
         </p>
-
-        {/* 5-star trust strip */}
-        <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-white border border-amber-100 px-4 py-2 shadow-sm">
-          <span className="flex gap-0.5">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="h-4 w-4 text-amber-500 fill-amber-500" aria-hidden="true" focusable="false" />
-            ))}
-          </span>
-          <span className="text-sm font-bold text-slate-900">5-Star Rated Service</span>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
