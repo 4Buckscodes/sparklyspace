@@ -2,14 +2,7 @@
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  
-  --color-sky-50: #f0f9ff;
-  --color-sky-100: #e0f2fe;
-  --color-sky-200: #bae6fd;
-  --color-sky-500: #0ea5e9;
-  --color-sky-600: #0284c7;
-  --color-sky-700: #0369a1;
-  
+
   --color-gold-50: #fbfbf4;
   --color-gold-100: #f6f3df;
   --color-gold-500: #d4af37;
@@ -23,7 +16,7 @@
 }
 
 body {
-  background-color: #f8fafc;
+  background-color: #fffdf6;
   color: #0f172a;
 }
 
@@ -54,8 +47,8 @@ body {
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
 }
 
-.blue-glow {
-  box-shadow: 0 0 20px rgba(14, 165, 233, 0.1);
+.sunny-glow {
+  box-shadow: 0 0 26px rgba(250, 204, 21, 0.18);
 }
 
 /* Animations */
@@ -79,7 +72,7 @@ input:focus-visible,
 select:focus-visible, 
 textarea:focus-visible, 
 button:focus-visible {
-  outline: 2px solid #0ea5e9;
+  outline: 2px solid #16a34a;
   outline-offset: 2px;
 }
 

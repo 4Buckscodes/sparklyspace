@@ -48,7 +48,9 @@ export async function POST(request: NextRequest) {
 
     const reference = body.reference || `SS-${Math.floor(100000 + Math.random() * 900000)}`;
     const scheduled_start = body.scheduled_start || new Date().toISOString();
-    const scheduled_end = body.scheduled_end || new Date(Date.now() + 2 * 60 * 60 * 1000).toISOString();
+    const startMs = new Date(scheduled_start).getTime();
+    const defaultEndMs = !isNaN(startMs) ? startMs + 2 * 60 * 60 * 1000 : Date.now() + 2 * 60 * 60 * 1000;
+    const scheduled_end = body.scheduled_end || new Date(defaultEndMs).toISOString();
 
     const newBooking: BookingInsert = {
       reference,

@@ -14,16 +14,16 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-900 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+    <footer className="bg-green-950 text-slate-300 pt-12 pb-8 border-t border-green-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 md:gap-8 mb-8">
           {/* Logo & Description */}
-          <div className="md:col-span-1 space-y-4">
-            <Link href="/" className="inline-block bg-slate-800/40 p-2.5 rounded-xl border border-slate-700/50">
+          <div className="col-span-2 md:col-span-1 space-y-3">
+            <Link href="/" className="inline-block bg-green-900/40 p-2.5 rounded-xl border border-green-800/50">
               <Logo iconOnly={false} className="h-9 w-auto" lightText={true} />
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed mt-4">
-              Professional cleaning services for domestic homes, deep cleaning, end-of-tenancy, Airbnb, and commercial properties across Bournemouth, Poole, and Christchurch. Every quote is tailored to your property's size, condition, and cleaning requirements.
+            <p className="text-slate-400 text-sm leading-relaxed mt-3">
+              Professional domestic, deep, end-of-tenancy, Airbnb &amp; commercial cleaning across Bournemouth, Poole &amp; Christchurch — every quote tailored to your property.
             </p>
           </div>
 
@@ -62,14 +62,14 @@ export default function Footer() {
           {/* Contact Details */}
           <div>
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Get in Touch</h3>
-            <ul className="space-y-3.5 text-sm">
+            <ul className="space-y-3 text-sm">
               <li>
                 <a
                   href="tel:+447552427880"
                   onClick={() => handleContactClick("phone")}
                   className="flex items-center gap-3 hover:text-white transition-colors min-h-[30px]"
                 >
-                  <Phone className="h-4 w-4 text-sky-500 flex-shrink-0" />
+                  <Phone className="h-4 w-4 text-green-500 flex-shrink-0" />
                   <span>07552 427880</span>
                 </a>
               </li>
@@ -94,12 +94,12 @@ export default function Footer() {
                   onClick={() => handleContactClick("email")}
                   className="flex items-center gap-3 hover:text-white transition-colors min-h-[30px]"
                 >
-                  <Mail className="h-4 w-4 text-sky-500 flex-shrink-0" />
+                  <Mail className="h-4 w-4 text-green-500 flex-shrink-0" />
                   <span className="break-all">info@sparklyspace.co.uk</span>
                 </a>
               </li>
               <li className="flex items-start gap-3">
-                <Clock className="h-4 w-4 text-sky-500 flex-shrink-0 mt-0.5" />
+                <Clock className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-white font-semibold">Mon – Sun</p>
                   <p className="text-xs text-slate-400 mt-0.5">8:00 AM – 8:00 PM</p>
@@ -109,16 +109,16 @@ export default function Footer() {
           </div>
 
           {/* Socials & Area */}
-          <div>
+          <div className="col-span-2 md:col-span-1">
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-4">Follow Us</h3>
-            <div className="flex gap-4 mb-5">
+            <div className="flex gap-3 mb-4">
               <a
                 href="https://www.instagram.com/sparklyspace01?utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => handleContactClick("instagram")}
                 aria-label="Follow us on Instagram"
-                className="flex items-center justify-center h-10 w-10 rounded-xl bg-slate-800 hover:bg-sky-600 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-sky-500"
+                className="flex items-center justify-center h-9 w-9 rounded-xl bg-green-900 hover:bg-green-600 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-green-500"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
@@ -132,7 +132,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 onClick={() => handleContactClick("facebook")}
                 aria-label="Follow us on Facebook"
-                className="flex items-center justify-center h-10 w-10 rounded-xl bg-slate-800 hover:bg-sky-600 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-sky-500"
+                className="flex items-center justify-center h-9 w-9 rounded-xl bg-green-900 hover:bg-green-600 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-green-500"
               >
                 <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -144,7 +144,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 onClick={() => handleContactClick("tiktok")}
                 aria-label="Follow us on TikTok"
-                className="flex items-center justify-center h-10 w-10 rounded-xl bg-slate-800 hover:bg-sky-600 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-sky-500"
+                className="flex items-center justify-center h-9 w-9 rounded-xl bg-green-900 hover:bg-green-600 hover:text-white transition-all focus-visible:outline-2 focus-visible:outline-green-500"
               >
                 {/* TikTok SVG */}
                 <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
@@ -159,7 +159,7 @@ export default function Footer() {
         </div>
 
         {/* Footer Bottom */}
-        <div className="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-6 border-t border-green-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>&copy; {currentYear} Sparkly Space Cleaning Services. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-slate-300 transition-colors">

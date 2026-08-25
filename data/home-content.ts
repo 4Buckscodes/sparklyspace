@@ -27,12 +27,12 @@ export const coreValues: CoreValue[] = [
   {
     iconName: "Leaf",
     title: "Optional Eco-Conscious Products",
-    description: "Our safety services include non-toxic, child-safe, and pet-friendly options.",
+    description: "Request non-toxic, child-safe, and pet-friendly products—kinder to your family, your pets, and the Dorset environment.",
   },
   {
     iconName: "Heart",
     title: "Tailored to Your Home",
-    description: "Every home is unique. Customize your clean by specifying priority tasks, adding entry/parking details, and sharing guidance on pets for a truly personal service.",
+    description: "Every home is unique. Customise your clean by specifying priority tasks, adding entry/parking details, and sharing guidance on pets for a truly personal service.",
   },
   {
     iconName: "CheckCircle2",

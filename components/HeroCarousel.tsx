@@ -40,7 +40,7 @@ export default function HeroCarousel() {
 
   return (
     <div 
-      className="absolute inset-0 w-full h-full select-none overflow-hidden bg-slate-950 pointer-events-none md:pointer-events-auto"
+      className="absolute inset-0 w-full h-full select-none overflow-hidden bg-green-950 pointer-events-none md:pointer-events-auto"
       role="region"
       aria-roledescription="carousel"
       aria-label="Clean living space slideshow background"
@@ -61,11 +61,11 @@ export default function HeroCarousel() {
           >
             <Image
               src={src}
-              alt={`Premium Clean Living Space Background ${index + 1}`}
+              alt={`Freshly cleaned living space ${index + 1}`}
               fill
               priority={index === 0}
               loading={index === 0 ? "eager" : "lazy"}
-              sizes="100vw"
+              sizes="(min-width: 1024px) 45vw, 100vw"
               className={`object-cover transition-transform ease-out will-change-transform motion-safe:transition-transform ${
                 isActive ? "scale-[1.06] duration-[6200ms]" : "scale-100 duration-1000"
               }`}
@@ -74,9 +74,8 @@ export default function HeroCarousel() {
         );
       })}
 
-      {/* Accessible Overlay Layers (Gradient & Dark Tint) */}
-      <div className="absolute inset-0 bg-slate-950/70 z-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-sky-950/30 via-slate-950/45 to-slate-950/80 z-10 pointer-events-none" />
+      {/* Subtle bottom scrim keeps the slide controls legible over bright photos */}
+      <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-slate-900/45 to-transparent z-10 pointer-events-none" />
 
       {/* Slide Selection Controls */}
       <div 
@@ -95,9 +94,9 @@ export default function HeroCarousel() {
               onClick={() => handleDotClick(index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               tabIndex={0}
-              className={`h-2.5 rounded-full transition-all duration-300 relative focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 min-h-[10px] ${
+              className={`h-2.5 rounded-full transition-all duration-300 relative focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 min-h-[10px] ${
                 isActive
-                  ? "w-8 bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.5)]"
+                  ? "w-8 bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.5)]"
                   : "w-2.5 bg-white/30 hover:bg-white/60 cursor-pointer"
               }`}
             />

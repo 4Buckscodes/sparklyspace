@@ -27,18 +27,18 @@ export const services: ServiceItem[] = [
     name: "Residential Cleaning",
     slug: "residential-cleaning",
     tagline: "Restore calm and order to your home.",
-    description: "A consistent, high-standard clean customized to your weekly or fortnightly routine. We handle the chores, giving you back your evenings and weekends.",
+    description: "A consistent, high-standard clean customised to your weekly or fortnightly routine. We handle the chores, giving you back your evenings and weekends.",
     basePrice: 0,
     pricePerBedroom: 0,
     pricePerBathroom: 0,
     minimumCharge: 0,
     isQuoteOnly: true,
     includedScope: [
-      "Sanitizing and polishing all countertops, sinks, and kitchen surfaces",
-      "Vacuuming carpets and sanitizing hard floors throughout",
+      "Sanitising and polishing all countertops, sinks, and kitchen surfaces",
+      "Vacuuming carpets and sanitising hard floors throughout",
       "Deep cleaning and disinfecting toilets, basins, showers, and baths",
       "Dusting furniture, fixtures, and reachable skirting boards",
-      "Emptying waste bins, replacing liners, and organizing clutter",
+      "Emptying waste bins, replacing liners, and organising clutter",
       "Making beds with fresh linens (if laid out for the team)"
     ],
     extras: [
@@ -54,7 +54,7 @@ export const services: ServiceItem[] = [
     name: "Deep Cleaning",
     slug: "deep-cleaning",
     tagline: "A thorough, top-to-bottom refresh.",
-    description: "Highly recommended for first-time bookings or properties requiring intense care. We focus on limescale removal, built-up dust, and sanitizing hard-to-reach areas.",
+    description: "Highly recommended for first-time bookings or properties requiring intense care. We focus on limescale removal, built-up dust, and sanitising hard-to-reach areas.",
     basePrice: 0,
     pricePerBedroom: 0,
     pricePerBathroom: 0,
@@ -65,7 +65,7 @@ export const services: ServiceItem[] = [
       "Meticulous cleaning of skirting boards, door frames, and light switches",
       "Advanced limescale removal from taps, shower screens, and basins",
       "Detailed dusting of window blinds, light fixtures, and air vents",
-      "Sanitizing exterior surfaces of kitchen cupboards and white goods",
+      "Sanitising exterior surfaces of kitchen cupboards and white goods",
       "Deep edge vacuuming along crevices and underneath reachable furniture"
     ],
     extras: [
@@ -91,7 +91,7 @@ export const services: ServiceItem[] = [
       "Deep clean of all rooms, fixtures, and internal appliances (Fridge/Freezer included!)",
       "Wiping clean all internal windows, frames, and sills",
       "Complete limescale removal and polishing of sanitaryware",
-      "Deep sanitization of all cupboards, cabinets, and drawers inside and out",
+      "Deep sanitisation of all cupboards, cabinets, and drawers inside and out",
       "Wiping down all doors, frames, switches, and sockets",
       "Wall spot cleaning to remove minor scuff marks and smudges"
     ],
@@ -106,21 +106,21 @@ export const services: ServiceItem[] = [
     name: "Airbnb & Holiday Let Cleaning",
     slug: "airbnb-cleaning",
     tagline: "Seamless turnover cleans for 5-star guest reviews.",
-    description: "Specialized turnarounds tailored for holiday lets and short-term rentals. We coordinate key collection, restock essentials, inspect for damage, and present the property immaculately.",
+    description: "Specialised turnarounds tailored for holiday lets and short-term rentals. We coordinate key collection, restock essentials, inspect for damage, and present the property immaculately.",
     basePrice: 0,
     pricePerBedroom: 0,
     pricePerBathroom: 0,
     minimumCharge: 0,
     isQuoteOnly: true,
     includedScope: [
-      "Sanitizing all surfaces and touchpoints between guest stays",
+      "Sanitising all surfaces and touchpoints between guest stays",
       "Arranging fresh linens, towels, and dressing beds to hotel standards",
       "Kitchen turnaround including washing dishes, wiping microwave, and cleaning fridge",
       "Disinfecting bathrooms and styling guest toiletries and toilet rolls",
       "Conducting property damage checks and reporting left-behind items with photos",
       "Restocking guest essentials (coffee, tea, handwash, toilet rolls)",
       "Emptying all waste bins and replacing liners",
-      "Vacuuming and sanitizing all flooring surfaces"
+      "Vacuuming and sanitising all flooring surfaces"
     ],
     extras: [
       { id: "key-exchange", name: "Key Exchange Coordination", description: "Retrieving or dropping off keys from a secure lockbox or local point", price: 0 },
@@ -143,7 +143,7 @@ export const services: ServiceItem[] = [
     minimumCharge: 0,
     isQuoteOnly: true,
     includedScope: [
-      "Sanitizing desks, keyboards, phones, and high-frequency touchpoints",
+      "Sanitising desks, keyboards, phones, and high-frequency touchpoints",
       "Disinfecting staff kitchens, breakrooms, and office washrooms",
       "Emptying desk bins and managing recycling sorting",
       "Vacuuming and mopping main office areas, walkways, and receptions",
@@ -164,7 +164,7 @@ export const services: ServiceItem[] = [
     minimumCharge: 0,
     isQuoteOnly: true,
     includedScope: [
-      "Fully customizable cleaning checklist based on your instructions",
+      "Fully customisable cleaning checklist based on your instructions",
       "Flexible scheduling options tailored to your availability",
       "Eco-friendly or standard professional products as requested",
       "Perfect for unique cleaning jobs, post-event cleanups, or builder cleanings"

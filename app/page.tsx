@@ -10,8 +10,25 @@ import FinalCTA from "@/components/sections/FinalCTA";
 import { coreValues, testimonials, faqs } from "@/data/home-content";
 
 export default function Home() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
+
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <div className="bg-[#fffdf6] min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* 1. Hero Carousel Banner */}
       <Hero />
 

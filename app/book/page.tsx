@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Request a Personalised Cleaning Quote | Sparkly Space",
   description: "Every property and cleaning requirement is different. Request a personalised quote for residential, deep clean, tenancy, or custom cleaning in Bournemouth, Poole & Christchurch.",
+  alternates: { canonical: "/book" },
 };
 
 export default function BookPage() {
@@ -13,7 +14,7 @@ export default function BookPage() {
     <div className="bg-slate-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       {/* Upper Info */}
       <div className="text-center max-w-2xl mx-auto mb-10">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-700 border border-sky-200 mb-3">
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 border border-green-200 mb-3">
           <span>Bespoke Quoting Process</span>
         </span>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -31,7 +32,7 @@ export default function BookPage() {
       <Suspense fallback={
         <div className="max-w-3xl mx-auto py-20 text-center">
           <div className="animate-pulse flex flex-col items-center gap-4">
-            <div className="h-10 w-10 bg-sky-100 rounded-full"></div>
+            <div className="h-10 w-10 bg-green-100 rounded-full"></div>
             <div className="h-6 w-48 bg-slate-200 rounded animate-pulse"></div>
             <div className="h-4 w-64 bg-slate-100 rounded animate-pulse"></div>
           </div>
@@ -43,7 +44,7 @@ export default function BookPage() {
       {/* Trust Signage Underneath Form */}
       <div className="max-w-xl mx-auto grid grid-cols-3 gap-6 text-center text-slate-400 font-medium text-xs border-t border-slate-200/60 pt-8 mb-10">
         <div className="space-y-1.5">
-          <div className="flex justify-center text-sky-500">
+          <div className="flex justify-center text-green-500">
             <ShieldCheck className="h-5 w-5" />
           </div>
           <p className="font-bold text-slate-700">Vetted Cleaner</p>

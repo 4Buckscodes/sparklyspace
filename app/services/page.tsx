@@ -6,7 +6,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Our Services | Sparkly Space Cleaning",
-  description: "Explore our premium cleaning catalog: Residential, Deep Clean, End of Tenancy, Airbnb & Holiday Let, and Commercial office cleaning in Bournemouth, Poole, and Christchurch.",
+  description: "Explore our cleaning services: Residential, Deep Clean, End of Tenancy, Airbnb & Holiday Let, Commercial and Custom cleaning across Bournemouth, Poole, and Christchurch.",
+  alternates: { canonical: "/services" },
 };
 
 export default function ServicesPage() {
@@ -15,14 +16,14 @@ export default function ServicesPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-700 border border-sky-200 mb-4 animate-fade-in-up">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 border border-green-200 mb-4 animate-fade-in-up">
             <span>Premium Standards</span>
           </span>
           <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight sm:text-5xl">
             Our Cleaning Services
           </h1>
           <p className="mt-4 text-lg text-slate-500">
-            Select a service tailored to your home or office. All cleans utilize vetted professionals, customizable priority notes, and optional eco-friendly products.
+            Select a service tailored to your home or office. All cleans use vetted professionals, customisable priority notes, and optional eco-friendly products.
           </p>
         </div>
 
@@ -32,13 +33,13 @@ export default function ServicesPage() {
             return (
               <div
                 key={service.id}
-                className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-100/50 flex flex-col justify-between hover:shadow-2xl hover:border-sky-100 transition-all duration-300 group"
+                className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-100/50 flex flex-col justify-between hover:shadow-2xl hover:border-green-100 transition-all duration-300 group"
               >
                 <div>
                   {/* Service Header */}
                   <div className="flex items-start justify-between mb-6">
                     <div>
-                      <h2 className="text-2xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
+                      <h2 className="text-2xl font-bold text-slate-900 group-hover:text-green-600 transition-colors">
                         {service.name}
                       </h2>
                       <p className="text-xs uppercase tracking-wider text-amber-600 font-bold mt-1.5">
@@ -59,7 +60,7 @@ export default function ServicesPage() {
                   {/* Included Scope */}
                   <div className="border-t border-slate-100 pt-6 mb-8">
                     <h3 className="text-slate-800 text-sm font-bold mb-4 flex items-center gap-2">
-                      <Shield className="h-4 w-4 text-sky-500" />
+                      <Shield className="h-4 w-4 text-green-500" />
                       <span>What's Included:</span>
                     </h3>
                     <ul className="space-y-3 text-sm">
@@ -84,7 +85,7 @@ export default function ServicesPage() {
                   </Link>
                   <Link
                     href={`/book?service=${service.id}`}
-                    className="flex-1 flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors duration-200 shadow-md shadow-sky-100 hover:shadow-lg hover:shadow-sky-100 active:scale-[0.98] min-h-[44px]"
+                    className="flex-1 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors duration-200 shadow-md shadow-green-100 hover:shadow-lg hover:shadow-green-100 active:scale-[0.98] min-h-[44px]"
                   >
                     <span>Request a Quote</span>
                   </Link>

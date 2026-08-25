@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms & Conditions",
   description: "Read our terms and booking conditions for Sparkly Space Cleaning Services.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {
@@ -32,7 +33,7 @@ export default function TermsPage() {
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">2. Service Area and Postcodes</h2>
           <p>
-            We operate within the Bournemouth, Christchurch, and Poole (BCP) areas, validating postcodes between <code className="bg-slate-100 px-1 py-0.5 rounded text-sky-600 font-semibold">BH1</code> and <code className="bg-slate-100 px-1 py-0.5 rounded text-sky-600 font-semibold">BH23</code>. Submitting an inquiry for a postcode outside our designated service area does not guarantee service availability.
+            We operate within the Bournemouth, Christchurch, and Poole (BCP) areas, validating postcodes between <code className="bg-slate-100 px-1 py-0.5 rounded text-green-600 font-semibold">BH1</code> and <code className="bg-slate-100 px-1 py-0.5 rounded text-green-600 font-semibold">BH23</code>. Submitting an inquiry for a postcode outside our designated service area does not guarantee service availability.
           </p>
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">3. Access and Safety</h2>
@@ -40,7 +41,7 @@ export default function TermsPage() {
             Clients must provide safe entry access to the property at the agreed scheduled time slot.
           </p>
           <ul className="list-disc pl-5 space-y-2 mt-2">
-            <li>Access arrangements (e.g. key in lockbox, keys left with a neighbor, someone present to let the cleaners in) must be clearly specified in the booking notes.</li>
+            <li>Access arrangements (e.g. key in lockbox, keys left with a neighbour, someone present to let the cleaners in) must be clearly specified in the booking notes.</li>
             <li>Our cleaners will wait for a maximum of 20 minutes at the property. If access cannot be obtained, the clean will be cancelled, and a call-out charge of £30 may apply.</li>
             <li>Properties must have active electrical outlets and running water. If utilities are turned off, we cannot perform the cleaning service, and booking charges remain payable.</li>
           </ul>

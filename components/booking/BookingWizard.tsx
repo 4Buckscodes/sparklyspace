@@ -191,6 +191,12 @@ export default function BookingWizard() {
         }
       }
 
+      const startMs = new Date(scheduledStart).getTime();
+      const scheduledEnd = new Date(startMs + 2 * 60 * 60 * 1000).toISOString();
+
+      const serviceObj = services.find((s) => s.id === data.serviceId);
+      const serviceName = serviceObj ? serviceObj.name : data.serviceId;
+
       const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -201,7 +207,7 @@ export default function BookingWizard() {
           phone: data.phone,
           postcode: data.postcode,
           address: `${data.address1 || ""}${data.address2 ? ", " + data.address2 : ""}${data.city ? ", " + data.city : ""}`,
-          service_type: data.serviceId,
+          service_type: serviceName,
           property_details: {
             bedrooms: data.bedrooms,
             bathrooms: data.bathrooms,
@@ -210,14 +216,17 @@ export default function BookingWizard() {
             notes: data.notes,
           },
           scheduled_start: scheduledStart,
+          scheduled_end: scheduledEnd,
           status: "pending",
           notes: data.notes,
         }),
       });
       const resData = await res.json();
       console.log("Booking saved response:", resData);
+      return resData;
     } catch (err) {
       console.error("Booking API save error:", err);
+      return null;
     }
   };
 
@@ -225,14 +234,12 @@ export default function BookingWizard() {
   const handleWhatsAppHandoff = async (data: BookingFormData) => {
     analytics.trackWhatsAppHandoff(data.serviceId, pricing.total, pricing.isQuoteOnly);
     
-    const waUrl = generateWhatsAppUrl(data, bookingRef);
-    
-    // Open WhatsApp immediately on user click to prevent popup blocker
-    const waWindow = window.open(waUrl, "_blank");
-
-    // Save booking asynchronously
+    // Save booking first to guarantee database storage
     await saveBookingToApi(data);
     
+    const waUrl = generateWhatsAppUrl(data, bookingRef);
+    const waWindow = window.open(waUrl, "_blank");
+
     // Clear draft storage
     localStorage.removeItem(LOCAL_STORAGE_KEY);
 
@@ -243,9 +250,10 @@ export default function BookingWizard() {
 
   const handleEmailHandoff = async (data: BookingFormData) => {
     analytics.trackContactClick("email");
-    const mailUrl = generateEmailUrl(data, bookingRef);
     
     await saveBookingToApi(data);
+    
+    const mailUrl = generateEmailUrl(data, bookingRef);
     
     // Clear draft storage
     localStorage.removeItem(LOCAL_STORAGE_KEY);
@@ -277,7 +285,7 @@ export default function BookingWizard() {
     return (
       <div className="max-w-3xl mx-auto py-20 text-center">
         <div className="animate-pulse flex flex-col items-center gap-4">
-          <div className="h-10 w-10 bg-sky-100 rounded-full"></div>
+          <div className="h-10 w-10 bg-green-100 rounded-full"></div>
           <div className="h-6 w-48 bg-slate-200 rounded"></div>
           <div className="h-4 w-64 bg-slate-100 rounded"></div>
         </div>
@@ -310,7 +318,7 @@ export default function BookingWizard() {
         </div>
         <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
           <div 
-            className="bg-sky-500 h-full rounded-full transition-all duration-300"
+            className="bg-green-500 h-full rounded-full transition-all duration-300"
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
@@ -334,7 +342,7 @@ export default function BookingWizard() {
                     key={service.id}
                     className={`relative flex flex-col sm:flex-row justify-between p-6 rounded-2xl border cursor-pointer select-none transition-all ${
                       isSelected
-                        ? "border-sky-500 bg-sky-50/40 ring-1 ring-sky-500"
+                        ? "border-green-500 bg-green-50/40 ring-1 ring-green-500"
                         : "border-slate-200 hover:border-slate-300 bg-white"
                     }`}
                   >
@@ -346,7 +354,7 @@ export default function BookingWizard() {
                     />
                     <div className="flex items-start gap-4">
                       <div className={`mt-0.5 flex-shrink-0 h-5 w-5 rounded-full border flex items-center justify-center transition-colors ${
-                        isSelected ? "border-sky-600 bg-sky-600 text-white" : "border-slate-300 bg-white"
+                        isSelected ? "border-green-600 bg-green-600 text-white" : "border-slate-300 bg-white"
                       }`}>
                         {isSelected && <Check className="h-3 w-3" />}
                       </div>
@@ -354,7 +362,7 @@ export default function BookingWizard() {
                         <p className="text-base font-bold text-slate-900 flex items-center gap-2">
                           <span>{service.name}</span>
                           {service.id === "residential" && (
-                            <span className="inline-flex px-2 py-0.5 bg-sky-100 text-sky-800 text-[10px] font-bold rounded-full">
+                            <span className="inline-flex px-2 py-0.5 bg-green-100 text-green-800 text-[10px] font-bold rounded-full">
                               Popular
                             </span>
                           )}
@@ -373,7 +381,7 @@ export default function BookingWizard() {
                       ) : (
                         <div className="text-right">
                           <span className="text-[10px] text-slate-400 block">From</span>
-                          <span className="text-xl font-extrabold text-sky-600">£{service.basePrice}</span>
+                          <span className="text-xl font-extrabold text-green-600">£{service.basePrice}</span>
                         </div>
                       )}
                     </div>
@@ -385,7 +393,7 @@ export default function BookingWizard() {
             {/* Postcode Area Check Sub-section */}
             <div className="space-y-4 pt-6 border-t border-slate-100">
               <div>
-                <h3 className="text-sm font-bold text-slate-805 uppercase tracking-wider">2. Service Location</h3>
+                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">2. Service Location</h3>
                 <p className="text-slate-500 text-xs mt-1">We service Bournemouth, Christchurch, Poole and surrounding area postcodes (BH1-BH23).</p>
               </div>
               <div className="space-y-2 max-w-md">
@@ -402,7 +410,7 @@ export default function BookingWizard() {
                     className={`pl-11 w-full p-3.5 bg-slate-50 rounded-xl border transition-all placeholder:text-slate-400 focus:bg-white text-slate-800 font-semibold focus-visible:outline-2 ${
                       postcodeError || errors.postcode
                         ? "border-red-400 focus:border-red-500"
-                        : "border-slate-200 focus:border-sky-500"
+                        : "border-slate-200 focus:border-green-500"
                     }`}
                   />
                 </div>
@@ -424,7 +432,7 @@ export default function BookingWizard() {
             {/* Property Details Sub-section */}
             <div className="space-y-4 pt-6 border-t border-slate-100">
               <div>
-                <h3 className="text-sm font-bold text-slate-805 uppercase tracking-wider">3. Property Metrics</h3>
+                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">3. Property Metrics</h3>
                 <p className="text-slate-500 text-xs mt-1">Specify room metrics to help us prepare your custom quote.</p>
               </div>
 
@@ -437,7 +445,7 @@ export default function BookingWizard() {
                   <select
                     id="propertyType"
                     {...register("propertyType")}
-                    className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-sky-500 font-semibold"
+                    className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-green-500 font-semibold"
                   >
                     <option value="Flat/Apartment">Flat / Apartment</option>
                     <option value="Terraced House">Terraced House</option>
@@ -502,9 +510,9 @@ export default function BookingWizard() {
                 </div>
 
                 {/* Dynamic Info Panel */}
-                <div className="p-4 bg-sky-50 rounded-2xl border border-sky-100/50 flex flex-col justify-between text-xs text-sky-800">
+                <div className="p-4 bg-green-50 rounded-2xl border border-green-100/50 flex flex-col justify-between text-xs text-green-800">
                   <div className="flex gap-2">
-                    <Info className="h-4 w-4 text-sky-600 flex-shrink-0 mt-0.5" />
+                    <Info className="h-4 w-4 text-green-600 flex-shrink-0 mt-0.5" />
                     <p className="leading-relaxed font-medium">
                       Specify your property metrics below. Listing the exact number of bedrooms and bathrooms helps us allocate the correct timings and team of specialists to your clean.
                     </p>
@@ -521,7 +529,7 @@ export default function BookingWizard() {
             {/* Preferred Schedule Section */}
             <div className="space-y-4">
               <div>
-                <h3 className="text-sm font-bold text-slate-805 uppercase tracking-wider">1. Preferred Schedule</h3>
+                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">1. Preferred Schedule</h3>
                 <p className="text-slate-500 text-xs mt-1">Choose the frequency and timing that best matches your routine.</p>
               </div>
 
@@ -541,7 +549,7 @@ export default function BookingWizard() {
                         isDisabled
                           ? "opacity-40 cursor-not-allowed bg-slate-50 border-slate-200"
                           : isSelected
-                            ? "border-sky-500 bg-sky-50/20 ring-1 ring-sky-500"
+                            ? "border-green-500 bg-green-50/20 ring-1 ring-green-500"
                             : "border-slate-200 hover:border-slate-300 cursor-pointer bg-white"
                       }`}
                     >
@@ -565,7 +573,7 @@ export default function BookingWizard() {
                       </div>
                       <div className="flex justify-end mt-4">
                         <div className={`h-4.5 w-4.5 rounded-full border-2 flex items-center justify-center transition-all ${
-                          isSelected ? "border-sky-500 bg-sky-500" : "border-slate-300 bg-white"
+                          isSelected ? "border-green-500 bg-green-500" : "border-slate-300 bg-white"
                         }`}>
                           {isSelected && <Check className="h-3 w-3 text-white" />}
                         </div>
@@ -589,7 +597,7 @@ export default function BookingWizard() {
                       min={new Date().toISOString().split("T")[0]}
                       {...register("preferredDate")}
                       className={`pl-11 w-full p-3.5 bg-slate-50 rounded-xl border transition-all focus:bg-white text-slate-800 font-semibold focus-visible:outline-2 ${
-                        errors.preferredDate ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-sky-500"
+                        errors.preferredDate ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-green-500"
                       }`}
                     />
                   </div>
@@ -608,7 +616,7 @@ export default function BookingWizard() {
                     <select
                       id="timeWindow"
                       {...register("timeWindow")}
-                      className="pl-11 w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-sky-500 font-semibold"
+                      className="pl-11 w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-green-500 font-semibold"
                     >
                       <option value="morning">Morning Slot (08:00 - 12:00)</option>
                       <option value="afternoon">Afternoon Slot (12:00 - 16:00)</option>
@@ -622,7 +630,7 @@ export default function BookingWizard() {
             {/* Extras Section & Details */}
             <div className="space-y-4 pt-6 border-t border-slate-100">
               <div>
-                <h3 className="text-sm font-bold text-slate-805 uppercase tracking-wider">2. Add-Ons &amp; Access Details</h3>
+                <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">2. Add-Ons &amp; Access Details</h3>
                 <p className="text-slate-500 text-xs mt-1">Configure optional add-ons and access details.</p>
               </div>
 
@@ -638,7 +646,7 @@ export default function BookingWizard() {
                           key={extra.id}
                           className={`flex items-start gap-3 p-4 rounded-xl border cursor-pointer select-none transition-all ${
                             isChecked
-                              ? "border-sky-500 bg-sky-50/40 ring-1 ring-sky-500"
+                              ? "border-green-500 bg-green-50/40 ring-1 ring-green-500"
                               : "border-slate-200 hover:border-slate-300 bg-white"
                           }`}
                         >
@@ -652,7 +660,7 @@ export default function BookingWizard() {
                                 : watchedExtras.filter((x) => x !== extra.id);
                               setValue("extras", val);
                             }}
-                            className="mt-1 h-4 w-4 text-sky-600 border-slate-300 rounded focus:ring-sky-500"
+                            className="mt-1 h-4 w-4 text-green-600 border-slate-300 rounded focus:ring-green-500"
                           />
                           <div className="flex-1">
                             <div className="flex justify-between items-center">
@@ -694,7 +702,7 @@ export default function BookingWizard() {
                   <select
                     id="parking"
                     {...register("parking")}
-                    className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus-visible:outline-2 focus:border-sky-500 font-semibold"
+                    className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus-visible:outline-2 focus:border-green-500 font-semibold"
                   >
                     <option value="free-onsite">Free Private Parking Onsite (Driveway/Bay)</option>
                     <option value="free-street">Free Street Parking Available nearby</option>
@@ -712,7 +720,7 @@ export default function BookingWizard() {
                   <select
                     id="access"
                     {...register("access")}
-                    className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-sky-500 font-semibold"
+                    className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-green-500 font-semibold"
                   >
                     <option value="someone-home">Someone will be home to let you in</option>
                     <option value="lockbox">Key in lockbox (provide code on confirmation)</option>
@@ -748,7 +756,7 @@ export default function BookingWizard() {
                     placeholder="e.g. Jane Doe"
                     {...register("name")}
                     className={`pl-11 w-full p-3.5 bg-slate-50 rounded-xl border transition-all focus:bg-white text-slate-800 focus-visible:outline-2 ${
-                      errors.name ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-sky-500"
+                      errors.name ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-green-500"
                     }`}
                   />
                 </div>
@@ -768,7 +776,7 @@ export default function BookingWizard() {
                     placeholder="e.g. 07123 456789"
                     {...register("phone")}
                     className={`pl-11 w-full p-3.5 bg-slate-50 rounded-xl border transition-all focus:bg-white text-slate-800 focus-visible:outline-2 ${
-                      errors.phone ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-sky-500"
+                      errors.phone ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-green-500"
                     }`}
                   />
                 </div>
@@ -788,7 +796,7 @@ export default function BookingWizard() {
                     placeholder="e.g. jane@example.com"
                     {...register("email")}
                     className={`pl-11 w-full p-3.5 bg-slate-50 rounded-xl border transition-all focus:bg-white text-slate-800 focus-visible:outline-2 ${
-                      errors.email ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-sky-500"
+                      errors.email ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-green-500"
                     }`}
                   />
                 </div>
@@ -806,7 +814,7 @@ export default function BookingWizard() {
                   placeholder="e.g. Bournemouth"
                   {...register("city")}
                   className={`w-full p-3.5 bg-slate-50 rounded-xl border transition-all focus:bg-white text-slate-800 ${
-                    errors.city ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-sky-500"
+                    errors.city ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-green-500"
                   }`}
                 />
                 {errors.city && <p className="text-red-500 text-xs font-bold">{errors.city.message}</p>}
@@ -823,7 +831,7 @@ export default function BookingWizard() {
                   placeholder="Street name, house name or number"
                   {...register("address1")}
                   className={`w-full p-3.5 bg-slate-50 rounded-xl border transition-all focus:bg-white text-slate-800 ${
-                    errors.address1 ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-sky-500"
+                    errors.address1 ? "border-red-400 focus:border-red-500" : "border-slate-200 focus:border-green-500"
                   }`}
                 />
                 {errors.address1 && <p className="text-red-500 text-xs font-bold">{errors.address1.message}</p>}
@@ -839,7 +847,7 @@ export default function BookingWizard() {
                   type="text"
                   placeholder="Apartment, suite, unit, building, etc."
                   {...register("address2")}
-                  className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-sky-500"
+                  className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-green-500"
                 />
               </div>
 
@@ -851,7 +859,7 @@ export default function BookingWizard() {
                 <select
                   id="referralSource"
                   {...register("referralSource")}
-                  className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-sky-500 font-semibold"
+                  className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-green-500 font-semibold"
                 >
                   <option value="">Select option</option>
                   <option value="Google Search">Google Search</option>
@@ -873,7 +881,7 @@ export default function BookingWizard() {
                   rows={3}
                   placeholder="e.g. Vicious dog in backyard, focus on kitchen floor, allergies to standard scents, etc."
                   {...register("notes")}
-                  className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-sky-500 focus-visible:outline-2"
+                  className="w-full p-3.5 bg-slate-50 rounded-xl border border-slate-200 transition-all focus:bg-white text-slate-800 focus:border-green-500 focus-visible:outline-2"
                 />
               </div>
 
@@ -904,7 +912,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(1)}
-                  className="text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
                 >
                   Edit
                 </button>
@@ -918,12 +926,12 @@ export default function BookingWizard() {
                     {watchedAll.address1}
                     {watchedAll.address2 ? `, ${watchedAll.address2}` : ""}, {watchedAll.city}
                   </p>
-                  <p className="text-xs font-bold text-sky-600 mt-0.5">{watchedAll.postcode}</p>
+                  <p className="text-xs font-bold text-green-600 mt-0.5">{watchedAll.postcode}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => jumpToStep(1)}
-                  className="text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
                 >
                   Edit
                 </button>
@@ -943,7 +951,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(2)}
-                  className="text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
                 >
                   Edit
                 </button>
@@ -959,7 +967,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(3)}
-                  className="text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
                 >
                   Edit
                 </button>
@@ -981,7 +989,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={() => jumpToStep(2)}
-                  className="text-xs text-sky-600 hover:text-sky-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
+                  className="text-xs text-green-600 hover:text-green-700 font-bold hover:underline py-1 px-2.5 bg-white border border-slate-200 rounded-lg min-h-[30px]"
                 >
                   Edit
                 </button>
@@ -990,18 +998,18 @@ export default function BookingWizard() {
             </div>
 
             {/* Quote Status Card */}
-            <div className="bg-sky-900 text-white rounded-3xl p-6 sm:p-8 shadow-lg shadow-sky-900/10">
+            <div className="bg-green-900 text-white rounded-3xl p-6 sm:p-8 shadow-lg shadow-green-900/10">
               <div className="flex items-center gap-2 mb-4">
-                <Shield className="h-5 w-5 text-sky-400 fill-sky-400/20" />
-                <span className="text-xs font-bold uppercase tracking-wider text-sky-200">Quotation Status</span>
+                <Shield className="h-5 w-5 text-green-400 fill-green-400/20" />
+                <span className="text-xs font-bold uppercase tracking-wider text-green-200">Quotation Status</span>
               </div>
               
               <div className="space-y-2">
                 <p className="text-xl font-extrabold">Personalised Quote Requested</p>
-                <p className="text-xs text-sky-200/80 leading-relaxed font-light">
+                <p className="text-xs text-green-200/80 leading-relaxed font-light">
                   Every property is unique in size, layout, condition, and requirements. We prepare custom quotations based on your specific requirements rather than rigid online pricing packages.
                 </p>
-                <p className="text-xs text-sky-300/80 leading-relaxed font-light mt-2 pt-2 border-t border-sky-800/40">
+                <p className="text-xs text-green-300/80 leading-relaxed font-light mt-2 pt-2 border-t border-green-800/40">
                   Our team will evaluate your details, preferred schedule, and photographs to prepare a custom quote, and confirm it with you via WhatsApp or email.
                 </p>
               </div>
@@ -1035,7 +1043,7 @@ export default function BookingWizard() {
                   type="checkbox"
                   required
                   {...register("marketingConsent")}
-                  className="mt-1 h-4 w-4 text-sky-600 border-slate-300 rounded focus:ring-sky-500"
+                  className="mt-1 h-4 w-4 text-green-600 border-slate-300 rounded focus:ring-green-500"
                 />
                 <span className="text-xs text-slate-600 leading-normal">
                   I agree to Sparkly Space contacting me via WhatsApp, SMS, or email regarding this cleaning inquiry.
@@ -1077,7 +1085,7 @@ export default function BookingWizard() {
               <button
                 type="button"
                 onClick={nextStep}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-8 rounded-xl text-sm transition-all shadow-md shadow-sky-100 hover:shadow-lg active:scale-[0.98] touch-manipulation min-h-[44px]"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold py-3.5 px-8 rounded-xl text-sm transition-all shadow-md shadow-green-100 hover:shadow-lg active:scale-[0.98] touch-manipulation min-h-[44px]"
               >
                 <span>Continue</span>
                 <ArrowRight className="h-4 w-4" />
@@ -1101,7 +1109,7 @@ export default function BookingWizard() {
                 <button
                   type="button"
                   onClick={handleSubmit(handleEmailHandoff)}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-extrabold py-3.5 px-8 rounded-xl text-sm transition-all shadow-md shadow-sky-100 hover:shadow-lg active:scale-[0.98] touch-manipulation min-h-[44px]"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-extrabold py-3.5 px-8 rounded-xl text-sm transition-all shadow-md shadow-green-100 hover:shadow-lg active:scale-[0.98] touch-manipulation min-h-[44px]"
                 >
                   <Mail className="h-4.5 w-4.5" />
                   <span>Send via Email</span>

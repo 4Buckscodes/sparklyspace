@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Sparkly Space Cleaning Services",
     default: "Sparkly Space Cleaning Services | Bournemouth, Christchurch & Poole",
   },
-  description: "Sparkly Space provides professional, reliable cleaning services with eco-friendly options in Bournemouth, Christchurch, and Poole. Get an instant estimate and book via WhatsApp in minutes.",
+  description: "Professional, reliable cleaning with eco-friendly options across Bournemouth, Poole & Christchurch. Request a personalised quote in minutes.",
   metadataBase: new URL("https://sparklyspace.co.uk"),
   alternates: {
     canonical: "/",
@@ -38,22 +38,13 @@ export const metadata: Metadata = {
     description: "Professional, reliable cleaning services with optional eco-friendly products in Bournemouth, Christchurch, and Poole.",
     url: "https://sparklyspace.co.uk",
     siteName: "Sparkly Space Cleaning Services",
-    images: [
-      {
-        url: "https://sparklyspace.co.uk/logo.png",
-        width: 600,
-        height: 900,
-        alt: "Sparkly Space Cleaning Services Logo",
-      },
-    ],
     locale: "en_GB",
     type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Sparkly Space Cleaning Services | Bournemouth, Poole & Christchurch",
     description: "Professional, reliable cleaning services with optional eco-friendly products in Bournemouth, Christchurch, and Poole.",
-    images: ["https://sparklyspace.co.uk/logo.png"],
   },
   robots: {
     index: true,
@@ -91,13 +82,6 @@ export default function RootLayout({
       "https://www.tiktok.com/@sparklyspace",
       "https://www.facebook.com/sparklyspace01"
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.9",
-      "reviewCount": "48",
-      "bestRating": "5",
-      "worstRating": "1"
-    },
     "knowsAbout": [
       "Domestic Cleaning",
       "Deep Cleaning",
@@ -177,14 +161,14 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en-GB" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 font-sans pb-16 md:pb-0" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col bg-[#fffdf6] text-slate-900 font-sans pb-16 md:pb-0" suppressHydrationWarning>
         <Header />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
@@ -200,7 +184,7 @@ export default function RootLayout({
           </a>
           <a
             href="/book"
-            className="flex-2 flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-colors duration-200 shadow-md shadow-sky-200 active:scale-95 touch-manipulation min-h-[48px]"
+            className="flex-2 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-colors duration-200 shadow-md shadow-green-200 active:scale-95 touch-manipulation min-h-[48px]"
           >
             <span>Request a Quote</span>
           </a>

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "Read our privacy policy to understand how we handle your personal data and WhatsApp booking details.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {
@@ -36,11 +37,11 @@ export default function PrivacyPage() {
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">2. How We Process and Hand Off Your Data</h2>
           <p>
-            Our website is designed for operational simplicity. We do not store your booking configurations in a persistent database on our servers. Instead, when you click <strong>"Confirm via WhatsApp"</strong>:
+            When you submit an enquiry, your booking details are stored securely in our booking system so we can manage and schedule your request, and may be added to our internal booking calendar. When you click <strong>"Confirm via WhatsApp"</strong>:
           </p>
           <ul className="list-disc pl-5 space-y-2 mt-2">
             <li>Your booking options are summarized into a formatted, URL-encoded text message.</li>
-            <li>You are redirected to WhatsApp to send this message directly to our official business number (<code className="bg-slate-100 px-1 py-0.5 rounded text-sky-600 font-semibold">+44 7552 427880</code>).</li>
+            <li>You are redirected to WhatsApp to send this message directly to our official business number (<code className="bg-slate-100 px-1 py-0.5 rounded text-green-600 font-semibold">+44 7552 427880</code>).</li>
             <li>If WhatsApp is unavailable, you can copy the summary to your clipboard to paste it manually into another communication channel.</li>
           </ul>
           <p>
@@ -58,7 +59,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">4. Data Retention</h2>
           <p>
-            Because we do not use a customer database on our website, we do not store your booking details on our web servers. Once the message is sent to WhatsApp, your data is retained in our business chat records only for as long as necessary to manage your booking, perform services, handle accounting records, and resolve queries.
+            We retain your booking details only for as long as necessary to manage your booking, perform the service, handle accounting records, and resolve queries, after which they are deleted from our booking system. Details you send via WhatsApp are additionally retained in our business chat records under WhatsApp's own terms.
           </p>
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">5. Cookies and Analytics</h2>
@@ -68,7 +69,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">6. Your Rights</h2>
           <p>
-            Under the UK General Data Protection Regulation (GDPR), you have the right to request access to, correction of, or deletion of the personal data we hold about you in our business communication logs. To make a request, contact us at <a href="mailto:info@sparklyspace.co.uk" className="text-sky-600 hover:underline">info@sparklyspace.co.uk</a>.
+            Under the UK General Data Protection Regulation (GDPR), you have the right to request access to, correction of, or deletion of the personal data we hold about you in our business communication logs. To make a request, contact us at <a href="mailto:info@sparklyspace.co.uk" className="text-green-600 hover:underline">info@sparklyspace.co.uk</a>.
           </p>
         </div>
       </div>
