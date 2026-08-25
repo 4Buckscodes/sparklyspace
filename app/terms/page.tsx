@@ -33,7 +33,7 @@ export default function TermsPage() {
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">2. Service Area and Postcodes</h2>
           <p>
-            We operate within the Bournemouth, Christchurch, and Poole (BCP) areas, validating postcodes between <code className="bg-slate-100 px-1 py-0.5 rounded text-green-600 font-semibold">BH1</code> and <code className="bg-slate-100 px-1 py-0.5 rounded text-green-600 font-semibold">BH23</code>. Submitting an inquiry for a postcode outside our designated service area does not guarantee service availability.
+            We operate within the Bournemouth, Christchurch, and Poole (BCP) areas, validating postcodes between <code className="bg-slate-100 px-1 py-0.5 rounded text-sky-600 font-semibold">BH1</code> and <code className="bg-slate-100 px-1 py-0.5 rounded text-sky-600 font-semibold">BH23</code>. Submitting an inquiry for a postcode outside our designated service area does not guarantee service availability.
           </p>
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">3. Access and Safety</h2>

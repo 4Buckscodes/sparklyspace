@@ -49,7 +49,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         {/* Back Link */}
         <Link
           href="/services"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-green-600 transition-colors mb-8 min-h-[44px]"
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-sky-600 transition-colors mb-8 min-h-[44px]"
         >
           <ArrowLeft className="h-4 w-4" />
           <span>Back to all services</span>
@@ -59,7 +59,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-8 sm:p-12 animate-fade-in-up">
           {/* Header */}
           <div className="border-b border-slate-100 pb-8 mb-8">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-50 text-green-700 border border-green-100 mb-3">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-50 text-sky-700 border border-sky-100 mb-3">
               <span>{service.tagline}</span>
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -73,7 +73,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           {/* Pricing Info */}
           <div className="bg-slate-50 rounded-2xl p-6 mb-8 border border-slate-100">
             <h2 className="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
-              <AlertCircle className="h-4 w-4 text-green-500" />
+              <AlertCircle className="h-4 w-4 text-sky-500" />
               <span>Personalised Quoting Process</span>
             </h2>
             <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
@@ -98,7 +98,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           {/* Inclusions */}
           <div className="mb-10">
             <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-              <Shield className="h-5 w-5 text-green-500" />
+              <Shield className="h-5 w-5 text-sky-500" />
               <span>Service Inclusion Checklist</span>
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -115,20 +115,20 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           {service.extras.length > 0 && (
             <div className="border-t border-slate-100 pt-8 mb-10">
               <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                <ShoppingCart className="h-5 w-5 text-green-500" />
+                <ShoppingCart className="h-5 w-5 text-sky-500" />
                 <span>Custom Add-Ons Available</span>
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {service.extras.map((extra) => (
                   <div
                     key={extra.id}
-                    className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-green-100 transition-all flex justify-between items-start gap-3"
+                    className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-sky-100 transition-all flex justify-between items-start gap-3"
                   >
                     <div>
                       <p className="text-sm font-bold text-slate-800">{extra.name}</p>
                       <p className="text-xs text-slate-400 mt-1">{extra.description}</p>
                     </div>
-                    <span className="bg-green-50 text-green-600 font-extrabold text-xs px-2.5 py-1 rounded-full border border-green-100 whitespace-nowrap">
+                    <span className="bg-sky-50 text-sky-600 font-extrabold text-xs px-2.5 py-1 rounded-full border border-sky-100 whitespace-nowrap">
                       {extra.price > 0 ? `+£${extra.price}` : "On request"}
                     </span>
                   </div>
@@ -145,7 +145,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </div>
             <Link
               href={`/book?service=${service.id}`}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-extrabold py-3 px-8 rounded-xl shadow-md shadow-green-100 hover:shadow-lg transition-all active:scale-[0.98] min-h-[44px]"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-extrabold py-3 px-8 rounded-xl shadow-md shadow-sky-100 hover:shadow-lg transition-all active:scale-[0.98] min-h-[44px]"
             >
               <Calendar className="h-5 w-5" />
               <span>Request a Quote</span>

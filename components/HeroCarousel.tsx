@@ -40,7 +40,7 @@ export default function HeroCarousel() {
 
   return (
     <div 
-      className="absolute inset-0 w-full h-full select-none overflow-hidden bg-green-950 pointer-events-none md:pointer-events-auto"
+      className="absolute inset-0 w-full h-full select-none overflow-hidden bg-sky-950 pointer-events-none md:pointer-events-auto"
       role="region"
       aria-roledescription="carousel"
       aria-label="Clean living space slideshow background"
@@ -94,9 +94,9 @@ export default function HeroCarousel() {
               onClick={() => handleDotClick(index)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               tabIndex={0}
-              className={`h-2.5 rounded-full transition-all duration-300 relative focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400 min-h-[10px] ${
+              className={`h-2.5 rounded-full transition-all duration-300 relative focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 min-h-[10px] ${
                 isActive
-                  ? "w-8 bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.5)]"
+                  ? "w-8 bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.5)]"
                   : "w-2.5 bg-white/30 hover:bg-white/60 cursor-pointer"
               }`}
             />

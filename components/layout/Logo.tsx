@@ -20,7 +20,7 @@ export default function Logo({ className = "h-10 w-auto", iconOnly = false, ligh
       {!iconOnly && (
         <div className="flex flex-col justify-center">
           <span className={`text-xl font-bold tracking-tight leading-none ${lightText ? "text-white" : "text-slate-800"}`}>
-            <span className="text-gold-500">Sparkly</span> <span className={lightText ? "text-slate-100" : "text-green-600"}>Space</span>
+            <span className="text-gold-500">Sparkly</span> <span className={lightText ? "text-slate-100" : "text-sky-600"}>Space</span>
           </span>
           <span className={`text-[10px] uppercase tracking-widest font-semibold mt-1 leading-none ${lightText ? "text-gold-500/80" : "text-amber-600"}`}>
             Cleaning Services

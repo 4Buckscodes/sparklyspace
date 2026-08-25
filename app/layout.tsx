@@ -184,7 +184,7 @@ export default function RootLayout({
           </a>
           <a
             href="/book"
-            className="flex-2 flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-colors duration-200 shadow-md shadow-green-200 active:scale-95 touch-manipulation min-h-[48px]"
+            className="flex-2 flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-colors duration-200 shadow-md shadow-sky-200 active:scale-95 touch-manipulation min-h-[48px]"
           >
             <span>Request a Quote</span>
           </a>

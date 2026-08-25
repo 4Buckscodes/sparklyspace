@@ -18,7 +18,7 @@ export default function Campaign() {
         </div>
         <Link
           href="/book?frequency=weekly"
-          className="w-full md:w-auto inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-extrabold py-3 px-6 rounded-xl transition-all shadow-md active:scale-95 text-sm min-h-[44px]"
+          className="w-full md:w-auto inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white font-extrabold py-3 px-6 rounded-xl transition-all shadow-md active:scale-95 text-sm min-h-[44px]"
         >
           Claim Your 10% Off
         </Link>

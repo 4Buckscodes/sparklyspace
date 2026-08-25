@@ -14,21 +14,21 @@ export default function Footer() {
   };
 
   const chip =
-    "group inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm font-medium text-slate-200 transition-all hover:border-green-500/50 hover:bg-green-500/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500";
+    "group inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2.5 text-sm font-medium text-slate-200 transition-all hover:border-sky-500/50 hover:bg-sky-500/10 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500";
   const social =
-    "flex items-center justify-center h-10 w-10 rounded-full border border-white/10 bg-white/[0.03] text-slate-300 transition-all hover:border-green-500 hover:bg-green-600 hover:text-white active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-500";
+    "flex items-center justify-center h-10 w-10 rounded-full border border-white/10 bg-white/[0.03] text-slate-300 transition-all hover:border-sky-500 hover:bg-sky-600 hover:text-white active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500";
 
   return (
-    <footer className="relative overflow-hidden bg-[#04120b] text-slate-300">
+    <footer className="relative overflow-hidden bg-[#04121d] text-slate-300">
       {/* Crisp glowing divider separates the footer from the CTA above */}
-      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-500/40 to-transparent" />
-      <div aria-hidden="true" className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-56 w-[40rem] max-w-full rounded-full bg-green-500/10 blur-3xl" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-500/40 to-transparent" />
+      <div aria-hidden="true" className="pointer-events-none absolute -top-28 left-1/2 -translate-x-1/2 h-56 w-[40rem] max-w-full rounded-full bg-sky-500/10 blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Get in Touch */}
         <div className="text-center">
           <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">Get in Touch</h2>
-          <span aria-hidden="true" className="mx-auto mt-3 block h-0.5 w-10 rounded-full bg-green-500" />
+          <span aria-hidden="true" className="mx-auto mt-3 block h-0.5 w-10 rounded-full bg-sky-500" />
           <p className="mt-3 text-sm text-slate-400">
             Serving Bournemouth, Poole &amp; Christchurch · BH1&ndash;BH23
           </p>
@@ -37,7 +37,7 @@ export default function Footer() {
         {/* Contact options — spread as sleek pills */}
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
           <a href="tel:+447552427880" onClick={() => handleContactClick("phone")} className={chip}>
-            <Phone className="h-4 w-4 text-green-400 flex-shrink-0" aria-hidden="true" />
+            <Phone className="h-4 w-4 text-sky-400 flex-shrink-0" aria-hidden="true" />
             <span>07552 427880</span>
           </a>
           <a
@@ -53,11 +53,11 @@ export default function Footer() {
             <span>WhatsApp</span>
           </a>
           <a href="mailto:info@sparklyspace.co.uk" onClick={() => handleContactClick("email")} className={chip}>
-            <Mail className="h-4 w-4 text-green-400 flex-shrink-0" aria-hidden="true" />
+            <Mail className="h-4 w-4 text-sky-400 flex-shrink-0" aria-hidden="true" />
             <span>info@sparklyspace.co.uk</span>
           </a>
           <span className="inline-flex items-center gap-2.5 rounded-full border border-white/[0.06] bg-white/[0.02] px-4 py-2.5 text-sm text-slate-400">
-            <Clock className="h-4 w-4 text-green-400/80 flex-shrink-0" aria-hidden="true" />
+            <Clock className="h-4 w-4 text-sky-400/80 flex-shrink-0" aria-hidden="true" />
             <span>Mon&nbsp;&ndash;&nbsp;Sun · 8am&nbsp;&ndash;&nbsp;8pm</span>
           </span>
         </div>

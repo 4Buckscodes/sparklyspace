@@ -23,7 +23,7 @@ export default function ContactPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700 border border-green-200 mb-4 animate-fade-in-up">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-700 border border-sky-200 mb-4 animate-fade-in-up">
             <span>Here to Help</span>
           </span>
           <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight sm:text-5xl">
@@ -45,7 +45,7 @@ export default function ContactPage() {
                   href="tel:+447552427880"
                   className="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors min-h-[48px]"
                 >
-                  <div className="h-11 w-11 bg-green-50 rounded-xl flex items-center justify-center text-green-600 flex-shrink-0">
+                  <div className="h-11 w-11 bg-sky-50 rounded-xl flex items-center justify-center text-sky-600 flex-shrink-0">
                     <Phone className="h-5 w-5" />
                   </div>
                   <div>
@@ -77,7 +77,7 @@ export default function ContactPage() {
                   href="mailto:info@sparklyspace.co.uk"
                   className="flex items-start gap-4 p-4 rounded-2xl hover:bg-slate-50 transition-colors min-h-[48px]"
                 >
-                  <div className="h-11 w-11 bg-green-50 rounded-xl flex items-center justify-center text-green-600 flex-shrink-0">
+                  <div className="h-11 w-11 bg-sky-50 rounded-xl flex items-center justify-center text-sky-600 flex-shrink-0">
                     <Mail className="h-5 w-5" />
                   </div>
                   <div className="min-w-0">
@@ -87,7 +87,7 @@ export default function ContactPage() {
                 </a>
 
                 <div className="flex items-start gap-4 p-4 rounded-2xl">
-                  <div className="h-11 w-11 bg-green-50 rounded-xl flex items-center justify-center text-green-600 flex-shrink-0">
+                  <div className="h-11 w-11 bg-sky-50 rounded-xl flex items-center justify-center text-sky-600 flex-shrink-0">
                     <Clock className="h-5 w-5" />
                   </div>
                   <div>
@@ -104,7 +104,7 @@ export default function ContactPage() {
                     href="https://www.instagram.com/sparklyspace01?utm_source=qr"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-sky-600 bg-slate-50 hover:bg-sky-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
                   >
                     Instagram
                   </a>
@@ -112,7 +112,7 @@ export default function ContactPage() {
                     href="https://www.facebook.com/sparklyspace01"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-sky-600 bg-slate-50 hover:bg-sky-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
                   >
                     Facebook
                   </a>
@@ -120,7 +120,7 @@ export default function ContactPage() {
                     href="https://www.tiktok.com/@sparklyspace?_r=1&_t=ZN-98BbZfhfR8o"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-green-600 bg-slate-50 hover:bg-green-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-sky-600 bg-slate-50 hover:bg-sky-50 px-3 py-2 min-h-[40px] rounded-xl border border-slate-200/80 transition-colors"
                   >
                     TikTok
                   </a>
@@ -133,7 +133,7 @@ export default function ContactPage() {
           <div className="lg:col-span-7 space-y-6">
             <div className="bg-white rounded-3xl p-8 shadow-xl shadow-slate-100 border border-slate-100">
               <h2 className="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-2">
-                <MapPin className="h-5 w-5 text-green-500" />
+                <MapPin className="h-5 w-5 text-sky-500" />
                 <span>Service Coverage Area</span>
               </h2>
               <p className="text-slate-500 text-sm mb-6">
@@ -146,20 +146,20 @@ export default function ContactPage() {
                     <CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0" />
                     <div>
                       <p className="text-sm font-bold text-slate-800">{area.name}</p>
-                      <p className="text-xs text-green-600 font-semibold mt-0.5">{area.postcodes}</p>
+                      <p className="text-xs text-sky-600 font-semibold mt-0.5">{area.postcodes}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-8 bg-green-50 border border-green-100 rounded-2xl p-6 text-center">
-                <h3 className="text-green-800 font-bold mb-2">Outside Our Standard Postcode Area?</h3>
-                <p className="text-green-700/80 text-sm leading-relaxed mb-4">
+              <div className="mt-8 bg-sky-50 border border-sky-100 rounded-2xl p-6 text-center">
+                <h3 className="text-sky-800 font-bold mb-2">Outside Our Standard Postcode Area?</h3>
+                <p className="text-sky-700/80 text-sm leading-relaxed mb-4">
                   If your property falls outside BH1-BH23, please get in touch anyway! We frequently accommodate custom deep cleans, office contracts, and holiday let portfolios across Dorset.
                 </p>
                 <Link
                   href="/book"
-                  className="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md shadow-green-200 active:scale-95 text-sm min-h-[44px]"
+                  className="inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md shadow-sky-200 active:scale-95 text-sm min-h-[44px]"
                 >
                   Configure a Cleaning Request
                 </Link>

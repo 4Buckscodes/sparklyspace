@@ -6,8 +6,8 @@ import { AirbnbIcon } from "@/components/icons/AirbnbIcon";
 const serviceCards = [
   {
     tag: "Popular",
-    tagClass: "bg-green-100 text-green-800",
-    tile: "bg-green-500",
+    tagClass: "bg-sky-100 text-sky-800",
+    tile: "bg-sky-500",
     Icon: SprayBottle,
     title: "Residential Clean",
     desc: "Our core housekeeping. Perfect for maintaining kitchens, baths, floors, and general dusting on a weekly or bi-weekly cycle.",
@@ -53,7 +53,7 @@ export default function ServicesCallout() {
           </div>
           <Link
             href="/services"
-            className="text-green-600 hover:text-green-700 font-bold text-sm inline-flex items-center gap-1 hover:underline min-h-[44px]"
+            className="text-sky-600 hover:text-sky-700 font-bold text-sm inline-flex items-center gap-1 hover:underline min-h-[44px]"
           >
             <span>Explore all services</span>
             <span className="text-xs">&rarr;</span>
@@ -80,7 +80,7 @@ export default function ServicesCallout() {
                 </div>
                 <Link
                   href={s.href}
-                  className="mt-6 w-full text-center bg-white hover:bg-green-50 text-slate-800 font-bold py-2.5 px-4 rounded-xl border border-slate-200 hover:border-green-200 text-xs block transition-all min-h-[40px]"
+                  className="mt-6 w-full text-center bg-white hover:bg-sky-50 text-slate-800 font-bold py-2.5 px-4 rounded-xl border border-slate-200 hover:border-sky-200 text-xs block transition-all min-h-[40px]"
                 >
                   Request a Quote
                 </Link>

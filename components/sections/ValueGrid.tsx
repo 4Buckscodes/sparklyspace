@@ -10,7 +10,7 @@ const ICON_MAP: Record<CoreValue["iconName"], React.ComponentType<{ className?: 
 };
 
 const TILE_COLOR: Record<CoreValue["iconName"], string> = {
-  ShieldCheck: "bg-green-600",
+  ShieldCheck: "bg-sky-600",
   Leaf: "bg-lime-500",
   Heart: "bg-orange-500",
   CheckCircle2: "bg-amber-500",

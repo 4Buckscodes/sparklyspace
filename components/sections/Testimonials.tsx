@@ -8,7 +8,7 @@ interface TestimonialsProps {
 
 // Solid citrus accents rotate per card to match the site's tile palette.
 const ACCENTS = [
-  { avatar: "bg-green-600", bar: "border-l-green-500", tag: "bg-green-50 text-green-700 border-green-100" },
+  { avatar: "bg-sky-600", bar: "border-l-sky-500", tag: "bg-sky-50 text-sky-700 border-sky-100" },
   { avatar: "bg-orange-500", bar: "border-l-orange-500", tag: "bg-orange-50 text-orange-700 border-orange-100" },
   { avatar: "bg-amber-500", bar: "border-l-amber-500", tag: "bg-amber-50 text-amber-700 border-amber-100" },
 ];
@@ -17,8 +17,8 @@ export default function Testimonials({ items }: TestimonialsProps) {
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
       <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 border border-green-200">
-          <MessageSquare className="h-3.5 w-3.5 text-green-600" aria-hidden="true" focusable="false" />
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800 border border-sky-200">
+          <MessageSquare className="h-3.5 w-3.5 text-sky-600" aria-hidden="true" focusable="false" />
           <span>Customer Testimonials</span>
         </span>
         <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl mt-3">
@@ -68,8 +68,8 @@ export default function Testimonials({ items }: TestimonialsProps) {
 
               {/* Verified footer */}
               <div className="mt-6 pt-4 border-t border-slate-100">
-                <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-green-700 bg-green-50 px-2.5 py-1 rounded-full border border-green-100">
-                  <ShieldCheck className="h-3 w-3 text-green-600" aria-hidden="true" focusable="false" /> Verified Clean
+                <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-sky-700 bg-sky-50 px-2.5 py-1 rounded-full border border-sky-100">
+                  <ShieldCheck className="h-3 w-3 text-sky-600" aria-hidden="true" focusable="false" /> Verified Clean
                 </span>
               </div>
             </div>

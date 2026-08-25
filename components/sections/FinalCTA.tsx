@@ -4,7 +4,7 @@ import { Calendar } from "lucide-react";
 
 export default function FinalCTA() {
   return (
-    <section className="bg-green-900 text-white py-10 sm:py-16 text-center">
+    <section className="bg-sky-900 text-white py-10 sm:py-16 text-center">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
           Experience the Cleanliness You Deserve
@@ -14,7 +14,7 @@ export default function FinalCTA() {
         </p>
         <Link
           href="/book"
-          className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-extrabold px-8 py-4 rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] text-base min-h-[48px]"
+          className="inline-flex items-center justify-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-extrabold px-8 py-4 rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] text-base min-h-[48px]"
         >
           <Calendar className="h-5 w-5" />
           <span>Request a Quote</span>
