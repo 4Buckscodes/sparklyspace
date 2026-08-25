@@ -334,13 +334,13 @@ export default function BookingWizard() {
               <p className="text-slate-500 text-xs mt-1">Choose the service type that matches your requirements.</p>
             </div>
             
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-3">
               {services.map((service) => {
                 const isSelected = watchedServiceId === service.id;
                 return (
                   <label
                     key={service.id}
-                    className={`relative flex flex-col sm:flex-row justify-between p-6 rounded-2xl border cursor-pointer select-none transition-all ${
+                    className={`relative flex flex-col sm:flex-row justify-between p-4 rounded-2xl border cursor-pointer select-none transition-all ${
                       isSelected
                         ? "border-sky-500 bg-sky-50/40 ring-1 ring-sky-500"
                         : "border-slate-200 hover:border-slate-300 bg-white"
@@ -368,7 +368,6 @@ export default function BookingWizard() {
                           )}
                         </p>
                         <p className="text-xs text-amber-600 font-semibold mt-0.5 uppercase tracking-wider">{service.tagline}</p>
-                        <p className="text-slate-500 text-xs mt-2.5 leading-relaxed">{service.description}</p>
                       </div>
                     </div>
 
