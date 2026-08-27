@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en-GB" data-theme="mint">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sparkly Space — Redesign Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ---------- THEMES ---------- */
+  :root, [data-theme="mint"]{
+    --bg:#eefaf6; --bg2:#ffffff; --surface:#ffffff; --ink:#0a1f1b; --muted:#597a73;
+    --p1:#14b8a6; --p2:#0d9488; --grad:linear-gradient(135deg,#2dd4bf 0%,#0d9488 100%);
+    --accent:#fb7185; --accent2:#f59e0b; --ring:rgba(20,184,166,.28);
+    --halo1:rgba(45,212,191,.5); --halo2:rgba(251,113,133,.4);
+  }
+  [data-theme="ocean"]{
+    --bg:#eef2ff; --bg2:#ffffff; --surface:#ffffff; --ink:#0b1437; --muted:#5b658c;
+    --p1:#0ea5e9; --p2:#6366f1; --grad:linear-gradient(135deg,#22d3ee 0%,#6366f1 100%);
+    --accent:#ec4899; --accent2:#a3e635; --ring:rgba(99,102,241,.28);
+    --halo1:rgba(34,211,238,.5); --halo2:rgba(236,72,153,.4);
+  }
+  [data-theme="citrus"]{
+    --bg:#fffdf2; --bg2:#ffffff; --surface:#ffffff; --ink:#231a05; --muted:#7a6a3f;
+    --p1:#22c55e; --p2:#16a34a; --grad:linear-gradient(135deg,#86efac 0%,#16a34a 100%);
+    --accent:#f97316; --accent2:#facc15; --ring:rgba(34,197,94,.28);
+    --halo1:rgba(250,204,21,.55); --halo2:rgba(249,115,22,.4);
+  }
+  [data-theme="grape"]{
+    --bg:#f6f1ff; --bg2:#ffffff; --surface:#ffffff; --ink:#1a0f2e; --muted:#6b5b86;
+    --p1:#8b5cf6; --p2:#d946ef; --grad:linear-gradient(135deg,#a78bfa 0%,#d946ef 100%);
+    --accent:#f43f5e; --accent2:#38bdf8; --ring:rgba(139,92,246,.28);
+    --halo1:rgba(167,139,250,.55); --halo2:rgba(56,189,248,.4);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.55;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    transition:background .5s ease;
+  }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{line-height:1.08;letter-spacing:-.02em}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .ic{width:100%;height:100%;display:block}
+  .muted{color:var(--muted)}
+
+  /* ---------- BUTTONS / CHIPS ---------- */
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;
+    padding:14px 24px;border-radius:16px;cursor:pointer;border:0;transition:transform .15s,box-shadow .25s}
+  .btn svg{width:19px;height:19px}
+  .btn-primary{background:var(--grad);color:#fff;box-shadow:0 12px 28px -8px var(--ring)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 34px -8px var(--ring)}
+  .btn-ghost{background:var(--surface);color:var(--ink);border:1.5px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+  .btn-ghost:hover{border-color:var(--p1);color:var(--p2)}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
+    padding:8px 15px;border-radius:100px;background:color-mix(in srgb,var(--p1) 12%,var(--bg2));
+    color:var(--p2);border:1px solid color-mix(in srgb,var(--p1) 22%,transparent)}
+  .chip svg{width:15px;height:15px}
+
+  /* ---------- HEADER ---------- */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
+    background:color-mix(in srgb,var(--bg) 72%,transparent);border-bottom:1px solid color-mix(in srgb,var(--ink) 7%,transparent)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px}
+  .brand .logo{width:42px;height:42px;border-radius:13px;background:var(--grad);
+    display:grid;place-items:center;color:#fff;box-shadow:0 8px 20px -6px var(--ring)}
+  .brand .logo svg{width:24px;height:24px}
+  .brand small{display:block;font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--accent);text-transform:uppercase;margin-top:1px}
+  .nav-links{display:flex;gap:30px;font-weight:600;font-size:15px}
+  .nav-links a{color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--p2)}
+  @media(max-width:860px){.nav-links{display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:76px 0 90px;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.75;z-index:0;pointer-events:none}
+  .blob.a{width:460px;height:460px;background:var(--halo1);top:-140px;right:-90px}
+  .blob.b{width:380px;height:380px;background:var(--halo2);bottom:-160px;left:-120px}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}}
+  .hero h1{font-size:clamp(38px,5.4vw,64px);font-weight:800;margin:22px 0 20px}
+  .hero p.lead{font-size:18px;color:var(--muted);max-width:520px;margin-bottom:30px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-trust{display:flex;gap:22px;flex-wrap:wrap;margin-top:34px;font-size:13.5px;font-weight:600;color:var(--muted)}
+  .hero-trust span{display:inline-flex;align-items:center;gap:7px}
+  .hero-trust svg{width:17px;height:17px;color:var(--p1)}
+
+  /* hero visual: floating tool bubbles + glass quote card */
+  .stage{position:relative;height:440px}
+  @media(max-width:900px){.stage{height:400px}}
+  .bubble{position:absolute;border-radius:24px;display:grid;place-items:center;color:#fff;
+    box-shadow:0 22px 45px -14px rgba(0,0,0,.35);animation:float 6s ease-in-out infinite}
+  .bubble svg{width:46%;height:46%}
+  .bubble.big{width:120px;height:120px;border-radius:34px}
+  .bubble.mid{width:92px;height:92px}
+  .bubble.sm{width:70px;height:70px;border-radius:20px}
+  .b1{top:6%;left:8%;background:linear-gradient(135deg,#2dd4bf,#06b6d4);animation-delay:0s}
+  .b2{top:0;right:14%;background:linear-gradient(135deg,#a78bfa,#8b5cf6);animation-delay:.8s}
+  .b3{bottom:16%;left:0;background:linear-gradient(135deg,#fb7185,#f43f5e);animation-delay:1.6s}
+  .b4{bottom:4%;right:6%;background:linear-gradient(135deg,#fbbf24,#f59e0b);animation-delay:.4s}
+  .b5{top:40%;right:0;background:linear-gradient(135deg,#34d399,#10b981);animation-delay:1.2s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  .quote-card{position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);
+    width:250px;background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(10px);
+    border:1px solid color-mix(in srgb,var(--ink) 8%,transparent);border-radius:24px;padding:22px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.25);z-index:3}
+  .quote-card .row{display:flex;justify-content:space-between;font-size:13px;padding:7px 0;color:var(--muted);font-weight:600}
+  .quote-card .row b{color:var(--ink)}
+  .quote-card .tot{border-top:1.5px dashed color-mix(in srgb,var(--ink) 14%,transparent);margin-top:6px;padding-top:12px;font-size:15px}
+  .quote-card .tot b{color:var(--p2);font-size:17px}
+
+  /* ---------- SECTION HEADINGS ---------- */
+  section.pad{padding:64px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 48px}
+  .sec-head h2{font-size:clamp(28px,3.6vw,42px);font-weight:800;margin:14px 0 12px}
+  .sec-head p{color:var(--muted);font-size:16.5px}
+
+  /* ---------- SERVICES ---------- */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media(max-width:900px){.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--surface);border-radius:26px;padding:28px;border:1px solid color-mix(in srgb,var(--ink) 7%,transparent);
+    transition:transform .22s,box-shadow .22s;position:relative;overflow:hidden}
+  .card:hover{transform:translateY(-6px);box-shadow:0 26px 50px -22px rgba(0,0,0,.3)}
+  .tile{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;color:#fff;margin-bottom:18px;
+    box-shadow:0 14px 28px -10px rgba(0,0,0,.3)}
+  .tile svg{width:31px;height:31px}
+  .g1{background:linear-gradient(135deg,#2dd4bf,#06b6d4)}
+  .g2{background:linear-gradient(135deg,#818cf8,#6366f1)}
+  .g3{background:linear-gradient(135deg,#fb7185,#f43f5e)}
+  .g4{background:linear-gradient(135deg,#fbbf24,#f59e0b)}
+  .g5{background:linear-gradient(135deg,#34d399,#10b981)}
+  .g6{background:linear-gradient(135deg,#e879f9,#d946ef)}
+  .card h3{font-size:19px;font-weight:700;margin-bottom:9px}
+  .card p{font-size:14.5px;color:var(--muted);margin-bottom:18px}
+  .card .link{font-weight:700;font-size:14px;color:var(--p2);display:inline-flex;align-items:center;gap:6px}
+  .card .link svg{width:15px;height:15px;transition:transform .2s}
+  .card:hover .link svg{transform:translateX(4px)}
+
+  /* ---------- WHY / VALUE ---------- */
+  .why{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  @media(max-width:900px){.why{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.why{grid-template-columns:1fr}}
+  .value{background:var(--surface);border-radius:24px;padding:26px;border:1px solid color-mix(in srgb,var(--ink) 7%,transparent);text-align:left}
+  .value .vi{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;margin-bottom:16px;
+    background:color-mix(in srgb,var(--p1) 14%,var(--bg2));color:var(--p2)}
+  .value .vi svg{width:27px;height:27px}
+  .value h3{font-size:16.5px;font-weight:700;margin-bottom:7px}
+  .value p{font-size:13.5px;color:var(--muted)}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--surface);border-radius:24px;padding:30px;border:1px solid color-mix(in srgb,var(--ink) 7%,transparent);text-align:center}
+  .step .num{width:34px;height:34px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;
+    display:grid;place-items:center;margin:0 auto 16px;font-size:14px}
+  .step .si{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;margin:0 auto 16px;
+    background:color-mix(in srgb,var(--accent) 14%,var(--bg2));color:var(--accent)}
+  .step .si svg{width:33px;height:33px}
+  .step h3{font-size:17px;font-weight:700;margin-bottom:8px}
+  .step p{font-size:14px;color:var(--muted)}
+
+  /* ---------- TESTIMONIAL ---------- */
+  .quote-band{background:var(--grad);border-radius:34px;padding:54px;color:#fff;position:relative;overflow:hidden}
+  .quote-band .mark{position:absolute;top:-20px;right:34px;font-size:200px;opacity:.16;font-weight:800;font-family:Georgia,serif}
+  .quote-band p{font-size:clamp(20px,2.6vw,28px);font-weight:600;max-width:760px;position:relative;z-index:2}
+  .quote-band .who{margin-top:22px;font-weight:700;font-size:15px;opacity:.95}
+  .quote-band .who span{opacity:.8;font-weight:500}
+
+  /* ---------- FINAL CTA ---------- */
+  .cta{text-align:center;padding:70px 0 30px}
+  .cta h2{font-size:clamp(30px,4vw,48px);font-weight:800;margin-bottom:16px}
+  .cta p{color:var(--muted);font-size:17px;margin-bottom:28px}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid color-mix(in srgb,var(--ink) 8%,transparent);padding:34px 0;margin-top:50px;color:var(--muted);font-size:14px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+
+  /* ---------- THEME SWITCHER ---------- */
+  .switcher{position:fixed;right:18px;bottom:18px;z-index:100;background:var(--surface);
+    border:1px solid color-mix(in srgb,var(--ink) 10%,transparent);border-radius:20px;padding:14px 16px;
+    box-shadow:0 24px 50px -18px rgba(0,0,0,.35)}
+  .switcher .t{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .swatches{display:flex;gap:9px}
+  .sw{width:34px;height:34px;border-radius:11px;cursor:pointer;border:2.5px solid transparent;transition:transform .15s;position:relative}
+  .sw:hover{transform:scale(1.1)}
+  .sw.active{border-color:var(--ink)}
+  .sw[data-set-theme="mint"]{background:linear-gradient(135deg,#2dd4bf,#0d9488)}
+  .sw[data-set-theme="ocean"]{background:linear-gradient(135deg,#22d3ee,#6366f1)}
+  .sw[data-set-theme="citrus"]{background:linear-gradient(135deg,#86efac,#f97316)}
+  .sw[data-set-theme="grape"]{background:linear-gradient(135deg,#a78bfa,#d946ef)}
+  .switcher .name{font-size:12px;font-weight:700;margin-top:9px;text-align:center;color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG ICON LIBRARY (custom cleaning tools) ===== -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="spray" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8.5 9h4.2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H8.5a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2Z"/>
+    <path d="M8.5 9V6h4.2"/><path d="M12.7 6V3.4h3.3"/>
+    <path d="M6.8 13.5h6.6"/>
+    <circle cx="18" cy="4" r=".5" fill="currentColor" stroke="none"/>
+    <circle cx="20.2" cy="6" r=".5" fill="currentColor" stroke="none"/>
+    <circle cx="18" cy="8" r=".5" fill="currentColor" stroke="none"/>
+    <circle cx="21.4" cy="9" r=".5" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="brush" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15.5 3.5 20.5 8.5"/>
+    <path d="M4.7 13.4 10.6 19.3l4-4a3.2 3.2 0 0 0 0-4.5l-1.4-1.4a3.2 3.2 0 0 0-4.5 0Z"/>
+    <path d="M4.7 19.4 3 21.2"/><path d="M7.2 20.6 6 21.8"/><path d="M9.6 21.4 8.7 22.3"/>
+  </symbol>
+  <symbol id="mop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2.5v9"/>
+    <path d="M7.5 11.5h9l-1.2 4.3a2 2 0 0 1-1.9 1.4h-2.8a2 2 0 0 1-1.9-1.4Z"/>
+    <path d="M9.3 17.4 8.4 21.5"/><path d="M12 17.6v3.9"/><path d="M14.7 17.4l.9 4.1"/>
+  </symbol>
+  <symbol id="bucket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 8.5h14l-1.4 10.8a2 2 0 0 1-2 1.7H8.4a2 2 0 0 1-2-1.7Z"/>
+    <path d="M3.8 8.5c0-1.6 3.7-3 8.2-3s8.2 1.4 8.2 3"/>
+    <path d="M8.5 6c.6-1.6 1.9-2.6 3.5-2.6S15 4.4 15.5 6"/>
+  </symbol>
+  <symbol id="squeegee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.2v9.3"/><path d="M9 3.2h6"/>
+    <rect x="4.5" y="12.5" width="15" height="3.4" rx="1"/>
+    <path d="M6.2 16 5 20.8"/><path d="M17.8 16 19 20.8"/><path d="M12 16v4.8"/>
+  </symbol>
+  <symbol id="duster" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 13.5V21"/>
+    <path d="M12 13.8c-3.1 0-5.2-2.2-5.2-5.4S8.9 3 12 3s5.2 2.2 5.2 5.4-2.1 5.4-5.2 5.4Z"/>
+    <path d="M12 3.4v10"/><path d="M8.4 5.2c1.4 1.7 1.4 5.6 0 7.1"/><path d="M15.6 5.2c-1.4 1.7-1.4 5.6 0 7.1"/>
+  </symbol>
+  <symbol id="sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.2 13.9 8.6 19.3 10.5 13.9 12.4 12 17.8 10.1 12.4 4.7 10.5 10.1 8.6Z"/>
+    <path d="M18.5 15.2 19.3 17.4 21.5 18.2 19.3 19 18.5 21.2 17.7 19 15.5 18.2 17.7 17.4Z"/>
+  </symbol>
+  <symbol id="shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3 5 5.8v5.4c0 4.3 3 7.6 7 9.8 4-2.2 7-5.5 7-9.8V5.8Z"/><path d="m9 11.5 2 2 4-4"/>
+  </symbol>
+  <symbol id="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20c0-8 6-14 16-14 0 10-6 16-14 14"/><path d="M4 20C8 14 12 11 17 9"/>
+  </symbol>
+  <symbol id="heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20s-7-4.3-9.3-9C1.2 8 2.6 4.8 6 4.8c2 0 3.3 1.2 4 2.4.7-1.2 2-2.4 4-2.4 3.4 0 4.8 3.2 3.3 6.2C19 15.7 12 20 12 20Z"/>
+  </symbol>
+  <symbol id="badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/>
+  </symbol>
+  <symbol id="chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.8A8 8 0 1 1 21 12Z"/>
+  </symbol>
+  <symbol id="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>
+  </symbol>
+  <symbol id="phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>
+  </symbol>
+  <symbol id="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+  </symbol>
+</svg>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <span class="logo"><svg class="ic"><use href="#sparkle"/></svg></span>
+      <span>Sparkly Space<small>Cleaning Services</small></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#why">Why Us</a>
+      <a href="#how">How It Works</a>
+      <a href="#">Contact</a>
+    </nav>
+    <a class="btn btn-primary" href="#"><svg><use href="#chat"/></svg>Request a Quote</a>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="blob a"></div><div class="blob b"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="chip"><svg><use href="#pin"/></svg> Bournemouth · Poole · Christchurch</span>
+      <h1>A spotless home,<br><span class="grad-text">without lifting a finger.</span></h1>
+      <p class="lead">Vetted, fully insured cleaning specialists across Dorset. Tell us about your space and get a friendly, personalised quote in minutes.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#"><svg><use href="#sparkle"/></svg>Get My Free Quote</a>
+        <a class="btn btn-ghost" href="#"><svg><use href="#phone"/></svg>07552 427880</a>
+      </div>
+      <div class="hero-trust">
+        <span><svg><use href="#shield"/></svg> Vetted &amp; Insured</span>
+        <span><svg><use href="#leaf"/></svg> Eco Options</span>
+        <span><svg><use href="#badge"/></svg> 24hr Re-Clean Promise</span>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="bubble big b1"><svg class="ic"><use href="#spray"/></svg></div>
+      <div class="bubble mid b2"><svg class="ic"><use href="#brush"/></svg></div>
+      <div class="bubble mid b3"><svg class="ic"><use href="#mop"/></svg></div>
+      <div class="bubble big b4"><svg class="ic"><use href="#bucket"/></svg></div>
+      <div class="bubble sm b5"><svg class="ic"><use href="#sparkle"/></svg></div>
+      <div class="quote-card">
+        <div class="row"><span>Service</span><b>Deep Clean</b></div>
+        <div class="row"><span>Home</span><b>3 bed · 2 bath</b></div>
+        <div class="row"><span>Frequency</span><b>Weekly · 10% off</b></div>
+        <div class="row tot"><span>Your estimate</span><b>2 min quote</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="pad" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="chip"><svg><use href="#sparkle"/></svg> What We Do</span>
+      <h2>Cleaning for every corner of life</h2>
+      <p>From weekly tidies to deposit-winning deep cleans — each with its own trusted toolkit.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="tile g1"><svg class="ic"><use href="#spray"/></svg></div>
+        <h3>Residential Cleaning</h3>
+        <p>A consistent, high-standard clean tailored to your weekly or fortnightly routine.</p>
+        <a class="link" href="#">Get a quote <svg><use href="#arrow"/></svg></a>
+      </div>
+      <div class="card">
+        <div class="tile g2"><svg class="ic"><use href="#brush"/></svg></div>
+        <h3>Deep Cleaning</h3>
+        <p>A top-to-bottom refresh targeting limescale, built-up dust and hard-to-reach spots.</p>
+        <a class="link" href="#">Get a quote <svg><use href="#arrow"/></svg></a>
+      </div>
+      <div class="card">
+        <div class="tile g3"><svg class="ic"><use href="#mop"/></svg></div>
+        <h3>End of Tenancy</h3>
+        <p>An agency-approved checkout clean designed to help secure your full deposit back.</p>
+        <a class="link" href="#">Get a quote <svg><use href="#arrow"/></svg></a>
+      </div>
+      <div class="card">
+        <div class="tile g4"><svg class="ic"><use href="#sparkle"/></svg></div>
+        <h3>Airbnb &amp; Holiday Lets</h3>
+        <p>Seamless turnovers with fresh linen, restocking and 5-star guest presentation.</p>
+        <a class="link" href="#">Get a quote <svg><use href="#arrow"/></svg></a>
+      </div>
+      <div class="card">
+        <div class="tile g5"><svg class="ic"><use href="#squeegee"/></svg></div>
+        <h3>Commercial &amp; Office</h3>
+        <p>Flexible, non-disruptive cleaning for offices, retail and gyms — on your schedule.</p>
+        <a class="link" href="#">Get a quote <svg><use href="#arrow"/></svg></a>
+      </div>
+      <div class="card">
+        <div class="tile g6"><svg class="ic"><use href="#duster"/></svg></div>
+        <h3>Custom &amp; Other</h3>
+        <p>Post-build, carpets, windows or a bespoke checklist — tell us and we'll tailor it.</p>
+        <a class="link" href="#">Get a quote <svg><use href="#arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY ===== -->
+<section class="pad" id="why" style="background:var(--bg2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="chip"><svg><use href="#shield"/></svg> Why Sparkly Space</span>
+      <h2>Trusted in over 20 BH postcodes</h2>
+      <p>The little things that make us the easy choice for Dorset homes and businesses.</p>
+    </div>
+    <div class="why">
+      <div class="value"><div class="vi"><svg class="ic"><use href="#shield"/></svg></div><h3>Vetted &amp; Insured</h3><p>Every cleaner is background-checked, trained and covered by full public liability insurance.</p></div>
+      <div class="value"><div class="vi"><svg class="ic"><use href="#leaf"/></svg></div><h3>Eco-Conscious</h3><p>Optional non-toxic, child- and pet-safe products that are kind to the Dorset environment.</p></div>
+      <div class="value"><div class="vi"><svg class="ic"><use href="#heart"/></svg></div><h3>Tailored to You</h3><p>Priority rooms, parking, lockbox codes, pets — your clean, exactly the way you like it.</p></div>
+      <div class="value"><div class="vi"><svg class="ic"><use href="#badge"/></svg></div><h3>Spotless Promise</h3><p>Not perfect? Tell us within 24 hours and we'll come back and re-clean it, free.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="pad" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="chip"><svg><use href="#chat"/></svg> Simple &amp; Fast</span>
+      <h2>Sparkling in three easy steps</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div class="si"><svg class="ic"><use href="#spray"/></svg></div><h3>Tell us about your space</h3><p>Pick a service, your property size and a time that suits you in our 2-minute wizard.</p></div>
+      <div class="step"><div class="num">2</div><div class="si"><svg class="ic"><use href="#chat"/></svg></div><h3>Get a personalised quote</h3><p>We confirm your tailored price and slot over WhatsApp or email — no surprises.</p></div>
+      <div class="step"><div class="num">3</div><div class="si"><svg class="ic"><use href="#sparkle"/></svg></div><h3>Relax &amp; enjoy the shine</h3><p>Our vetted team arrives on time and leaves your space immaculate. That's it.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL ===== -->
+<section class="pad">
+  <div class="wrap">
+    <div class="quote-band">
+      <div class="mark">&ldquo;</div>
+      <p>Finding a reliable cleaner was a challenge until we found Sparkly Space. The attention to detail is remarkable — polite, punctual, and brilliant with our dog!</p>
+      <div class="who">Sarah M. <span>· Weekly Clean · Poole (BH14)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="wrap cta">
+  <h2>Ready for a <span class="grad-text">sparkling space?</span></h2>
+  <p>Get your free, no-obligation quote in minutes — we'll take it from there.</p>
+  <a class="btn btn-primary" href="#" style="font-size:16px;padding:16px 30px"><svg><use href="#sparkle"/></svg>Request Your Free Quote</a>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap foot">
+    <div class="brand" style="font-size:17px"><span class="logo" style="width:36px;height:36px;border-radius:11px"><svg class="ic"><use href="#sparkle"/></svg></span> Sparkly Space</div>
+    <div>Serving Bournemouth · Poole · Christchurch · BH1–BH23</div>
+    <div>© 2026 Sparkly Space Cleaning Services</div>
+  </div>
+</footer>
+
+<!-- ===== THEME SWITCHER ===== -->
+<div class="switcher">
+  <div class="t">Try a palette</div>
+  <div class="swatches">
+    <div class="sw active" data-set-theme="mint" title="Mint Fresh"></div>
+    <div class="sw" data-set-theme="ocean" title="Ocean Pop"></div>
+    <div class="sw" data-set-theme="citrus" title="Sunshine Citrus"></div>
+    <div class="sw" data-set-theme="grape" title="Berry Bloom"></div>
+  </div>
+  <div class="name" id="themeName">Mint Fresh</div>
+</div>
+
+<script>
+  var names={mint:'Mint Fresh',ocean:'Ocean Pop',citrus:'Sunshine Citrus',grape:'Berry Bloom'};
+  document.querySelectorAll('[data-set-theme]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.dataset.setTheme;
+      document.documentElement.setAttribute('data-theme',t);
+      document.querySelectorAll('[data-set-theme]').forEach(function(x){x.classList.remove('active')});
+      b.classList.add('active');
+      document.getElementById('themeName').textContent=names[t];
+    });
+  });
+</script>
+</body>
+</html>

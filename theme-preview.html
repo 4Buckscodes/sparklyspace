@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blue theme options — Sparkly Space</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: #e9eef3;
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page-head {
+    max-width: 1200px; margin: 0 auto; padding: 32px 20px 8px;
+  }
+  .page-head h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 6px; }
+  .page-head p { margin: 0; color: #475569; font-size: 14px; line-height: 1.5; max-width: 720px; }
+  .note { margin-top: 10px; font-size: 12.5px; color: #64748b; }
+  .note b { color: #334155; }
+  .grid {
+    max-width: 1200px; margin: 0 auto; padding: 20px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+  }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; } }
+  .panel {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; overflow: hidden;
+    box-shadow: 0 8px 30px rgba(2, 6, 23, 0.05);
+  }
+  .panel-head { padding: 18px 20px 14px; border-bottom: 1px solid #f1f5f9; }
+  .panel-head h2 { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; }
+  .panel-head p { margin: 5px 0 0; font-size: 12.5px; color: #64748b; }
+  .rec { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #047857; background: #d1fae5; border: 1px solid #a7f3d0; padding: 3px 8px; border-radius: 999px; }
+  .scale { display: flex; padding: 14px 20px 4px; gap: 0; }
+  .swatch { flex: 1; text-align: center; }
+  .swatch .chip { height: 34px; border-radius: 6px; }
+  .swatch small { display: block; font-size: 9px; color: #94a3b8; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .demo { padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 14px; }
+
+  /* Hero mini */
+  .hero { background: #fffdf6; border: 1px solid #f1f5f9; border-radius: 16px; padding: 20px; }
+  .badge { display: inline-flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 12px; }
+  .badge .dot { width: 7px; height: 7px; border-radius: 999px; }
+  .hero h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 12px 0 14px; color: #0f172a; }
+  .hero h3 em { font-style: normal; }
+  .btns { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; color: #fff; font-weight: 800; font-size: 13px; padding: 11px 18px; border-radius: 14px; text-decoration: none; box-shadow: 0 8px 20px rgba(2,6,23,0.12); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #e2e8f0; color: #1f2937; font-weight: 700; font-size: 13px; padding: 11px 18px; border-radius: 14px; text-decoration: none; }
+  .link { font-size: 13px; font-weight: 700; text-decoration: none; }
+
+  /* CTA band */
+  .cta { border-radius: 16px; padding: 22px 20px; text-align: center; color: #fff; }
+  .cta h4 { margin: 0 0 12px; font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
+
+  /* Footer band */
+  .footer { position: relative; border-radius: 16px; padding: 22px 20px 18px; overflow: hidden; }
+  .footer .glow { position: absolute; top: 0; left: 0; right: 0; height: 1px; }
+  .footer .wordmark { text-align: center; font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: #f1f5f9; }
+  .footer .wordmark .gold { color: #d4af37; }
+  .footer .sub { text-align: center; font-size: 11px; color: #94a3b8; margin-top: 4px; }
+  .pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 14px; }
+  .pill { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: #e2e8f0; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); padding: 7px 13px; border-radius: 999px; }
+  .pill .pdot { width: 7px; height: 7px; border-radius: 999px; }
+</style>
+</head>
+<body>
+  <div class="page-head">
+    <h1>Blue theme options — Sparkly Space</h1>
+    <p>Four blue palettes applied to the real surfaces: the hero, the CTA band, and the revamped footer (glass pills + glowing divider). Pick the one you like and I'll swap the green theme across the whole site.</p>
+    <p class="note"><b>Kept as-is in every option:</b> the gold "Sparkly" wordmark (blue + gold is a premium pairing), WhatsApp's own green, and amber info/warning boxes. The cream page background can stay warm or cool slightly to match — your call.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const PALETTES = [
+      {
+        name: "Sky Fresh", rec: true, scale: 'Tailwind "sky" · bright, airy, fresh-water feel — strongest fit for a cleaning brand',
+        dark: "#04121d",
+        c: {50:"#f0f9ff",100:"#e0f2fe",200:"#bae6fd",300:"#7dd3fc",400:"#38bdf8",500:"#0ea5e9",600:"#0284c7",700:"#0369a1",800:"#075985",900:"#0c4a6e",950:"#082f49"}
+      },
+      {
+        name: "Classic Blue", rec: false, scale: 'Tailwind "blue" · professional, trustworthy — the safe, corporate choice',
+        dark: "#0a1226",
+        c: {50:"#eff6ff",100:"#dbeafe",200:"#bfdbfe",300:"#93c5fd",400:"#60a5fa",500:"#3b82f6",600:"#2563eb",700:"#1d4ed8",800:"#1e40af",900:"#1e3a8a",950:"#172554"}
+      },
+      {
+        name: "Ocean Cyan", rec: false, scale: 'Tailwind "cyan" · aqua / sparkle — bold and distinctive, most "water & shine"',
+        dark: "#04141a",
+        c: {50:"#ecfeff",100:"#cffafe",200:"#a5f3fc",300:"#67e8f9",400:"#22d3ee",500:"#06b6d4",600:"#0891b2",700:"#0e7490",800:"#155e75",900:"#164e63",950:"#083344"}
+      },
+      {
+        name: "Indigo Navy", rec: false, scale: 'Tailwind "indigo" · deeper, premium, a touch of purple-blue — upscale/modern',
+        dark: "#0b0a1e",
+        c: {50:"#eef2ff",100:"#e0e7ff",200:"#c7d2fe",300:"#a5b4fc",400:"#818cf8",500:"#6366f1",600:"#4f46e5",700:"#4338ca",800:"#3730a3",900:"#312e81",950:"#1e1b4b"}
+      }
+    ];
+
+    const scaleKeys = [50,100,200,300,400,500,600,700,800,900,950];
+
+    function panel(p) {
+      const swatches = scaleKeys.map(k =>
+        `<div class="swatch"><div class="chip" style="background:${p.c[k]}"></div><small>${k}</small></div>`
+      ).join("");
+      return `
+      <section class="panel">
+        <div class="panel-head">
+          <h2>${p.name} ${p.rec ? '<span class="rec">Recommended</span>' : ''}</h2>
+          <p>${p.scale}</p>
+        </div>
+        <div class="scale">${swatches}</div>
+        <div class="demo">
+
+          <div class="hero">
+            <span class="badge" style="background:${p.c[100]};color:${p.c[800]};border:1px solid ${p.c[200]}">
+              <span class="dot" style="background:${p.c[600]}"></span>Trusted Local Cleaners
+            </span>
+            <h3>We Clean, So You Can Focus on <em style="color:${p.c[600]}">What Matters.</em></h3>
+            <div class="btns">
+              <a class="btn-primary" style="background:${p.c[600]}">Request a Quote</a>
+              <a class="btn-ghost">07552 427880</a>
+            </div>
+            <div style="margin-top:14px"><a class="link" style="color:${p.c[600]}">See our services →</a></div>
+          </div>
+
+          <div class="cta" style="background:${p.c[900]}">
+            <h4>Experience the Cleanliness You Deserve</h4>
+            <a class="btn-primary" style="background:${p.c[600]}">Request a Quote</a>
+          </div>
+
+          <div class="footer" style="background:${p.dark}">
+            <div class="glow" style="background:linear-gradient(90deg, transparent, ${p.c[500]}80, transparent)"></div>
+            <div class="wordmark"><span class="gold">Sparkly</span> <span>Space</span></div>
+            <div class="sub">Get in Touch · Bournemouth, Poole &amp; Christchurch</div>
+            <div class="pills">
+              <span class="pill"><span class="pdot" style="background:${p.c[400]}"></span>07552 427880</span>
+              <span class="pill"><span class="pdot" style="background:#34d399"></span>WhatsApp</span>
+              <span class="pill"><span class="pdot" style="background:${p.c[400]}"></span>Email</span>
+            </div>
+          </div>
+
+        </div>
+      </section>`;
+    }
+
+    document.getElementById("grid").innerHTML = PALETTES.map(panel).join("");
+  </script>
+</body>
+</html>
