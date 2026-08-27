@@ -4,6 +4,7 @@ import Link from "next/link";
 import { services } from "@/data/services";
 import { Check, Calendar, ArrowLeft, Shield, AlertCircle, ShoppingCart } from "lucide-react";
 import type { Metadata } from "next";
+import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -42,8 +43,21 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const jsonLd = [
+    serviceJsonLd(service),
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Services", path: "/services" },
+      { name: service.name, path: `/services/${service.slug}` },
+    ]),
+  ];
+
   return (
     <div className="bg-slate-50 min-h-screen py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         
         {/* Back Link */}

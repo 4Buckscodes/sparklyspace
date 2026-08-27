@@ -62,6 +62,18 @@ export default function Footer() {
           </span>
         </div>
 
+        {/* Areas we cover — internal links for local SEO + navigation */}
+        <nav aria-label="Areas we cover" className="mt-7 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">Areas We Cover</p>
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm">
+            <Link href="/bournemouth" className="text-slate-300 hover:text-white transition-colors">Bournemouth</Link>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <Link href="/poole" className="text-slate-300 hover:text-white transition-colors">Poole</Link>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <Link href="/christchurch" className="text-slate-300 hover:text-white transition-colors">Christchurch</Link>
+          </div>
+        </nav>
+
         {/* Brand + socials */}
         <div className="mt-10 border-t border-white/[0.06] pt-7 flex flex-col sm:flex-row items-center justify-between gap-6">
           <Link href="/" aria-label="Sparkly Space home" className="inline-block">

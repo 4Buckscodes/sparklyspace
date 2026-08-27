@@ -1,6 +1,7 @@
 import React from "react";
 import { Quote, Star, ShieldCheck, MessageSquare } from "lucide-react";
 import { Testimonial } from "@/data/home-content";
+import { GBP_URL } from "@/lib/seo";
 
 interface TestimonialsProps {
   items: Testimonial[];
@@ -75,6 +76,24 @@ export default function Testimonials({ items }: TestimonialsProps) {
             </div>
           );
         })}
+      </div>
+
+      {/* Read reviews on Google — links to the real Google Business Profile */}
+      <div className="mt-10 sm:mt-12 flex justify-center">
+        <a
+          href={GBP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group inline-flex items-center gap-2.5 rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-sm transition-all hover:border-sky-300 hover:bg-sky-50 hover:text-slate-900 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 min-h-[44px]"
+        >
+          <span className="flex gap-0.5" aria-hidden="true">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="h-4 w-4 text-amber-500 fill-amber-500" />
+            ))}
+          </span>
+          <span>Read our reviews on Google</span>
+          <span aria-hidden="true" className="text-sky-600 transition-transform group-hover:translate-x-0.5">&rarr;</span>
+        </a>
       </div>
     </section>
   );

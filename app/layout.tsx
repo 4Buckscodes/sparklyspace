@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import { localBusinessJsonLd } from "@/lib/seo";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -57,108 +58,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "HouseCleaning",
-    "name": "Sparkly Space Cleaning Services",
-    "image": "https://sparklyspace.co.uk/logo-gold.png",
-    "description": "Sparkly Space provides premium residential, deep cleaning, end of tenancy, Airbnb, and commercial office cleaning services.",
-    "telephone": "+447552427880",
-    "email": "info@sparklyspace.co.uk",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Bournemouth",
-      "addressRegion": "Dorset",
-      "addressCountry": "GB"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "50.7208",
-      "longitude": "-1.8796"
-    },
-    "url": "https://sparklyspace.co.uk",
-    "sameAs": [
-      "https://www.instagram.com/sparklyspace01",
-      "https://www.tiktok.com/@sparklyspace",
-      "https://www.facebook.com/sparklyspace01"
-    ],
-    "knowsAbout": [
-      "Domestic Cleaning",
-      "Deep Cleaning",
-      "End of Tenancy Deposit Guarantee Cleaning",
-      "Airbnb & Holiday Let Turnover Cleaning",
-      "Commercial & Office Sanitization",
-      "Eco-Friendly Non-Toxic Cleaning",
-      "Bournemouth Poole Christchurch BH Postcodes Cleaning"
-    ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Cleaning Services Catalog",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Residential & Domestic Cleaning",
-            "description": "Regular home cleaning tailored to client routines."
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Deep Cleaning",
-            "description": "Top-to-bottom intense clean targeting limescale and built-up dust."
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "End of Tenancy Cleaning",
-            "description": "Agency-approved checkout clean designed for 100% deposit returns."
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Airbnb & Holiday Let Cleaning",
-            "description": "Turnover cleans, linen laundry, and guest amenity restocking."
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Commercial & Office Cleaning",
-            "description": "Flexible scheduled cleaning for commercial and office spaces."
-          }
-        }
-      ]
-    },
-    "priceRange": "££",
-    "areaServed": [
-      { "@type": "AdministrativeArea", "name": "Bournemouth" },
-      { "@type": "AdministrativeArea", "name": "Christchurch" },
-      { "@type": "AdministrativeArea", "name": "Poole" },
-      { "@type": "AdministrativeArea", "name": "Dorset BH Postcodes (BH1-BH23)" }
-    ],
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ],
-      "opens": "08:00",
-      "closes": "20:00"
-    }
-  };
+  const jsonLd = localBusinessJsonLd();
 
   return (
     <html lang="en-GB" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
