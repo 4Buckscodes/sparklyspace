@@ -1,13 +1,11 @@
 import { ImageResponse } from "next/og";
 
-// Route segment config
 export const alt =
-  "Sparkly Space Cleaning Services — Bournemouth, Poole & Christchurch";
+  "Sparkly Space — professional home and commercial cleaning across Bournemouth, Poole and Christchurch.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Branded 1200x630 social-share card, generated at build time.
-export default function OpengraphImage() {
+export default function OpenGraphImage() {
   return new ImageResponse(
     (
       <div
@@ -16,58 +14,95 @@ export default function OpengraphImage() {
           height: "100%",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
+          padding: "64px 76px",
           background:
-            "linear-gradient(135deg, #0f172a 0%, #082f49 55%, #0c4a6e 100%)",
-          color: "white",
-          fontFamily: "sans-serif",
-          padding: "72px",
-          textAlign: "center",
+            "linear-gradient(125deg, #071B3A 0%, #0B3762 58%, #0D5570 100%)",
+          color: "#FFFFFF",
+          fontFamily: "Arial, sans-serif",
         }}
       >
+        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+          <div
+            style={{
+              width: 58,
+              height: 58,
+              borderRadius: 18,
+              background: "#F5C451",
+              color: "#071B3A",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 37,
+              fontWeight: 900,
+            }}
+          >
+            ✦
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ fontSize: 31, fontWeight: 800, letterSpacing: 1.5 }}>
+              SPARKLY SPACE
+            </div>
+            <div style={{ fontSize: 15, letterSpacing: 4, color: "#C7D9E8" }}>
+              CLEANING SERVICES
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", maxWidth: 1000 }}>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 67,
+              lineHeight: 1.08,
+              fontWeight: 800,
+              letterSpacing: -2,
+            }}
+          >
+            A cleaner space.
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 67,
+              lineHeight: 1.08,
+              fontWeight: 800,
+              letterSpacing: -2,
+              color: "#F5C451",
+            }}
+          >
+            A better feeling.
+          </div>
+          <div
+            style={{
+              display: "flex",
+              marginTop: 26,
+              fontSize: 27,
+              lineHeight: 1.4,
+              color: "#E4EDF5",
+            }}
+          >
+            Thoughtful, reliable cleaning for homes and businesses.
+          </div>
+        </div>
+
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            fontSize: 92,
-            fontWeight: 800,
-            letterSpacing: "-0.03em",
+            justifyContent: "space-between",
+            borderTop: "1px solid rgba(255,255,255,0.25)",
+            paddingTop: 22,
+            fontSize: 22,
+            color: "#E4EDF5",
           }}
         >
-          <span style={{ color: "#f59e0b" }}>Sparkly</span>
-          <span style={{ color: "#e0f2fe", marginLeft: 22 }}>Space</span>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 22,
-            fontSize: 42,
-            fontWeight: 600,
-            color: "#7dd3fc",
-          }}
-        >
-          Professional Cleaning Services
-        </div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 26,
-            fontSize: 32,
-            color: "#cbd5e1",
-          }}
-        >
-          Bournemouth · Poole · Christchurch
-        </div>
-        <div
-          style={{
-            display: "flex",
-            marginTop: 44,
-            fontSize: 24,
-            color: "#94a3b8",
-          }}
-        >
-          Vetted &amp; Fully Insured · Eco-Friendly Options · BH1–BH23
+          <div style={{ display: "flex" }}>
+            Bournemouth · Poole · Christchurch
+          </div>
+          <div style={{ display: "flex", color: "#F5C451", fontWeight: 700 }}>
+            sparklyspace.co.uk
+          </div>
         </div>
       </div>
     ),
