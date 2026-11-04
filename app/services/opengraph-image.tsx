@@ -15,7 +15,7 @@ export default function OpenGraphImage() {
             <div style={{ display: "flex", background: "#fff", borderRadius: 14, padding: "8px 14px", width: 210, height: 82, alignItems: "center", justifyContent: "center" }}>
               <img src="https://sparklyspace.co.uk/logo.png" width="184" height="66" style={{ objectFit: "contain" }} />
             </div>
-            <div style={{ display: "flex", marginLeft: 22, color: "#F5C451", fontSize: 17, fontWeight: 800, letterSpacing: 1 }}>{eyebrow}</div>
+            <div style={{ display: "flex", marginLeft: 22, color: "#F5C451", fontSize: 17, fontWeight: 800, letterSpacing: 1 }}>"OUR CLEANING SERVICES"</div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", maxWidth: 850 }}>
             <div style={{ display: "flex", fontSize: 63, lineHeight: 1.08, fontWeight: 800, letterSpacing: -1.5 }}>The Right Clean for Every Space.</div>
