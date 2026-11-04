@@ -12,14 +12,14 @@ const inter = Inter({
   display: "swap",
 });
 
-const shareTitle = "Sparkly Space | A Cleaner Space, A Better Feeling";
+const shareTitle = "Sparkly Space | We Clean, So You Can Focus on What Matters.";
 const shareDescription =
-  "Thoughtful, reliable home and commercial cleaning across Bournemouth, Poole and Christchurch. Book your clean or request a personalised quote online.";
+  "We Clean, So You Can Focus on What Matters. Reliable home and commercial cleaning across Bournemouth, Poole and Christchurch. Book your clean or request a personalised quote online.";
 
 export const metadata: Metadata = {
   title: {
     template: "%s | Sparkly Space Cleaning Services",
-    default: "Sparkly Space | Professional Cleaning in Bournemouth, Poole & Christchurch",
+    default: "Sparkly Space | We Clean, So You Can Focus on What Matters.",
   },
   description: shareDescription,
   metadataBase: new URL("https://sparklyspace.co.uk"),
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Sparkly Space — a cleaner space, a better feeling. Reliable home and commercial cleaning across Bournemouth, Poole and Christchurch.",
+        alt: "Sparkly Space — We Clean, So You Can Focus on What Matters.",
       },
     ],
   },
