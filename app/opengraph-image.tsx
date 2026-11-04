@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const alt =
-  "Sparkly Space — professional home and commercial cleaning across Bournemouth, Poole and Christchurch.";
+  "Sparkly Space — We Clean, So You Can Focus on What Matters. Professional home and commercial cleaning across Bournemouth, Poole and Christchurch.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -15,74 +15,75 @@ export default function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          padding: "64px 76px",
+          padding: "54px 76px",
           background:
             "linear-gradient(125deg, #071B3A 0%, #0B3762 58%, #0D5570 100%)",
           color: "#FFFFFF",
           fontFamily: "Arial, sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-start",
+          }}
+        >
           <div
             style={{
-              width: 58,
-              height: 58,
-              borderRadius: 18,
-              background: "#F5C451",
-              color: "#071B3A",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 37,
-              fontWeight: 900,
+              background: "#FFFFFF",
+              borderRadius: 18,
+              padding: "12px 20px",
+              width: 250,
+              height: 105,
             }}
           >
-            ✦
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <div style={{ fontSize: 31, fontWeight: 800, letterSpacing: 1.5 }}>
-              SPARKLY SPACE
-            </div>
-            <div style={{ fontSize: 15, letterSpacing: 4, color: "#C7D9E8" }}>
-              CLEANING SERVICES
-            </div>
+            <img
+              src="https://sparklyspace.co.uk/logo.png"
+              width="210"
+              height="80"
+              style={{ objectFit: "contain" }}
+            />
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", maxWidth: 1000 }}>
+        <div style={{ display: "flex", flexDirection: "column", maxWidth: 1040 }}>
           <div
             style={{
               display: "flex",
-              fontSize: 67,
-              lineHeight: 1.08,
+              fontSize: 62,
+              lineHeight: 1.13,
               fontWeight: 800,
-              letterSpacing: -2,
+              letterSpacing: -1.8,
             }}
           >
-            A cleaner space.
+            We Clean, So You Can
           </div>
           <div
             style={{
               display: "flex",
-              fontSize: 67,
-              lineHeight: 1.08,
+              fontSize: 68,
+              lineHeight: 1.13,
               fontWeight: 800,
               letterSpacing: -2,
               color: "#F5C451",
             }}
           >
-            A better feeling.
+            Focus on What Matters.
           </div>
           <div
             style={{
               display: "flex",
-              marginTop: 26,
-              fontSize: 27,
-              lineHeight: 1.4,
+              marginTop: 22,
+              fontSize: 25,
+              lineHeight: 1.35,
               color: "#E4EDF5",
             }}
           >
-            Thoughtful, reliable cleaning for homes and businesses.
+            Reliable home and commercial cleaning, made simple.
           </div>
         </div>
 
@@ -92,8 +93,8 @@ export default function OpenGraphImage() {
             alignItems: "center",
             justifyContent: "space-between",
             borderTop: "1px solid rgba(255,255,255,0.25)",
-            paddingTop: 22,
-            fontSize: 22,
+            paddingTop: 20,
+            fontSize: 21,
             color: "#E4EDF5",
           }}
         >
