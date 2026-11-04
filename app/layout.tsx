@@ -12,12 +12,16 @@ const inter = Inter({
   display: "swap",
 });
 
+const shareTitle = "Sparkly Space | A Cleaner Space, A Better Feeling";
+const shareDescription =
+  "Thoughtful, reliable home and commercial cleaning across Bournemouth, Poole and Christchurch. Book your clean or request a personalised quote online.";
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Sparkly Space Cleaning Services",
-    default: "Sparkly Space Cleaning Services | Bournemouth, Christchurch & Poole",
+    default: "Sparkly Space | Professional Cleaning in Bournemouth, Poole & Christchurch",
   },
-  description: "Professional, reliable cleaning with eco-friendly options across Bournemouth, Poole & Christchurch. Request a personalised quote in minutes.",
+  description: shareDescription,
   metadataBase: new URL("https://sparklyspace.co.uk"),
   alternates: {
     canonical: "/",
@@ -35,17 +39,26 @@ export const metadata: Metadata = {
     "eco friendly cleaning",
   ],
   openGraph: {
-    title: "Sparkly Space Cleaning Services",
-    description: "Professional, reliable cleaning services with optional eco-friendly products in Bournemouth, Christchurch, and Poole.",
-    url: "https://sparklyspace.co.uk",
-    siteName: "Sparkly Space Cleaning Services",
+    title: shareTitle,
+    description: shareDescription,
+    url: "https://sparklyspace.co.uk/",
+    siteName: "Sparkly Space",
     locale: "en_GB",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Sparkly Space — a cleaner space, a better feeling. Reliable home and commercial cleaning across Bournemouth, Poole and Christchurch.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sparkly Space Cleaning Services | Bournemouth, Poole & Christchurch",
-    description: "Professional, reliable cleaning services with optional eco-friendly products in Bournemouth, Christchurch, and Poole.",
+    title: shareTitle,
+    description: shareDescription,
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -73,7 +86,7 @@ export default function RootLayout({
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
         <Analytics />
-        
+
         {/* Floating Quick Action Contacts for Mobile */}
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-200 px-4 py-3 flex gap-3 shadow-lg">
           <a
@@ -93,4 +106,3 @@ export default function RootLayout({
     </html>
   );
 }
-
