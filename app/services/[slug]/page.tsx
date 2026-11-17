@@ -1,7 +1,9 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { services } from "@/data/services";
+import { servicePhotos } from "@/lib/images";
 import { Check, Calendar, ArrowLeft, Shield, AlertCircle, ShoppingCart } from "lucide-react";
 import type { Metadata } from "next";
 import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -43,6 +45,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const photo = servicePhotos[service.id];
+
   const jsonLd = [
     serviceJsonLd(service),
     breadcrumbJsonLd([
@@ -68,6 +72,28 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <ArrowLeft className="h-4 w-4" />
           <span>Back to all services</span>
         </Link>
+
+        {/* Service photography — the standard behind the checklist */}
+        {photo && (
+          <div className="relative mb-8 overflow-hidden rounded-3xl bg-slate-200 aspect-[4/3] sm:aspect-[16/10] shadow-sm">
+            <Image
+              src={photo.src}
+              alt={photo.alt}
+              fill
+              priority
+              sizes="(min-width: 1024px) 896px, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/80 via-slate-950/35 to-transparent p-4 sm:p-6">
+              <p className="text-[10px] font-extrabold uppercase tracking-widest text-sky-200">
+                {service.name}
+              </p>
+              <p className="mt-1 text-sm sm:text-base font-bold text-white leading-snug">
+                Finished to a documented checklist — then checked before we leave.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Detailed Card */}
         <div className="bg-white rounded-3xl border border-slate-100 shadow-xl p-8 sm:p-12 animate-fade-in-up">

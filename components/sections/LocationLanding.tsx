@@ -1,9 +1,11 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Calendar, ShieldCheck, Leaf, Heart, CheckCircle2, Check, ArrowRight } from "lucide-react";
 import type { LocationArea } from "@/data/locations";
 import { services } from "@/data/services";
 import { coreValues, faqs, type CoreValue } from "@/data/home-content";
+import { jobPhotos } from "@/lib/images";
 
 const valueIcons: Record<CoreValue["iconName"], React.ComponentType<{ className?: string }>> = {
   ShieldCheck,
@@ -93,6 +95,42 @@ export default function LocationLanding({ location }: { location: LocationArea }
           ))}
         </div>
       </section>
+      {/* Local proof — the room-level standard, so location pages don't feel templated */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-2 pb-12 sm:pb-16">
+        <div className="text-center max-w-2xl mx-auto mb-8">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Inside a {name} clean
+          </h2>
+          <p className="mt-3 text-sm text-slate-500">
+            The same documented standard in every home, whichever {name} postcode you are in.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            jobPhotos.find((p) => p.title === "Kitchen reset")!,
+            jobPhotos.find((p) => p.title === "Bathroom suite")!,
+            jobPhotos.find((p) => p.title === "Workplace reset")!,
+          ].map((photo) => (
+            <figure
+              key={photo.title}
+              className="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[4/3] group"
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(min-width: 640px) 33vw, 100vw"
+                className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
+              />
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/35 to-transparent p-3.5">
+                <p className="text-sm font-extrabold text-white leading-tight">{photo.title}</p>
+                <p className="mt-0.5 text-[11px] text-slate-200 leading-snug">{photo.detail}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
       {/* Areas covered */}
       <section className="bg-white border-y border-slate-100 py-12 sm:py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

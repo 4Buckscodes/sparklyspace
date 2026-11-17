@@ -1,13 +1,17 @@
 import React from "react";
 import Hero from "@/components/sections/Hero";
+import TrustBar from "@/components/sections/TrustBar";
 import Campaign from "@/components/sections/Campaign";
 import ValueGrid from "@/components/sections/ValueGrid";
 import ServicesCallout from "@/components/sections/ServicesCallout";
+import WorkGallery from "@/components/sections/WorkGallery";
+import BeforeAfterProof from "@/components/sections/BeforeAfterProof";
 import Testimonials from "@/components/sections/Testimonials";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
 
 import { coreValues, testimonials, faqs } from "@/data/home-content";
+import { jobPhotos, beforeAfterPairs } from "@/lib/images";
 
 export default function Home() {
   const faqJsonLd = {
@@ -32,22 +36,31 @@ export default function Home() {
       {/* 1. Hero Carousel Banner */}
       <Hero />
 
-      {/* 2. Campaign Promo banner */}
+      {/* 2. Credential bar — what protects the customer, before any ask */}
+      <TrustBar />
+
+      {/* 3. Campaign Promo banner */}
       <Campaign />
 
-      {/* 3. Why Choose Us (Value propositions Grid) */}
+      {/* 4. Why Choose Us (Value propositions Grid) */}
       <ValueGrid items={coreValues} />
 
-      {/* 4. Core consumer module lists */}
+      {/* 5. Core consumer module lists */}
       <ServicesCallout />
 
-      {/* 5. Client feedback slide details */}
+      {/* 6. Proof of work — real job photography, room by room */}
+      <WorkGallery photos={jobPhotos} />
+
+      {/* 7. Before/after evidence — sliders for aligned shots, pairs otherwise */}
+      <BeforeAfterProof pairs={beforeAfterPairs} />
+
+      {/* 8. Client feedback slide details */}
       <Testimonials items={testimonials} />
 
-      {/* 6. General helper queries accordion list */}
+      {/* 9. General helper queries accordion list */}
       <FAQ items={faqs} />
 
-      {/* 7. Bottom call to WhatsApp inquiry */}
+      {/* 10. Bottom call to WhatsApp inquiry */}
       <FinalCTA />
     </div>
   );
