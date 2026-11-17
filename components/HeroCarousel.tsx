@@ -2,13 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { heroSlides } from "@/lib/images";
 
-const IMAGES = [
-  "/pexels-alesha-260500796-13009887.jpg",
-  "/pexels-ansar-muhammad-380085065-23916862.jpg",
-  "/pexels-artbovich-5998138.jpg",
-  "/pexels-artbovich-7546276.jpg",
-];
+const IMAGES = heroSlides;
 
 export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,11 +42,11 @@ export default function HeroCarousel() {
       aria-label="Clean living space slideshow background"
     >
       {/* Background Images with Cross-fade & Ken Burns Zoom */}
-      {IMAGES.map((src, index) => {
+      {IMAGES.map((slide, index) => {
         const isActive = index === currentIndex;
         return (
           <div
-            key={src}
+            key={slide.src}
             className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
               isActive ? "opacity-100 z-0" : "opacity-0 -z-10"
             }`}
@@ -60,8 +56,8 @@ export default function HeroCarousel() {
             aria-hidden={!isActive}
           >
             <Image
-              src={src}
-              alt={`Freshly cleaned living space ${index + 1}`}
+              src={slide.src}
+              alt={slide.alt}
               fill
               priority={index === 0}
               loading={index === 0 ? "eager" : "lazy"}

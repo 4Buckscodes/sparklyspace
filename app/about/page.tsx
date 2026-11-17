@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { ShieldCheck, Heart, Check, Leaf } from "lucide-react";
 import type { Metadata } from "next";
+import { peoplePhotos } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "About Us | Professional Cleaning Services in Bournemouth",
@@ -117,6 +119,73 @@ export default function AboutPage() {
                 We clean behind, under, and around. If a detail doesn't meet your expectations, let us know within 24 hours and we'll re-clean it free.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* People & process — puts a face (and a standard) to the claim */}
+      <section className="bg-white border-y border-slate-100 py-14 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="relative">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-slate-200 shadow-lg shadow-slate-900/5">
+              <Image
+                src={peoplePhotos.caddy.src}
+                alt={peoplePhotos.caddy.alt}
+                fill
+                sizes="(min-width: 1024px) 45vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="hidden sm:block absolute -bottom-8 -right-4 w-40 lg:w-48 aspect-[4/3] overflow-hidden rounded-2xl ring-4 ring-white shadow-xl">
+              <Image
+                src={peoplePhotos.eco.src}
+                alt={peoplePhotos.eco.alt}
+                fill
+                sizes="200px"
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          <div>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800 border border-sky-200">
+              <ShieldCheck className="h-3.5 w-3.5 text-sky-600" aria-hidden="true" focusable="false" />
+              <span>Who turns up</span>
+            </span>
+            <h2 className="mt-3 text-3xl font-bold text-slate-900 tracking-tight">
+              The same vetted people, the same standard, every visit
+            </h2>
+            <p className="mt-4 text-slate-600 leading-relaxed text-base">
+              You are inviting someone into your home. That is why vetting, briefing
+              and consistency matter more to us than speed — and why every clean
+              follows the same four steps.
+            </p>
+
+            <ol className="mt-7 space-y-4">
+              {[
+                ["01", "Vetted before day one", "Identity, references and background checks completed before a first clean."],
+                ["02", "Briefed on your home", "Priority rooms, pets, parking and access notes are carried through from your enquiry."],
+                ["03", "Cleaned to a checklist", "Room-by-room scope, so the finish does not depend on who is on the rota."],
+                ["04", "Checked before we leave", "Missed something? Tell us within 24 hours and we return to put it right, free."],
+              ].map(([step, title, detail]) => (
+                <li key={step} className="flex gap-4">
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-sky-600 text-[11px] font-extrabold text-white">
+                    {step}
+                  </span>
+                  <div>
+                    <p className="text-sm font-extrabold text-slate-900">{title}</p>
+                    <p className="mt-0.5 text-sm text-slate-500 leading-relaxed">{detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+
+            <Link
+              href="/book"
+              className="mt-7 inline-flex items-center justify-center bg-sky-600 hover:bg-sky-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-md shadow-sky-200 active:scale-95 text-sm min-h-[44px]"
+            >
+              Request your quote
+            </Link>
           </div>
         </div>
       </section>

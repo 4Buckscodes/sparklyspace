@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { services } from "@/data/services";
+import { servicePhotos } from "@/lib/images";
 import { Check, ArrowRight, Shield } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -30,12 +32,29 @@ export default function ServicesPage() {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {services.map((service) => {
+            const photo = servicePhotos[service.id];
             return (
               <div
                 key={service.id}
                 className="bg-white rounded-3xl p-8 border border-slate-100 shadow-xl shadow-slate-100/50 flex flex-col justify-between hover:shadow-2xl hover:border-sky-100 transition-all duration-300 group"
               >
                 <div>
+                  {/* Service photography — shows the finish, not just the checklist */}
+                  {photo && (
+                    <div className="relative aspect-[16/9] mb-6 overflow-hidden rounded-2xl bg-slate-100">
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        sizes="(min-width: 768px) 45vw, 100vw"
+                        className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
+                      />
+                      <span className="absolute left-3 top-3 rounded-full bg-slate-950/70 px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-widest text-white">
+                        {service.name}
+                      </span>
+                    </div>
+                  )}
+
                   {/* Service Header */}
                   <div className="flex items-start justify-between mb-6">
                     <div>

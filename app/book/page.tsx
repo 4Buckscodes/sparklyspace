@@ -1,6 +1,8 @@
 import React, { Suspense } from "react";
+import Image from "next/image";
 import BookingWizard from "@/components/booking/BookingWizard";
-import { Calendar, ShieldCheck, Heart } from "lucide-react";
+import TrustBar from "@/components/sections/TrustBar";
+import { peoplePhotos } from "@/lib/images";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -41,28 +43,31 @@ export default function BookPage() {
         <BookingWizard />
       </Suspense>
 
-      {/* Trust Signage Underneath Form */}
-      <div className="max-w-xl mx-auto grid grid-cols-3 gap-6 text-center text-slate-400 font-medium text-xs border-t border-slate-200/60 pt-8 mb-10">
-        <div className="space-y-1.5">
-          <div className="flex justify-center text-sky-500">
-            <ShieldCheck className="h-5 w-5" />
+      {/* Reassurance: what protects the customer, and what happens next */}
+      <div className="max-w-3xl mx-auto border-t border-slate-200/70 pt-8 mb-10">
+        <p className="text-center text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
+          Your home is protected
+        </p>
+        <TrustBar compact className="mt-4" />
+
+        <div className="mt-8 grid sm:grid-cols-[minmax(0,190px)_1fr] gap-5 items-center rounded-2xl border border-slate-200 bg-white p-4">
+          <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden rounded-xl bg-slate-200">
+            <Image
+              src={peoplePhotos.caddy.src}
+              alt={peoplePhotos.caddy.alt}
+              fill
+              sizes="190px"
+              className="object-cover"
+            />
           </div>
-          <p className="font-bold text-slate-700">Vetted Cleaner</p>
-          <p className="text-[10px] text-slate-400 font-light">Fully insured &amp; checked</p>
-        </div>
-        <div className="space-y-1.5">
-          <div className="flex justify-center text-emerald-500">
-            <Calendar className="h-5 w-5" />
+          <div>
+            <p className="text-sm font-extrabold text-slate-900">What happens after you submit</p>
+            <ol className="mt-2 space-y-1.5 text-xs text-slate-500 leading-relaxed list-decimal list-inside marker:font-bold marker:text-sky-600">
+              <li>We review your answers, photos and any access notes.</li>
+              <li>We confirm a personalised quote by WhatsApp or email — no obligation.</li>
+              <li>A vetted, insured cleaner arrives briefed on your priorities.</li>
+            </ol>
           </div>
-          <p className="font-bold text-slate-700">Flexible Slots</p>
-          <p className="text-[10px] text-slate-400 font-light">Mon-Sun 8am-8pm</p>
-        </div>
-        <div className="space-y-1.5">
-          <div className="flex justify-center text-pink-500">
-            <Heart className="h-5 w-5" />
-          </div>
-          <p className="font-bold text-slate-700">Satisfaction</p>
-          <p className="text-[10px] text-slate-400 font-light">Happiness guaranteed</p>
         </div>
       </div>
     </div>
