@@ -15,6 +15,17 @@
   box-sizing: border-box;
 }
 
+/* In-page anchors (e.g. the hero pointer to #our-work) glide instead of jumping */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background-color: #fffdf6;
   color: #0f172a;

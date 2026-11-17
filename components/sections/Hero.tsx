@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Calendar, Phone, MapPin, ShieldCheck } from "lucide-react";
+import { Calendar, Phone, MapPin, ShieldCheck, Images, ArrowDown } from "lucide-react";
 import HeroCarousel from "../HeroCarousel";
 
 export default function Hero() {
@@ -38,6 +38,18 @@ export default function Hero() {
                 <Phone className="h-5 w-5 text-sky-600 flex-shrink-0" aria-hidden="true" focusable="false" />
                 <span>07552 427880</span>
               </a>
+            </div>
+
+            {/* Pointer to the real-job photo gallery further down the page */}
+            <div className="mt-4 sm:mt-5 flex justify-center lg:justify-start">
+              <Link
+                href="#our-work"
+                className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-50/70 px-4 py-2 text-xs sm:text-sm font-bold text-sky-800 hover:bg-sky-100 hover:border-sky-300 transition-colors min-h-[40px]"
+              >
+                <Images className="h-4 w-4 flex-shrink-0" aria-hidden="true" focusable="false" />
+                <span>See photos of our real jobs</span>
+                <ArrowDown className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" focusable="false" />
+              </Link>
             </div>
 
             {/* Social proof */}
