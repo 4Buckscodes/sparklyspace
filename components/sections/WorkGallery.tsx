@@ -31,10 +31,10 @@ export default function WorkGallery({
     <section
       id="our-work"
       aria-labelledby="our-work-heading"
-      className="bg-[#fffdf6] py-14 sm:py-20"
+      className="bg-[#fffdf6] py-10 sm:py-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-12">
           <div className="max-w-2xl">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800 border border-sky-200">
               <Camera className="h-3.5 w-3.5 text-sky-600" aria-hidden="true" focusable="false" />
@@ -59,28 +59,33 @@ export default function WorkGallery({
           )}
         </div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 sm:gap-4">
+        {/*
+          Mobile: two columns, captions reduced to a single line. Seven full-width
+          portrait photos stacked in one column made this section ~3.5 screens of
+          scrolling on a phone; two columns roughly halves it without cropping.
+        */}
+        <div className="columns-2 md:columns-3 gap-2.5 sm:gap-4">
           {photos.map((photo) => (
             <figure
               key={photo.src + photo.title}
-              className="relative mb-3 sm:mb-4 break-inside-avoid overflow-hidden rounded-2xl bg-slate-200 group"
+              className="relative mb-2.5 sm:mb-4 break-inside-avoid overflow-hidden rounded-xl sm:rounded-2xl bg-slate-200 group"
             >
               <Image
                 src={photo.src}
                 alt={photo.alt}
                 width={photo.width}
                 height={photo.height}
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                sizes="(min-width: 768px) 33vw, 50vw"
                 className="w-full h-auto object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
               />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent p-3.5 sm:p-4">
-                <span className="inline-flex rounded-full bg-white/15 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-widest text-white backdrop-blur-sm">
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent p-2.5 sm:p-4">
+                <span className="hidden sm:inline-flex rounded-full bg-white/15 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-widest text-white backdrop-blur-sm">
                   {photo.tag}
                 </span>
-                <p className="mt-1 text-sm sm:text-base font-extrabold text-white leading-tight">
+                <p className="sm:mt-1 text-[11px] sm:text-base font-extrabold text-white leading-tight">
                   {photo.title}
                 </p>
-                <p className="mt-0.5 text-[11px] sm:text-xs text-slate-200 leading-snug">
+                <p className="hidden sm:block mt-0.5 text-xs text-slate-200 leading-snug">
                   {photo.detail}
                 </p>
               </figcaption>

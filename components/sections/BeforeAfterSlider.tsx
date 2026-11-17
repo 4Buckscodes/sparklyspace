@@ -21,7 +21,7 @@ export default function BeforeAfterSlider({ pair }: { pair: BeforeAfterPair }) {
   return (
     <figure className="w-full">
       <div
-        className="relative mx-auto w-full max-w-xl overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-200 select-none"
+        className="relative mx-auto w-full max-w-sm sm:max-w-xl overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-200 select-none"
         style={{ aspectRatio: `${pair.after.width} / ${pair.after.height}` }}
       >
         {/* AFTER: the finished result is the base layer */}
