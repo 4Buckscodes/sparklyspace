@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ShieldCheck, Heart, Check, Leaf } from "lucide-react";
 import type { Metadata } from "next";
-import { peoplePhotos } from "@/lib/images";
+import { processPhotos } from "@/lib/images";
 
 export const metadata: Metadata = {
   title: "About Us | Professional Cleaning Services in Bournemouth",
@@ -123,23 +123,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* People & process — puts a face (and a standard) to the claim */}
+      {/* Process — the real finish behind the vetting claim */}
       <section className="bg-white border-y border-slate-100 py-14 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div className="relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-slate-200 shadow-lg shadow-slate-900/5">
               <Image
-                src={peoplePhotos.caddy.src}
-                alt={peoplePhotos.caddy.alt}
+                src={processPhotos.workspace.src}
+                alt={processPhotos.workspace.alt}
                 fill
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 className="object-cover"
               />
             </div>
-            <div className="hidden sm:block absolute -bottom-8 -right-4 w-40 lg:w-48 aspect-[4/3] overflow-hidden rounded-2xl ring-4 ring-white shadow-xl">
+            <div className="hidden sm:block absolute -bottom-8 -right-4 w-32 lg:w-40 aspect-[3/4] overflow-hidden rounded-2xl ring-4 ring-white shadow-xl">
               <Image
-                src={peoplePhotos.eco.src}
-                alt={peoplePhotos.eco.alt}
+                src={processPhotos.detail.src}
+                alt={processPhotos.detail.alt}
                 fill
                 sizes="200px"
                 className="object-cover"
@@ -150,7 +150,7 @@ export default function AboutPage() {
           <div>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800 border border-sky-200">
               <ShieldCheck className="h-3.5 w-3.5 text-sky-600" aria-hidden="true" focusable="false" />
-              <span>Who turns up</span>
+              <span>How we work</span>
             </span>
             <h2 className="mt-3 text-3xl font-bold text-slate-900 tracking-tight">
               The same vetted people, the same standard, every visit

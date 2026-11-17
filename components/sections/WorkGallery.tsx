@@ -2,35 +2,30 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Camera, ArrowRight } from "lucide-react";
-import type { WorkPhoto } from "@/lib/images";
+import type { JobPhoto } from "@/lib/images";
 
 interface WorkGalleryProps {
-  photos: WorkPhoto[];
+  photos: JobPhoto[];
   heading?: string;
   subheading?: string;
-  /** Hide the "explore services" link when the gallery is used on a service page. */
   showServicesLink?: boolean;
 }
 
 /**
- * Second proof layer: show the standard of work, room by room.
+ * Second proof layer: real job photography, room by room.
  *
- * Layout is deliberately editorial — one wide feature tile, a grid of supporting
- * tiles, then a full-width closer — so it reads as a portfolio rather than a
- * stock-photo carousel. Captions describe the *standard shown*, never a specific
- * customer's address.
+ * A masonry column layout is used deliberately — the source photos are phone
+ * shots in mixed orientations, and cropping a 3:4 kitchen into a 16:9 tile
+ * throws away the detail that makes the photo worth showing. Each image keeps
+ * its natural aspect ratio; captions describe the finish, never a customer.
  */
 export default function WorkGallery({
   photos,
-  heading = "What a Sparkly Space clean actually looks like",
-  subheading = "Not stock promises — the finishes we work to in every room, on every visit. Kitchens, bathrooms, bedrooms, rentals and workplaces across Bournemouth, Poole and Christchurch.",
+  heading = "Real jobs. Real results.",
+  subheading = "Photographed on our own cleans across Bournemouth, Poole and Christchurch — kitchens, bathrooms, ovens, carpets and workplaces. No stock photos.",
   showServicesLink = true,
 }: WorkGalleryProps) {
-  if (photos.length < 3) return null;
-
-  const [feature, ...rest] = photos;
-  const grid = rest.slice(0, -1);
-  const closer = rest[rest.length - 1];
+  if (photos.length === 0) return null;
 
   return (
     <section
@@ -64,75 +59,33 @@ export default function WorkGallery({
           )}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {/* Feature tile */}
-          <figure className="relative sm:col-span-2 lg:col-span-3 overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-200 aspect-[16/10] sm:aspect-[16/9] lg:aspect-[21/9] group">
-            <Image
-              src={feature.src}
-              alt={feature.alt}
-              fill
-              sizes="100vw"
-              className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
-            />
-            <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/45 to-transparent p-4 sm:p-6">
-              <span className="inline-flex rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-widest text-white backdrop-blur-sm">
-                {feature.tag}
-              </span>
-              <p className="mt-1.5 text-base sm:text-xl font-extrabold text-white leading-tight">
-                {feature.title}
-              </p>
-              <p className="mt-1 text-xs sm:text-sm text-slate-200 max-w-lg leading-snug">
-                {feature.detail}
-              </p>
-            </figcaption>
-          </figure>
-
-          {/* Supporting tiles */}
-          {grid.map((photo) => (
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 sm:gap-4">
+          {photos.map((photo) => (
             <figure
               key={photo.src + photo.title}
-              className="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[4/3] group"
+              className="relative mb-3 sm:mb-4 break-inside-avoid overflow-hidden rounded-2xl bg-slate-200 group"
             >
               <Image
                 src={photo.src}
                 alt={photo.alt}
-                fill
+                width={photo.width}
+                height={photo.height}
                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
+                className="w-full h-auto object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
               />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/40 to-transparent p-3.5 sm:p-4">
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/45 to-transparent p-3.5 sm:p-4">
                 <span className="inline-flex rounded-full bg-white/15 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-widest text-white backdrop-blur-sm">
                   {photo.tag}
                 </span>
-                <p className="mt-1 text-sm font-extrabold text-white leading-tight">{photo.title}</p>
-                <p className="mt-0.5 text-[11px] text-slate-200 leading-snug">{photo.detail}</p>
+                <p className="mt-1 text-sm sm:text-base font-extrabold text-white leading-tight">
+                  {photo.title}
+                </p>
+                <p className="mt-0.5 text-[11px] sm:text-xs text-slate-200 leading-snug">
+                  {photo.detail}
+                </p>
               </figcaption>
             </figure>
           ))}
-
-          {/* Full-width closer */}
-          {closer && (
-            <figure className="relative sm:col-span-2 lg:col-span-3 overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-200 aspect-[16/10] sm:aspect-[21/9] group">
-              <Image
-                src={closer.src}
-                alt={closer.alt}
-                fill
-                sizes="100vw"
-                className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
-              />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/40 to-transparent p-4 sm:p-6">
-                <span className="inline-flex rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-widest text-white backdrop-blur-sm">
-                  {closer.tag}
-                </span>
-                <p className="mt-1.5 text-base sm:text-xl font-extrabold text-white leading-tight">
-                  {closer.title}
-                </p>
-                <p className="mt-1 text-xs sm:text-sm text-slate-200 leading-snug max-w-2xl">
-                  {closer.detail}
-                </p>
-              </figcaption>
-            </figure>
-          )}
         </div>
       </div>
     </section>

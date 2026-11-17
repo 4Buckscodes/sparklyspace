@@ -5,7 +5,7 @@ import { MapPin, Phone, Calendar, ShieldCheck, Leaf, Heart, CheckCircle2, Check,
 import type { LocationArea } from "@/data/locations";
 import { services } from "@/data/services";
 import { coreValues, faqs, type CoreValue } from "@/data/home-content";
-import { workPhotos } from "@/lib/images";
+import { jobPhotos } from "@/lib/images";
 
 const valueIcons: Record<CoreValue["iconName"], React.ComponentType<{ className?: string }>> = {
   ShieldCheck,
@@ -106,7 +106,11 @@ export default function LocationLanding({ location }: { location: LocationArea }
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {[workPhotos[2], workPhotos[1], workPhotos[3]].map((photo) => (
+          {[
+            jobPhotos.find((p) => p.title === "Kitchen reset")!,
+            jobPhotos.find((p) => p.title === "Bathroom suite")!,
+            jobPhotos.find((p) => p.title === "Workplace reset")!,
+          ].map((photo) => (
             <figure
               key={photo.title}
               className="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[4/3] group"

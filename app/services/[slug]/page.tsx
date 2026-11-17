@@ -75,7 +75,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
         {/* Service photography — the standard behind the checklist */}
         {photo && (
-          <div className="relative mb-8 overflow-hidden rounded-3xl bg-slate-200 aspect-[16/10] sm:aspect-[21/9] shadow-sm">
+          <div className="relative mb-8 overflow-hidden rounded-3xl bg-slate-200 aspect-[4/3] sm:aspect-[16/10] shadow-sm">
             <Image
               src={photo.src}
               alt={photo.alt}

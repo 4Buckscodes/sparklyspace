@@ -64,24 +64,70 @@ the codebase needs to know.
   hero's first slide and the service-detail hero are `priority`.
 - `public/pexels-*.jpg` originals were deleted after conversion.
 
-## The shot list — what to replace next (highest impact first)
+
+## Stage 2 — real job photography (Nov 2026)
+
+The first pass used brand-matched generated scenes as a floor. They have now
+been **replaced by 17 real job photographs** and the generated/stock assets were
+removed from `public/`.
+
+**Asset organisation** — `public/images/jobs/`, subject-first filenames:
+
+| File | Shows | Used for |
+| --- | --- | --- |
+| `kitchen-reset.webp` | White kitchen, worktops and fronts wiped | Hero, gallery, Residential |
+| `kitchen-appliances.webp` | Built-ins, fridge, oven open | Hero, gallery, Deep clean, About |
+| `bathroom-tap.webp` | Chrome tap polished | Gallery, About inset |
+| `bathroom-suite.webp` | Bath, screen, frosted window | Hero, gallery, Airbnb |
+| `oven-detail.webp` / `oven-glass-detail.webp` | Oven interior and door glass | Gallery, Hero, Deep clean |
+| `towel-radiator.webp` | Chrome radiator polished | Custom / other |
+| `office-clean.webp` | Office desks, chairs, carpet | Hero, gallery, Commercial |
+| `carpet-before/-after.webp` | Carpet deep clean | Before/after pair |
+| `washer-drawer-before/-after.webp` | Detergent drawer descale | Before/after slider |
+| `extractor-filter-before/-after.webp` | Cooker hood filters degreased | Before/after pair |
+| `extractor-filters-clean.webp`, `extractor-filter-detail.webp` | Clean/dirty filter detail | Service pages, spares |
+| `carpet-edge.webp` | Carpet edge, threshold, skirting | End of tenancy |
+
+**Two before/after renderers, chosen by framing**
+- `kind: "slider"` — identical camera position (washer drawer). Drag-to-compare,
+  keyboard accessible.
+- `kind: "pair"` — different zoom/angle (carpet, hood filters). Side-by-side so
+  the honest comparison is obvious instead of looking like a camera jump.
+
+**Framing decisions**
+- The homepage gallery is a **masonry** layout that keeps each photo's native
+  3:4 aspect. Cropping phone photos into 16:9 tiles was throwing away the detail
+  that proves the clean.
+- Wide crops are only used where the subject survives them: hero, service cards
+  and location bands.
+- EXIF rotation applied, metadata stripped, WebP q82, 1600 px long edge —
+  17 photos total **3.7 MB**, versus 7.6 MB for the previous four stock JPEGs.
+
+**What this unlocked** — the site now proves work (gallery), proves change
+(before/after), and proves range (kitchen, bathroom, oven, carpet, office,
+appliance) without a single stock or generated image.
+
+## The shot list — what to add next (highest impact first)
 
 Generated/stock imagery is fine as a floor, but real photographs will outperform
 all of it. In order of conversion value:
 
-1. **Six real before/after pairs** — same angle, same light, phone photos are fine.
-   Kitchens (oven, hob), bathrooms (shower screen, limescale), carpets, end of
-   tenancy rooms, an Airbnb turnaround. Add to `beforeAfterPairs` and the slider
-   appears automatically.
-2. **One real team photo** — uniformed, at a doorstep or with caddies, faces
-   visible and consenting. Goes in the About "Who turns up" block.
-3. **Your actual equipment and products** — photograph the caddy, cloths, and the
-   eco range you really use. It is the cheapest credibility on the site.
-4. **Review screenshots** — your Google Business Profile reviews (name, stars,
+1. **One real team photo** — uniformed, at a doorstep or holding a caddy, faces
+   visible and consenting. This is the biggest remaining gap: every photo proves
+   the work, none yet proves the people. Goes in the About "How we work" block.
+2. **More before/after pairs** — you already have three strong ones. Shower
+   screens (limescale), ovens, and end-of-tenancy rooms are the highest-value
+   additions; shoot each pair from the same spot, then add to `beforeAfterPairs`.
+3. **A bedroom and a living room after-shot** — the gallery currently skews
+   kitchen/bathroom/commercial. Two residential room photos would complete the
+   "we clean whole homes" story.
+4. **A holiday-let turnaround** — bed made, towels stacked, guest-ready. Directly
+   sells the Airbnb service.
+5. **Review screenshots** — your Google Business Profile reviews (name, stars,
    text) as images next to the existing testimonials.
-5. **Insurance certificate / DBS evidence** — only if you are happy to publish it;
+6. **Insurance certificate / DBS evidence** — only if you are happy to publish it;
    a badge that links to the certificate is stronger than the badge alone.
-6. **Per-neighbourhood shots** — a clean interior in a Bournemouth apartment vs a
+7. **Per-neighbourhood shots** — a clean interior in a Bournemouth apartment vs a
    Christchurch cottage removes the "template page" feel from the location pages.
 
 ## Honesty rules (please keep these)
@@ -98,7 +144,8 @@ all of it. In order of conversion value:
 
 ## Maintenance
 
-- New photo → export WebP at ~1400 px, drop in `public/images/`, add an entry to
-  `lib/images.ts` with descriptive alt text (room + finish, not "cleaning image").
+- New photo → export WebP at 1600 px long edge, drop in `public/images/jobs/`,
+  add an entry to `lib/images.ts` with descriptive alt text (room + finish, not
+  "cleaning image"). Named `subject-detail.webp`, lowercase, hyphenated.
 - Keep alt text specific: it feeds local SEO and screen readers.
 - Re-run `npm run build` after edits; `npx tsc --noEmit` catches registry typos.

@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import BookingWizard from "@/components/booking/BookingWizard";
 import TrustBar from "@/components/sections/TrustBar";
-import { peoplePhotos } from "@/lib/images";
+import { processPhotos } from "@/lib/images";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -53,8 +53,8 @@ export default function BookPage() {
         <div className="mt-8 grid sm:grid-cols-[minmax(0,190px)_1fr] gap-5 items-center rounded-2xl border border-slate-200 bg-white p-4">
           <div className="relative aspect-[4/3] sm:aspect-square overflow-hidden rounded-xl bg-slate-200">
             <Image
-              src={peoplePhotos.caddy.src}
-              alt={peoplePhotos.caddy.alt}
+              src={processPhotos.workspace.src}
+              alt={processPhotos.workspace.alt}
               fill
               sizes="190px"
               className="object-cover"

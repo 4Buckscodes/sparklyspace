@@ -4,14 +4,18 @@
  * Every photo used across the site is declared here so that:
  *  - alt text, dimensions and aspect ratios stay consistent,
  *  - services and locations can be mapped to relevant proof imagery,
- *  - real client/job photography can replace a placeholder by editing ONE line.
+ *  - ordering the gallery is a data edit, not a component edit.
+ *
+ * These are REAL Sparkly Space job photographs (supplied Nov 2026), exported to
+ * WebP at 1600px on the long edge, metadata stripped, EXIF rotation applied.
  *
  * House rules for new images:
- *  1. Prefer real photographs of real Sparkly Space jobs, cleaned rooms, or team
- *     members. They convert far better than stock or generated imagery.
- *  2. Never caption an image as a specific customer's home, or a named team
- *     member, unless it genuinely is. Caption the *standard* shown instead.
- *  3. Export at ~1400px on the long edge, WebP, quality ~82, and strip metadata.
+ *  1. Real photographs of real jobs only. No AI scenes, no stock filler.
+ *  2. Never caption a photo as a specific customer's address unless you have
+ *     permission. Caption the finish, room or task instead.
+ *  3. Before/after must be the same room, same angle. If the framing differs,
+ *     use the side-by-side pair, never the slider.
+ *  4. Filenames: lowercase, hyphenated, subject-first (`oven-detail.webp`).
  */
 
 export interface SiteImage {
@@ -21,7 +25,7 @@ export interface SiteImage {
   height: number;
 }
 
-export interface WorkPhoto extends SiteImage {
+export interface JobPhoto extends SiteImage {
   /** Service bucket this photo proves, used for the chip on the tile. */
   tag: string;
   /** Short headline shown on the tile. */
@@ -30,46 +34,42 @@ export interface WorkPhoto extends SiteImage {
   detail: string;
 }
 
+const JOBS = "/images/jobs";
+
 /* ------------------------------------------------------------------ */
-/* Hero carousel                                                       */
+/* Hero carousel — lead with real work, not a stock interior           */
 /* ------------------------------------------------------------------ */
 
 export const heroSlides: SiteImage[] = [
   {
-    src: "/images/living-room-clean.webp",
-    alt: "Bright, freshly cleaned living room with vacuumed rug and plumped cushions",
-    width: 1376,
-    height: 768,
+    src: `${JOBS}/kitchen-reset.webp`,
+    alt: "Freshly cleaned white kitchen with polished worktops and wiped appliance fronts",
+    width: 1200,
+    height: 1600,
   },
   {
-    src: "/images/pexels-alesha-260500796-13009887.webp",
-    alt: "Clean, tidy home interior with clear surfaces ready for the day",
+    src: `${JOBS}/office-clean.webp`,
+    alt: "Open-plan office with cleaned desks, chairs and vacuumed carpet",
     width: 1600,
-    height: 1067,
+    height: 1200,
   },
   {
-    src: "/images/kitchen-detail.webp",
-    alt: "Gloved hand wiping a quartz kitchen worktop beside a polished chrome tap",
-    width: 1400,
-    height: 764,
+    src: `${JOBS}/bathroom-suite.webp`,
+    alt: "Bathtub and frosted window cleaned and polished after a bathroom deep clean",
+    width: 1200,
+    height: 1600,
   },
   {
-    src: "/images/pexels-ansar-muhammad-380085065-23916862.webp",
-    alt: "Neatly arranged, spotless room in a Dorset home",
-    width: 1600,
-    height: 1081,
+    src: `${JOBS}/kitchen-appliances.webp`,
+    alt: "Integrated kitchen appliances and worktops wiped clean inside and out",
+    width: 1284,
+    height: 723,
   },
   {
-    src: "/images/pexels-artbovich-5998138.webp",
-    alt: "Freshly cleaned, uncluttered living space with natural light",
-    width: 1600,
-    height: 1068,
-  },
-  {
-    src: "/images/pexels-artbovich-7546276.webp",
-    alt: "Immaculate kitchen surfaces and fittings after a Sparkly Space clean",
-    width: 1600,
-    height: 1130,
+    src: `${JOBS}/oven-glass-detail.webp`,
+    alt: "Open oven with the door glass cleaned until clear, during a deep clean",
+    width: 1200,
+    height: 1600,
   },
 ];
 
@@ -77,78 +77,69 @@ export const heroSlides: SiteImage[] = [
 /* "Our standard" gallery — the main trust section on the homepage      */
 /* ------------------------------------------------------------------ */
 
-export const workPhotos: WorkPhoto[] = [
+export const jobPhotos: JobPhoto[] = [
   {
-    src: "/images/living-room-clean.webp",
-    alt: "Immaculate living room with freshly vacuumed rug, dust-free surfaces and neatly arranged cushions",
-    width: 1376,
-    height: 768,
-    tag: "Living spaces",
-    title: "Living spaces that feel reset",
-    detail: "Edges vacuumed, soft furnishings plumped, every surface dust-free.",
-  },
-  {
-    src: "/images/bathroom-shine.webp",
-    alt: "Streak-free glass shower screen and polished chrome fittings in a spotless bathroom",
-    width: 1400,
-    height: 764,
-    tag: "Bathrooms",
-    title: "Bathrooms descaled and sanitised",
-    detail: "Limescale lifted from glass and chrome, then disinfected end to end.",
-  },
-  {
-    src: "/images/kitchen-detail.webp",
-    alt: "Gloved hand wiping a quartz kitchen worktop with a microfibre cloth beside a polished tap",
-    width: 1400,
-    height: 764,
+    src: `${JOBS}/kitchen-reset.webp`,
+    alt: "White kitchen after cleaning: worktops, sink, cabinet fronts and appliance exteriors wiped and polished",
+    width: 1200,
+    height: 1600,
     tag: "Kitchens",
-    title: "Kitchens finished by hand",
-    detail: "Worktops, splashbacks, sink and tap polished — grease and water marks gone.",
+    title: "Kitchen reset",
+    detail: "Worktops, splashback, sink and appliance fronts — degreased and polished.",
   },
   {
-    src: "/images/bedroom-fresh.webp",
-    alt: "Crisp white bed linen and plumped pillows in a bright, dust-free bedroom",
-    width: 1400,
-    height: 764,
-    tag: "Bedrooms",
-    title: "Bedrooms made properly",
-    detail: "Fresh linen, made beds and dust-free bedside detail in every room.",
+    src: `${JOBS}/bathroom-tap.webp`,
+    alt: "Chrome basin tap polished until reflective beside a cleaned white basin",
+    width: 1200,
+    height: 1600,
+    tag: "Bathrooms",
+    title: "Chrome, polished by hand",
+    detail: "Limescale and water marks lifted from taps, then buffed until reflective.",
   },
   {
-    src: "/images/tenancy-empty.webp",
-    alt: "Empty rental flat with gleaming floors and spotless skirting boards before a tenancy inspection",
-    width: 1400,
-    height: 764,
-    tag: "End of tenancy",
-    title: "Checkout-ready, deposit-safe",
-    detail: "Floors, skirting, frames and interiors finished to inventory standard.",
-  },
-  {
-    src: "/images/holiday-let-ready.webp",
-    alt: "Holiday let bedroom styled with fresh linen and folded towels ready for arriving guests",
-    width: 1400,
-    height: 764,
-    tag: "Holiday lets",
-    title: "Guest-ready between stays",
-    detail: "Turnarounds presented for five-star reviews, with essentials restocked.",
-  },
-  {
-    src: "/images/office-clean.webp",
-    alt: "Tidy open-plan office with cable-free desks, clean glass partitions and freshly vacuumed carpet",
-    width: 1400,
-    height: 764,
+    src: `${JOBS}/office-clean.webp`,
+    alt: "Open-plan office with cable-free desks, clean chairs and freshly vacuumed carpet",
+    width: 1600,
+    height: 1200,
     tag: "Commercial",
-    title: "Workplaces that reflect you",
-    detail: "Desks, glass and floors reset outside your working hours.",
+    title: "Workplace reset",
+    detail: "Desks, chairs and floors finished outside working hours.",
   },
   {
-    src: "/images/eco-kit.webp",
-    alt: "Refillable spray bottles, folded microfibre cloths and eucalyptus on a cream surface",
-    width: 1400,
-    height: 764,
-    tag: "Eco option",
-    title: "Kinder products, same standard",
-    detail: "Non-toxic, child- and pet-safe products available on request.",
+    src: `${JOBS}/oven-detail.webp`,
+    alt: "Oven cleaned inside with racks removed and door glass clear",
+    width: 1200,
+    height: 1600,
+    tag: "Deep clean",
+    title: "Oven, inside and out",
+    detail: "Racks, trays and glass stripped of baked-on grease — no shortcuts.",
+  },
+  {
+    src: `${JOBS}/kitchen-appliances.webp`,
+    alt: "Built-in microwave, coffee machine, fridge and oven cleaned inside a fitted kitchen",
+    width: 1284,
+    height: 723,
+    tag: "Deep clean",
+    title: "Appliances included",
+    detail: "Built-ins opened, cleaned and closed again — fridge and oven included.",
+  },
+  {
+    src: `${JOBS}/bathroom-suite.webp`,
+    alt: "Bathtub, screen and frosted window cleaned during a bathroom deep clean",
+    width: 1200,
+    height: 1600,
+    tag: "Bathrooms",
+    title: "Bathroom suite",
+    detail: "Bath, screen, surrounds and sills — cleaned, descaled and dried off.",
+  },
+  {
+    src: `${JOBS}/carpet-edge.webp`,
+    alt: "Clean carpet meeting a polished doorway threshold and skirting board",
+    width: 1200,
+    height: 1600,
+    tag: "End of tenancy",
+    title: "Edges and thresholds",
+    detail: "The last 5% most cleaners skip: edges, thresholds, skirting and frames.",
   },
 ];
 
@@ -156,33 +147,44 @@ export const workPhotos: WorkPhoto[] = [
 /* Service mapping                                                     */
 /* ------------------------------------------------------------------ */
 
+const byTitle = (title: string) => jobPhotos.find((p) => p.title === title)!;
+
 export const servicePhotos: Record<string, SiteImage> = {
-  residential: workPhotos[0],
-  "deep-clean": workPhotos[2],
-  "end-of-tenancy": workPhotos[4],
-  airbnb: workPhotos[5],
-  commercial: workPhotos[6],
-  custom: workPhotos[1],
+  residential: byTitle("Kitchen reset"),
+  "deep-clean": byTitle("Oven, inside and out"),
+  "end-of-tenancy": byTitle("Edges and thresholds"),
+  airbnb: byTitle("Bathroom suite"),
+  commercial: byTitle("Workplace reset"),
+  custom: {
+    src: `${JOBS}/towel-radiator.webp`,
+    alt: "Chrome towel radiator polished until free of water marks",
+    width: 1200,
+    height: 1600,
+  },
 };
 
 /* ------------------------------------------------------------------ */
-/* People / process imagery                                            */
+/* Process imagery — used on the about and booking pages               */
 /* ------------------------------------------------------------------ */
 
-export const peoplePhotos = {
-  /** Supplies caddy being carried into a home — uniform, no identifiable face. */
-  caddy: {
-    src: "/images/team-caddy.webp",
-    alt: "Cleaning caddy with folded microfibre cloths, spray bottle and squeegee carried into a home",
-    width: 1400,
-    height: 764,
+export const processPhotos = {
+  workspace: {
+    src: `${JOBS}/kitchen-appliances.webp`,
+    alt: "Fitted kitchen with appliances and worktops cleaned during a Sparkly Space visit",
+    width: 1284,
+    height: 723,
   } satisfies SiteImage,
-  /** Eco product still life. */
-  eco: {
-    src: "/images/eco-kit.webp",
-    alt: "Refillable cleaning bottles and cloths used for the eco-friendly cleaning option",
-    width: 1400,
-    height: 764,
+  detail: {
+    src: `${JOBS}/bathroom-tap.webp`,
+    alt: "Polished chrome tap after descaling during a bathroom clean",
+    width: 1200,
+    height: 1600,
+  } satisfies SiteImage,
+  filters: {
+    src: `${JOBS}/extractor-filters-clean.webp`,
+    alt: "Cooker hood grease filters washed and left streak-free",
+    width: 1200,
+    height: 1600,
   } satisfies SiteImage,
 } as const;
 
@@ -193,20 +195,62 @@ export const peoplePhotos = {
 export interface BeforeAfterPair {
   before: SiteImage;
   after: SiteImage;
-  /** What the job was, e.g. "End of tenancy — Poole (BH14)". */
+  /** What the job was — no customer names, no addresses. */
   label: string;
+  /**
+   * "slider" needs identical framing so the wipe lines up.
+   * "pair" is side-by-side and tolerates different framing/zoom.
+   */
+  kind: "slider" | "pair";
 }
 
-/**
- * Before/after is the single highest-trust asset a cleaning company can show —
- * but only if it is genuine. Add real, same-angle, same-lighting pairs here and
- * the slider renders automatically on the homepage. Leave empty until then.
- *
- * Example:
- *   {
- *     before: { src: "/images/jobs/poole-oven-before.webp", alt: "...", width: 1400, height: 900 },
- *     after:  { src: "/images/jobs/poole-oven-after.webp",  alt: "...", width: 1400, height: 900 },
- *     label: "Inside oven — end of tenancy, Poole (BH14)",
- *   }
- */
-export const beforeAfterPairs: BeforeAfterPair[] = [];
+export const beforeAfterPairs: BeforeAfterPair[] = [
+  {
+    before: {
+      src: `${JOBS}/washer-drawer-before.webp`,
+      alt: "Washing machine detergent drawer heavily stained with limescale and mould before cleaning",
+      width: 1200,
+      height: 1600,
+    },
+    after: {
+      src: `${JOBS}/washer-drawer-after.webp`,
+      alt: "The same washing machine detergent drawer after descaling and cleaning",
+      width: 1200,
+      height: 1600,
+    },
+    label: "Washing machine detergent drawer — descaled and degreased",
+    kind: "slider",
+  },
+  {
+    before: {
+      src: `${JOBS}/carpet-before.webp`,
+      alt: "Worn, soiled bedroom carpet before a deep clean, with a carpet cleaner in shot",
+      width: 1200,
+      height: 1600,
+    },
+    after: {
+      src: `${JOBS}/carpet-after.webp`,
+      alt: "The same bedroom carpet after extraction cleaning, visibly lighter and even",
+      width: 1200,
+      height: 1600,
+    },
+    label: "Carpet deep clean — bedroom",
+    kind: "pair",
+  },
+  {
+    before: {
+      src: `${JOBS}/extractor-filter-before.webp`,
+      alt: "Cooker hood grease filters coated in brown grease before cleaning",
+      width: 1200,
+      height: 1600,
+    },
+    after: {
+      src: `${JOBS}/extractor-filter-after.webp`,
+      alt: "The same cooker hood filters after degreasing, mesh clean and bright",
+      width: 1200,
+      height: 1600,
+    },
+    label: "Cooker hood filters — degreased and washed",
+    kind: "pair",
+  },
+];

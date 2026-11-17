@@ -7,25 +7,29 @@ import type { BeforeAfterPair } from "@/lib/images";
 /**
  * Third proof layer: a drag-to-compare before/after slider.
  *
- * Renders nothing when no pairs are supplied, so it stays dormant until real
- * job photography exists. The range input doubles as the keyboard/screen-reader
- * control, so it works without pointer precision.
+ * Only use this when the before and after were shot from the same position at
+ * the same angle — otherwise the wipe jumps and looks staged. For pairs with
+ * different framing, the side-by-side renderer in BeforeAfterProof is used.
+ *
+ * The range input is the control, so the comparison works with a keyboard and
+ * a screen reader, not just a pointer.
  */
 export default function BeforeAfterSlider({ pair }: { pair: BeforeAfterPair }) {
   const [position, setPosition] = useState(50);
   const inputId = useId();
 
-  if (!pair) return null;
-
   return (
     <figure className="w-full">
-      <div className="relative overflow-hidden rounded-3xl bg-slate-200 aspect-[4/3] sm:aspect-[16/9] select-none">
+      <div
+        className="relative mx-auto w-full max-w-xl overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-200 select-none"
+        style={{ aspectRatio: `${pair.after.width} / ${pair.after.height}` }}
+      >
         {/* AFTER: the finished result is the base layer */}
         <Image
           src={pair.after.src}
           alt={pair.after.alt}
           fill
-          sizes="(min-width: 1024px) 900px, 100vw"
+          sizes="(min-width: 640px) 576px, 100vw"
           className="object-cover"
         />
 
@@ -39,7 +43,7 @@ export default function BeforeAfterSlider({ pair }: { pair: BeforeAfterPair }) {
             src={pair.before.src}
             alt=""
             fill
-            sizes="(min-width: 1024px) 900px, 100vw"
+            sizes="(min-width: 640px) 576px, 100vw"
             className="object-cover"
           />
         </div>
@@ -79,7 +83,9 @@ export default function BeforeAfterSlider({ pair }: { pair: BeforeAfterPair }) {
           aria-valuetext={`${position}% before, ${100 - position}% after`}
         />
       </div>
-      <figcaption className="mt-3 text-xs font-semibold text-slate-500">{pair.label}</figcaption>
+      <figcaption className="mt-3 text-center text-xs font-semibold text-slate-500">
+        {pair.label}
+      </figcaption>
     </figure>
   );
 }

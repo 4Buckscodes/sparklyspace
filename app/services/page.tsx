@@ -41,7 +41,7 @@ export default function ServicesPage() {
                 <div>
                   {/* Service photography — shows the finish, not just the checklist */}
                   {photo && (
-                    <div className="relative aspect-[16/9] mb-6 overflow-hidden rounded-2xl bg-slate-100">
+                    <div className="relative aspect-[4/3] mb-6 overflow-hidden rounded-2xl bg-slate-100">
                       <Image
                         src={photo.src}
                         alt={photo.alt}
