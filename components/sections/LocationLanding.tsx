@@ -105,21 +105,23 @@ export default function LocationLanding({ location }: { location: LocationArea }
             The same documented standard in every home, whichever {name} postcode you are in.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           {[
             jobPhotos.find((p) => p.title === "Kitchen reset")!,
             jobPhotos.find((p) => p.title === "Bathroom suite")!,
             jobPhotos.find((p) => p.title === "Workplace reset")!,
-          ].map((photo) => (
+          ].map((photo, i) => (
             <figure
               key={photo.title}
-              className="relative overflow-hidden rounded-2xl bg-slate-200 aspect-[4/3] group"
+              className={`relative overflow-hidden rounded-2xl bg-slate-200 aspect-[4/3] group ${
+                i === 2 ? "col-span-2 sm:col-span-1" : ""
+              }`}
             >
               <Image
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                sizes="(min-width: 640px) 33vw, 100vw"
+                sizes="(min-width: 640px) 33vw, 50vw"
                 className="object-cover transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.04]"
               />
               <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/85 via-slate-950/35 to-transparent p-3.5">

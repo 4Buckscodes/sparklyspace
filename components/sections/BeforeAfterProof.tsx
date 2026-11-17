@@ -22,10 +22,10 @@ export default function BeforeAfterProof({ pairs }: { pairs: BeforeAfterPair[] }
     <section
       id="before-after"
       aria-labelledby="before-after-heading"
-      className="bg-white border-y border-slate-100 py-14 sm:py-20"
+      className="bg-white border-y border-slate-100 py-10 sm:py-20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-sky-100 text-sky-800 border border-sky-200">
             <Sparkles className="h-3.5 w-3.5 text-sky-600" aria-hidden="true" focusable="false" />
             <span>Before &amp; After</span>
@@ -43,7 +43,7 @@ export default function BeforeAfterProof({ pairs }: { pairs: BeforeAfterPair[] }
 
         {sliders.length > 0 && (
           <div
-            className={`grid gap-10 ${sliders.length > 1 ? "sm:grid-cols-2" : ""}`}
+            className={`grid gap-8 sm:gap-10 ${sliders.length > 1 ? "sm:grid-cols-2" : ""}`}
           >
             {sliders.map((pair) => (
               <BeforeAfterSlider key={pair.label} pair={pair} />
@@ -53,8 +53,8 @@ export default function BeforeAfterProof({ pairs }: { pairs: BeforeAfterPair[] }
 
         {sideBySide.length > 0 && (
           <div
-            className={`grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 ${
-              sliders.length > 0 ? "mt-12 sm:mt-16" : ""
+            className={`grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 ${
+              sliders.length > 0 ? "mt-8 sm:mt-16" : ""
             }`}
           >
             {sideBySide.map((pair) => (
