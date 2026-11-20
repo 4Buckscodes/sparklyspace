@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sparkly Space – 3D motion graphic</title>
+<style>
+  html,body{margin:0;background:#fffdf6;overflow:hidden}
+  #stage{position:relative;width:1920px;height:1080px;transform-origin:0 0;font-family:Inter,system-ui,sans-serif;color:#0f172a}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .t{position:absolute;opacity:0;will-change:transform,opacity}
+  .eyebrow{font-weight:700;font-size:26px;letter-spacing:.22em;text-transform:uppercase;color:#0284c7}
+  .h{font-weight:800;font-size:104px;line-height:1.02;letter-spacing:-.03em}
+  .h em{font-style:normal;color:#0284c7}
+  .h .g{color:#bca02d}
+  .sub{font-weight:400;font-size:34px;color:#475569;line-height:1.35}
+  .pill{display:inline-flex;align-items:center;gap:14px;background:#fff;border:2px solid #bae6fd;border-radius:999px;padding:14px 28px;font-weight:700;font-size:28px;color:#075985;box-shadow:0 10px 30px rgba(2,132,199,.12)}
+  .btn{display:inline-flex;background:#0284c7;color:#fff;font-weight:800;font-size:38px;border-radius:28px;padding:26px 54px;box-shadow:0 24px 50px rgba(2,132,199,.35)}
+  .url{font-weight:800;font-size:60px;letter-spacing:-.02em}
+  .tag{font-weight:800;font-size:40px;color:#0f172a;background:rgba(255,255,255,.92);border-radius:22px;padding:14px 28px;box-shadow:0 14px 36px rgba(15,23,42,.14);white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+
+  <!-- timed overlays -->
+  <div class="t" data-in="0.9" data-out="3.6" style="left:120px;top:150px;width:900px">
+    <div class="eyebrow">Sparkly Space · Cleaning Services</div>
+  </div>
+  <div class="t" data-in="1.3" data-out="3.6" style="left:120px;top:210px;width:1000px">
+    <div class="h">Spotless homes.<br><em>Zero stress.</em></div>
+  </div>
+
+  <div class="t" data-in="4.7" data-out="8.4" style="left:120px;top:190px;width:860px">
+    <div class="eyebrow">Why Bournemouth trusts us</div>
+  </div>
+  <div class="t" data-in="5.0" data-out="8.4" style="left:120px;top:250px;width:860px">
+    <div class="h" style="font-size:92px">Vetted.<br>Insured.<br><span class="g">Spotless.</span></div>
+  </div>
+  <div class="t" data-in="5.6" data-out="8.4" style="left:120px;top:700px;width:900px">
+    <div class="sub">Professional cleaning specialists you can<br>trust inside your home.</div>
+  </div>
+
+  <div class="t" data-in="9.1" data-out="13.6" style="left:0;top:80px;width:1920px;text-align:center">
+    <div class="eyebrow">Every space. Every standard.</div>
+    <div class="h" style="font-size:82px;margin-top:12px">Cleaning that fits <em>your life.</em></div>
+  </div>
+
+  <div class="t" data-in="14.5" data-out="17.6" style="left:120px;top:170px;width:900px">
+    <div class="eyebrow">Locally based, locally loved</div>
+  </div>
+  <div class="t" data-in="14.8" data-out="17.6" style="left:120px;top:230px;width:900px">
+    <div class="h" style="font-size:92px">Across the<br><em>south coast.</em></div>
+  </div>
+  <div class="t tag" data-in="15.5" data-out="17.7" id="tagB" style="left:0;top:0">Bournemouth</div>
+  <div class="t tag" data-in="15.8" data-out="17.7" id="tagP" style="left:0;top:0">Poole</div>
+  <div class="t tag" data-in="16.1" data-out="17.7" id="tagC" style="left:0;top:0">Christchurch</div>
+
+  <div class="t" data-in="18.3" data-out="99" style="left:0;top:560px;width:1920px;text-align:center">
+    <div class="h" style="font-size:96px">Book your <em>sparkle.</em></div>
+  </div>
+  <div class="t" data-in="18.8" data-out="99" style="left:0;top:720px;width:1920px;text-align:center">
+    <div class="sub" style="font-size:36px">Fast personalised quote · Book in minutes via WhatsApp</div>
+  </div>
+  <div class="t" data-in="19.3" data-out="99" style="left:0;top:800px;width:1920px;text-align:center">
+    <div class="btn">Request a Quote</div>
+  </div>
+  <div class="t" data-in="19.8" data-out="99" style="left:0;top:945px;width:1920px;text-align:center">
+    <div class="url">sparklyspace.co.uk <span style="color:#cbd5e1;font-weight:400">|</span> <span style="color:#0284c7">07552 427880</span></div>
+  </div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const W = 1920, H = 1080, DURATION = 21;
+const SKY = 0x0284c7, GOLD = 0xd4af37, CREAM = 0xfffdf6;
+
+/* ---------- deterministic helpers ---------- */
+let seed = 7;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const sstep = x => { x = clamp(x); return x * x * x * (x * (x * 6 - 15) + 10); };
+const easeOutBack = x => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const lerp = (a, b, x) => a + (b - a) * x;
+
+/* ---------- renderer / scene ---------- */
+const canvas = document.getElementById('c');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H, false);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.3;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+const bg = new THREE.Color(0xfffdf6);
+scene.background = bg;
+scene.fog = new THREE.Fog(0xfffdf6, 40, 120);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.9;
+
+const camera = new THREE.PerspectiveCamera(32, W / H, 0.1, 200);
+
+const sun = new THREE.DirectionalLight(0xfff4dc, 2.2);
+sun.position.set(-8, 14, 10);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.radius = 6;
+sun.shadow.bias = -0.0004;
+Object.assign(sun.shadow.camera, { left: -20, right: 20, top: 14, bottom: -14, near: 1, far: 50 });
+scene.add(sun, sun.target);
+scene.add(new THREE.HemisphereLight(0xe0f2fe, 0xfff7e0, 0.7));
+
+/* floor: shadow catcher + soft blue-cream disc gradient */
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(400, 80), new THREE.ShadowMaterial({ opacity: 0.16 }));
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 80), new THREE.MeshBasicMaterial({ color: 0xf6f1de, toneMapped: false, fog: false }));
+ground.rotation.x = -Math.PI / 2; ground.position.y = -0.01; scene.add(ground);
+
+/* ---------- materials ---------- */
+const goldMat = new THREE.MeshStandardMaterial({ color: 0xe2b93b, metalness: 1, roughness: 0.22, envMapIntensity: 1.4 });
+const skyGloss = new THREE.MeshPhysicalMaterial({ color: 0x0284c7, roughness: 0.12, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.05 });
+const whiteGloss = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.2, clearcoat: 1 });
+const bubbleMat = new THREE.MeshPhysicalMaterial({ color: 0x7dd3fc, roughness: 0.02, metalness: 0, transparent: true, opacity: 0.2, clearcoat: 1, envMapIntensity: 2.6, depthWrite: false });
+
+/* ---------- sparkle (4-point star) geometry ---------- */
+function starShape(outer = 1, inner = 0.2) {
+  const s = new THREE.Shape(); const n = 4;
+  for (let i = 0; i < n * 2; i++) {
+    const a = (i / (n * 2)) * Math.PI * 2 + Math.PI / 2;
+    const r = i % 2 === 0 ? outer : inner;
+    const x = Math.cos(a) * r, y = Math.sin(a) * r;
+    i === 0 ? s.moveTo(x, y) : s.lineTo(x, y);
+  }
+  s.closePath(); return s;
+}
+const starGeo = new THREE.ExtrudeGeometry(starShape(1, 0.26), { depth: 0.16, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.03, bevelSegments: 3 });
+starGeo.center();
+
+/* ---------- logo ---------- */
+const texLoader = new THREE.TextureLoader();
+const logoTex = await texLoader.loadAsync('../public/logo.png');
+logoTex.colorSpace = THREE.SRGBColorSpace; logoTex.anisotropy = 8;
+const logoMat = new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, fog: false, toneMapped: false });
+function makeLogo(h) { const m = new THREE.Mesh(new THREE.PlaneGeometry(h * 408 / 612, h), logoMat); return m; }
+
+/* ---------- 3D set pieces ---------- */
+const zones = { hero: 6.5, bottle: 15, services: 25, house: 54, cta: 76 };
+
+const discMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.4, clearcoat: 0.8 });
+function makeDisc(r) { const d = new THREE.Mesh(new THREE.CylinderGeometry(r, r, 0.18, 96), discMat); d.rotation.x = Math.PI / 2; d.castShadow = true; return d; }
+// HERO: logo, ring and orbiting stars
+const hero = new THREE.Group(); hero.position.x = zones.hero; scene.add(hero);
+const heroLogo = makeLogo(5.2); heroLogo.position.set(0, 3.4, 0); hero.add(heroLogo);
+const heroDisc = makeDisc(2.6); heroDisc.position.set(0, 3.4, -0.55); hero.add(heroDisc);
+const ring = new THREE.Mesh(new THREE.TorusGeometry(2.7, 0.07, 32, 160), goldMat); ring.position.copy(heroLogo.position); ring.castShadow = true; hero.add(ring);
+const heroStars = [];
+for (let i = 0; i < 9; i++) {
+  const m = new THREE.Mesh(starGeo, goldMat); m.castShadow = true;
+  const sc = 0.28 + rnd() * 0.55;
+  m.userData = { r: 3.2 + rnd() * 2.4, a0: rnd() * 6.28, sp: 0.35 + rnd() * 0.4, y: 1.2 + rnd() * 4.6, sc, z: (rnd() - 0.5) * 3, delay: 0.2 + i * 0.12 };
+  hero.add(m); heroStars.push(m);
+}
+
+// BOTTLE: pedestal + spray bottle
+const bottle = new THREE.Group(); bottle.position.x = zones.bottle; scene.add(bottle);
+const ped = new THREE.Mesh(new THREE.CylinderGeometry(2.4, 2.6, 0.5, 96), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.35, clearcoat: 0.6 }));
+ped.position.y = 0.25; ped.receiveShadow = true; ped.castShadow = true; bottle.add(ped);
+const pedRing = new THREE.Mesh(new THREE.TorusGeometry(2.45, 0.05, 24, 128), goldMat); pedRing.rotation.x = Math.PI / 2; pedRing.position.y = 0.5; bottle.add(pedRing);
+const spray = new THREE.Group(); spray.position.y = 0.5; bottle.add(spray);
+{
+  const body = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 1.0, 2.6, 64), new THREE.MeshPhysicalMaterial({ color: 0x0ea5e9, roughness: 0.1, clearcoat: 1, clearcoatRoughness: 0.03 }));
+  body.position.y = 1.5; body.castShadow = true; spray.add(body);
+  const liquid = new THREE.Mesh(new THREE.CylinderGeometry(0.88, 0.93, 2.0, 64), new THREE.MeshPhysicalMaterial({ color: 0x0369a1, roughness: 0.2, clearcoat: 1 }));
+  liquid.position.y = 1.2; liquid.visible = false; spray.add(liquid);
+  const shoulder = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.95, 0.6, 64), skyGloss); shoulder.position.y = 3.1; shoulder.castShadow = true; spray.add(shoulder);
+  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.3, 48), whiteGloss); neck.position.y = 3.55; spray.add(neck);
+  const head = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.62, 0.62, 4, 2, 2), whiteGloss);
+  head.geometry = new THREE.CapsuleGeometry(0.31, 1.1, 12, 24); head.rotation.z = Math.PI / 2; head.position.set(0.35, 3.95, 0); head.castShadow = true; spray.add(head);
+  const nozzle = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.2, 0.4, 32), goldMat); nozzle.rotation.z = Math.PI / 2; nozzle.position.set(1.2, 3.97, 0); spray.add(nozzle);
+  const trig = new THREE.Mesh(new THREE.CapsuleGeometry(0.1, 0.7, 8, 16), whiteGloss); trig.position.set(0.55, 3.45, 0); trig.rotation.z = -0.5; trig.castShadow = true; spray.add(trig);
+  const label = new THREE.Mesh(new THREE.CylinderGeometry(1.012, 1.012, 1.2, 64, 1, true, -Math.PI * 0.45, Math.PI * 0.9), new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, side: THREE.FrontSide }));
+  label.position.y = 1.7; label.visible = false; spray.add(label);
+  // logo badge on bottle front
+  const disc = new THREE.Mesh(new THREE.CylinderGeometry(0.82, 0.82, 2.1, 64, 1, false, -0.95, 1.9), new THREE.MeshPhysicalMaterial({ color: 0xfffdf6, roughness: 0.35, clearcoat: 0.5 }));
+  disc.scale.set(1.02, 1, 1.02); disc.position.y = 1.55; spray.add(disc);
+  const badge = makeLogo(1.75); badge.position.set(0, 1.55, 1.018); spray.add(badge);
+  const disc2 = disc.clone(); disc2.rotation.y = Math.PI; spray.add(disc2);
+  const badge2 = makeLogo(1.75); badge2.position.set(0, 1.55, -1.018); badge2.rotation.y = Math.PI; spray.add(badge2);
+}
+const sprayStars = [];
+for (let i = 0; i < 14; i++) {
+  const m = new THREE.Mesh(starGeo, goldMat); m.castShadow = true;
+  m.userData = { ang: (rnd() - 0.5) * 0.7, spd: 2 + rnd() * 2.4, off: rnd(), sc: 0.12 + rnd() * 0.22, lift: (rnd() - 0.2) * 1.2 };
+  bottle.add(m); sprayStars.push(m);
+}
+
+// SERVICES: six rounded glossy cards with icons drawn on canvas
+const serviceDefs = [
+  ['Residential', 'Weekly & fortnightly care', 'home'],
+  ['Deep Clean', 'Top-to-bottom refresh', 'sparkle'],
+  ['End of Tenancy', 'Get your deposit back', 'key'],
+  ['Airbnb & Holiday Let', '5-star guest turnarounds', 'star'],
+  ['Commercial & Office', 'A workplace you can be proud of', 'building'],
+  ['Bespoke Clean', 'Tailored to your needs', 'heart'],
+];
+function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+function drawIcon(ctx, kind, cx, cy, s) {
+  ctx.save(); ctx.translate(cx, cy); ctx.lineWidth = s * 0.07; ctx.lineCap = ctx.lineJoin = 'round'; ctx.strokeStyle = '#0284c7'; ctx.fillStyle = '#d4af37';
+  const star = (x, y, r) => { ctx.beginPath(); for (let i = 0; i < 8; i++) { const a = i / 8 * 6.283 - 1.5708, rr = i % 2 ? r * 0.26 : r; ctx.lineTo(x + Math.cos(a) * rr, y + Math.sin(a) * rr); } ctx.closePath(); ctx.fill(); };
+  if (kind === 'home') { ctx.beginPath(); ctx.moveTo(-s * .5, 0); ctx.lineTo(0, -s * .5); ctx.lineTo(s * .5, 0); ctx.moveTo(-s * .36, -s * .1); ctx.lineTo(-s * .36, s * .42); ctx.lineTo(s * .36, s * .42); ctx.lineTo(s * .36, -s * .1); ctx.stroke(); star(s * .42, -s * .38, s * .22); }
+  if (kind === 'sparkle') { star(0, 0, s * .55); star(s * .45, -s * .35, s * .2); star(-s * .42, s * .38, s * .16); }
+  if (kind === 'key') { ctx.beginPath(); ctx.arc(-s * .22, 0, s * .22, 0, 6.283); ctx.moveTo(0, 0); ctx.lineTo(s * .5, 0); ctx.moveTo(s * .34, 0); ctx.lineTo(s * .34, s * .17); ctx.moveTo(s * .5, 0); ctx.lineTo(s * .5, s * .17); ctx.stroke(); }
+  if (kind === 'star') { ctx.beginPath(); for (let i = 0; i < 10; i++) { const a = i / 10 * 6.283 - 1.5708, r = i % 2 ? s * .22 : s * .5; ctx.lineTo(Math.cos(a) * r, Math.sin(a) * r); } ctx.closePath(); ctx.fill(); ctx.stroke(); }
+  if (kind === 'building') { ctx.strokeRect(-s * .3, -s * .5, s * .6, s); for (let r = 0; r < 3; r++) for (let c = 0; c < 2; c++) ctx.strokeRect(-s * .18 + c * s * .22, -s * .36 + r * s * .26, s * .1, s * .1); }
+  if (kind === 'heart') { ctx.beginPath(); ctx.moveTo(0, s * .42); ctx.bezierCurveTo(-s * .7, -s * .05, -s * .3, -s * .6, 0, -s * .2); ctx.bezierCurveTo(s * .3, -s * .6, s * .7, -s * .05, 0, s * .42); ctx.stroke(); star(s * .38, -s * .4, s * .2); }
+  ctx.restore();
+}
+function cardTexture(def) {
+  const c = document.createElement('canvas'); c.width = 768; c.height = 1024; const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, 1024); g.addColorStop(0, '#ffffff'); g.addColorStop(1, '#f0f9ff');
+  x.fillStyle = g; x.fillRect(0, 0, 768, 1024);
+  x.fillStyle = '#0284c7'; x.fillRect(0, 0, 768, 36);
+  x.fillStyle = '#e0f2fe'; x.beginPath(); x.arc(384, 330, 190, 0, 6.283); x.fill();
+  x.strokeStyle = '#d4af37'; x.lineWidth = 6; x.beginPath(); x.arc(384, 330, 208, 0, 6.283); x.stroke();
+  drawIcon(x, def[2], 384, 330, 220);
+  x.fillStyle = '#0f172a'; x.textAlign = 'center'; x.font = '800 66px Inter, sans-serif';
+  const words = def[0].split(' '); const lines = []; let line = '';
+  for (const w of words) { const t = (line + ' ' + w).trim(); if (x.measureText(t).width > 640 && line) { lines.push(line); line = w; } else line = t; } lines.push(line);
+  lines.forEach((l, i) => x.fillText(l, 384, 640 + i * 76));
+  x.fillStyle = '#64748b'; x.font = '500 38px Inter, sans-serif';
+  const ty = 640 + lines.length * 76 + 20; x.fillText(def[1], 384, ty);
+  x.fillStyle = '#d4af37'; x.fillRect(344, 940, 80, 8);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+await document.fonts.load('800 66px Inter'); await document.fonts.load('500 38px Inter');
+const services = new THREE.Group(); services.position.x = zones.services; scene.add(services);
+const cards = [];
+const cardGeo = new THREE.BoxGeometry(3.0, 4.0, 0.2, 1, 1, 1);
+serviceDefs.forEach((def, i) => {
+  const tex = cardTexture(def);
+  const edge = new THREE.MeshPhysicalMaterial({ color: 0xd4af37, metalness: 0.9, roughness: 0.3 });
+  const face = new THREE.MeshBasicMaterial({ map: tex, toneMapped: false });
+  const m = new THREE.Mesh(cardGeo, [edge, edge, edge, edge, face, face]);
+  m.castShadow = true; m.receiveShadow = true;
+  const x = (i - 2.5) * 3.55;
+  m.userData = { x, i, base: 0 };
+  m.position.set(x, 2.5, 0); services.add(m); cards.push(m);
+});
+
+// HOUSE
+const house = new THREE.Group(); house.position.x = zones.house; scene.add(house);
+{
+  const wall = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.6, clearcoat: 0.2 });
+  const roofM = new THREE.MeshPhysicalMaterial({ color: 0x0369a1, roughness: 0.35, clearcoat: 0.6 });
+  const body = new THREE.Mesh(new THREE.BoxGeometry(5, 3, 3.6), wall); body.position.y = 1.5; body.castShadow = body.receiveShadow = true; house.add(body);
+  const roofShape = new THREE.Shape(); roofShape.moveTo(-2.9, 0); roofShape.lineTo(0, 2.2); roofShape.lineTo(2.9, 0); roofShape.closePath();
+  const roof = new THREE.Mesh(new THREE.ExtrudeGeometry(roofShape, { depth: 4.1, bevelEnabled: true, bevelSize: 0.08, bevelThickness: 0.08, bevelSegments: 3 }), roofM);
+  roof.position.set(0, 3, -2.05); roof.castShadow = true; house.add(roof);
+  const door = new THREE.Mesh(new THREE.BoxGeometry(0.95, 1.7, 0.1), new THREE.MeshPhysicalMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.3 })); door.position.set(-0.2, 0.85, 1.82); house.add(door);
+  const glass = new THREE.MeshPhysicalMaterial({ color: 0xbae6fd, roughness: 0.05, metalness: 0.1, clearcoat: 1, emissive: 0x7dd3fc, emissiveIntensity: 0.25 });
+  [[-1.6, 1.8], [1.3, 1.8]].forEach(([x, y]) => { const w = new THREE.Mesh(new THREE.BoxGeometry(1.0, 1.1, 0.1), glass); w.position.set(x, y, 1.82); house.add(w); const f = new THREE.Mesh(new THREE.BoxGeometry(1.12, 1.22, 0.06), whiteGloss); f.position.set(x, y, 1.79); house.add(f); });
+  const chim = new THREE.Mesh(new THREE.BoxGeometry(0.6, 1.4, 0.6), wall); chim.position.set(1.5, 4.4, 0); chim.castShadow = true; house.add(chim);
+}
+const houseStars = [];
+for (let i = 0; i < 12; i++) {
+  const m = new THREE.Mesh(starGeo, goldMat); m.castShadow = true;
+  m.userData = { p: new THREE.Vector3((rnd() - 0.5) * 5.2, 0.5 + rnd() * 4.3, 1.9 + rnd() * 0.7), t0: 0.15 + i * 0.07, sc: 0.18 + rnd() * 0.3 };
+  house.add(m); houseStars.push(m);
+}
+// location pins
+function makePin(x, z) {
+  const g = new THREE.Group(); g.position.set(x, 0, z);
+  const head = new THREE.Mesh(new THREE.SphereGeometry(0.42, 48, 48), skyGloss); head.position.y = 1.2; head.castShadow = true;
+  const tip = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.75, 48), skyGloss); tip.rotation.x = Math.PI; tip.position.y = 0.55; tip.castShadow = true;
+  const dot = new THREE.Mesh(new THREE.SphereGeometry(0.16, 24, 24), goldMat); dot.position.set(0, 1.2, 0.3);
+  g.add(head, tip, dot); return g;
+}
+const pins = [makePin(-9.2, 4.2), makePin(-5.0, 4.6), makePin(-2.6, 4.0)];
+pins.forEach(p => house.add(p));
+
+// CTA: gold coin ring + sparkles
+const cta = new THREE.Group(); cta.position.x = zones.cta; cta.scale.setScalar(0.8); scene.add(cta);
+const ctaLogo = makeLogo(5.6); ctaLogo.position.set(0, 4.6, 0); cta.add(ctaLogo);
+const ctaDisc = makeDisc(2.85); ctaDisc.position.set(0, 4.6, -0.55); cta.add(ctaDisc);
+const ctaRing = new THREE.Mesh(new THREE.TorusGeometry(2.95, 0.08, 32, 160), goldMat); ctaRing.position.copy(ctaLogo.position); ctaRing.castShadow = true; cta.add(ctaRing);
+const ctaStars = [];
+for (let i = 0; i < 18; i++) {
+  const m = new THREE.Mesh(starGeo, goldMat); m.castShadow = true;
+  m.userData = { a: rnd() * 6.283, r: 3.3 + rnd() * 3.4, y: 0.8 + rnd() * 6, sp: 0.2 + rnd() * 0.35, sc: 0.18 + rnd() * 0.42, z: (rnd() - 0.5) * 3 };
+  cta.add(m); ctaStars.push(m);
+}
+
+/* ---------- ambient bubbles (world space) ---------- */
+const bubbleGeo = new THREE.SphereGeometry(1, 40, 40);
+const bubbles = [];
+for (let i = 0; i < 70; i++) {
+  const m = new THREE.Mesh(bubbleGeo, bubbleMat);
+  const s = 0.12 + Math.pow(rnd(), 2.2) * 0.65;
+  m.userData = { x: rnd() * 74 - 4, z: (rnd() - 0.45) * 9 - 1.5, s, ph: rnd() * 10, sp: 0.35 + rnd() * 0.55, wob: 0.2 + rnd() * 0.5 };
+  scene.add(m); bubbles.push(m);
+}
+
+/* ---------- twinkle dust (sprite points) ---------- */
+function sparkleSprite() {
+  const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d');
+  const g = x.createRadialGradient(64, 64, 0, 64, 64, 64); g.addColorStop(0, 'rgba(255,240,190,1)'); g.addColorStop(0.18, 'rgba(255,222,120,.9)'); g.addColorStop(1, 'rgba(255,220,100,0)');
+  x.fillStyle = g; x.fillRect(0, 0, 128, 128);
+  x.fillStyle = 'rgba(255,246,210,.95)'; x.beginPath(); x.moveTo(64, 2); x.quadraticCurveTo(68, 60, 126, 64); x.quadraticCurveTo(68, 68, 64, 126); x.quadraticCurveTo(60, 68, 2, 64); x.quadraticCurveTo(60, 60, 64, 2); x.fill();
+  return new THREE.CanvasTexture(c);
+}
+const dustTex = sparkleSprite();
+const dust = [];
+for (let i = 0; i < 160; i++) {
+  const m = new THREE.Sprite(new THREE.SpriteMaterial({ map: dustTex, transparent: true, depthWrite: false, blending: THREE.NormalBlending, color: 0xffd966 }));
+  m.userData = { x: rnd() * 78 - 6, y: 0.4 + rnd() * 8, z: (rnd() - 0.5) * 10 - 1, s: 0.18 + rnd() * 0.42, ph: rnd() * 10, sp: 1 + rnd() * 2.5 };
+  scene.add(m); dust.push(m);
+}
+
+/* ---------- camera keyframes: [time, pos, lookAt] ---------- */
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+const keys = [
+  [0.0, V(1.5, 3.8, 21), V(3.0, 5.4, 0)],
+  [3.6, V(10.0, 4.0, 16.5), V(8.6, 3.6, 0)],
+  [4.6, V(12.0, 3.8, 15.0), V(12.0, 3.2, 0)],
+  [8.4, V(17.0, 4.2, 14.5), V(14.0, 3.0, 0)],
+  [9.0, V(22.0, 3.4, 17.0), V(25.0, 3.0, 0)],
+  [13.6, V(27.5, 3.7, 17.5), V(25.5, 2.7, 0)],
+  [14.4, V(46.0, 3.6, 19.0), V(48.0, 2.4, 0)],
+  [17.6, V(51.0, 3.6, 18.0), V(48.5, 2.4, 0)],
+  [18.2, V(76.0, 3.8, 27.0), V(76.0, 1.6, 0)],
+  [21.0, V(76.0, 3.8, 25.0), V(76.0, 1.6, 0)],
+];
+function camAt(t) {
+  let i = 0; while (i < keys.length - 2 && t > keys[i + 1][0]) i++;
+  const [t0, p0, l0] = keys[i], [t1, p1, l1] = keys[i + 1];
+  const u = sstep((t - t0) / (t1 - t0));
+  return [p0.clone().lerp(p1, u), l0.clone().lerp(l1, u)];
+}
+
+/* ---------- animation ---------- */
+const overlays = [...document.querySelectorAll('.t')];
+const tags = { tagB: V(-5.0, 3.1, 4.6), tagP: V(-2.7, 2.5, 4.0), tagC: V(-9.2, 2.5, 4.2) };
+const tmpV = new THREE.Vector3();
+
+function update(t) {
+  /* camera */
+  const [p, l] = camAt(t);
+  p.x += Math.sin(t * 0.6) * 0.18; p.y += Math.sin(t * 0.45) * 0.1;
+  camera.position.copy(p); camera.lookAt(l); camera.updateMatrixWorld();
+
+  /* hero */
+  const hOut = 1 - sstep((t - 3.3) / 1.0); hero.visible = hOut > 0.001; hero.scale.setScalar(Math.max(0.0001, hOut));
+  const hp = easeOutBack((t - 0.1) / 1.2);
+  heroLogo.scale.setScalar(Math.max(0.0001, hp)); heroLogo.position.y = 3.4 + Math.sin(t * 1.1) * 0.08;
+  ring.scale.setScalar(Math.max(0.0001, sstep((t - 0.0) / 1.4))); ring.rotation.set(0.0, Math.sin(t * 0.9) * 0.45, t * 0.3); ring.position.y = heroLogo.position.y;
+  heroDisc.scale.setScalar(Math.max(0.0001, sstep((t - 0.1) / 1.2))); heroDisc.position.y = heroLogo.position.y; heroDisc.rotation.y = Math.sin(t * 0.9) * 0.15;
+  heroLogo.rotation.y = Math.sin(t * 0.9) * 0.15;
+  const heroFade = 1 - sstep((t - 3.2) / 1.2) * 0.0;
+  heroStars.forEach(m => { const d = m.userData; const k = easeOutBack((t - d.delay) / 1.0); const a = d.a0 + t * d.sp;
+    m.position.set(Math.cos(a) * d.r, d.y + Math.sin(t * 1.2 + d.a0) * 0.2, Math.sin(a) * 1.2 + d.z);
+    m.scale.setScalar(Math.max(0.0001, d.sc * k)); m.rotation.set(0.3, t * 1.4 + d.a0, 0.2 * Math.sin(t + d.a0)); });
+
+  /* bottle */
+  const bt = t - 4.6;
+  const bIn = easeOutBack(bt / 1.0);
+  spray.scale.setScalar(Math.max(0.0001, bIn)); spray.rotation.y = Math.sin(bt * 0.8) * 0.8 - 0.1; spray.position.y = 0.5 + Math.sin(t * 1.5) * 0.06;
+  ped.scale.setScalar(Math.max(0.0001, sstep(bt / 0.8))); pedRing.scale.setScalar(Math.max(0.0001, sstep(bt / 0.8)));
+  // spray burst from nozzle (world-ish): nozzle tip approx
+  const nozzleLocal = tmpV.set(1.45, 3.97 + 0.5, 0).applyAxisAngle(V(0, 1, 0), spray.rotation.y);
+  sprayStars.forEach(m => { const d = m.userData; const ph = ((bt - 1.2) * 0.9 + d.off) % 1; const act = bt > 1.2 ? 1 : 0;
+    const dist = ph * d.spd; const dir = spray.rotation.y;
+    const dx = Math.cos(-dir + d.ang) * dist, dz = Math.sin(-dir + d.ang) * dist;
+    m.position.set(nozzleLocal.x + dx, nozzleLocal.y + d.lift * ph - ph * ph * 0.6, nozzleLocal.z + dz);
+    const s = d.sc * Math.sin(ph * Math.PI) * act; m.scale.setScalar(Math.max(0.0001, s)); m.rotation.set(0.2, t * 3 + d.off * 6, t * 2); });
+
+  /* service cards */
+  const st = t - 9.0;
+  cards.forEach(c => { const d = c.userData; const k = easeOutBack((st - 0.15 - d.i * 0.14) / 0.9);
+    c.scale.setScalar(Math.max(0.0001, k));
+    c.position.y = 2.5 + (1 - clamp(k, 0, 1)) * -1.5 + Math.sin(t * 1.2 + d.i * 0.9) * 0.12;
+    c.rotation.y = Math.sin(t * 0.8 + d.i * 0.7) * 0.28 + (1 - clamp(k, 0, 1)) * 1.4; c.rotation.x = Math.sin(t * 0.6 + d.i) * 0.04; });
+
+  /* house */
+  const ht = t - 14.3;
+  house.scale.setScalar(Math.max(0.0001, easeOutBack(ht / 1.0))); house.rotation.y = -0.35 + Math.sin(t * 0.5) * 0.12;
+  houseStars.forEach(m => { const d = m.userData; const lt = (ht - 0.7 - d.t0 * 6) ; const ph = (lt % 1.6) / 1.6; const on = lt > 0 ? Math.sin(clamp(ph) * Math.PI) : 0;
+    m.position.copy(d.p); m.scale.setScalar(Math.max(0.0001, d.sc * on * 1.2)); m.rotation.set(0, t * 2 + d.t0 * 9, 0); });
+  pins.forEach((pin, i) => { const k = easeOutBack((ht - 1.3 - i * 0.3) / 0.7); pin.scale.setScalar(Math.max(0.0001, k)); pin.position.y = Math.abs(Math.sin(t * 2.4 + i)) * 0.25 * (1 - (1 - clamp(k, 0, 1))); pin.rotation.y = t * 1.2; });
+
+  /* cta */
+  const ct = t - 18.1;
+  ctaLogo.scale.setScalar(Math.max(0.0001, easeOutBack(ct / 1.1))); ctaLogo.position.y = 4.7 + Math.sin(t * 1.1) * 0.08;
+  ctaRing.scale.setScalar(Math.max(0.0001, sstep(ct / 1.0))); ctaRing.rotation.set(0, Math.sin(t * 0.9) * 0.4, t * 0.3); ctaRing.position.y = ctaLogo.position.y;
+  ctaDisc.scale.setScalar(Math.max(0.0001, sstep(ct / 1.0))); ctaDisc.position.y = ctaLogo.position.y;
+  ctaStars.forEach(m => { const d = m.userData; const a = d.a + t * d.sp; const k = easeOutBack((ct - 0.2) / 1.0);
+    m.position.set(Math.cos(a) * d.r, d.y + Math.sin(t + d.a) * 0.25, Math.sin(a) * 1.6 + d.z);
+    m.scale.setScalar(Math.max(0.0001, d.sc * k * (0.8 + 0.2 * Math.sin(t * 3 + d.a * 5)))); m.rotation.set(0.2, t * 1.6 + d.a, 0.2); });
+
+  /* bubbles & dust */
+  bubbles.forEach(m => { const d = m.userData; const y = ((t * d.sp * 0.9 + d.ph) % 9) - 0.5; m.position.set(d.x + Math.sin(t * 0.8 + d.ph) * d.wob, y + d.s, d.z); m.scale.setScalar(d.s); });
+  dust.forEach(m => { const d = m.userData; const tw = 0.5 + 0.5 * Math.sin(t * d.sp + d.ph); m.position.set(d.x + Math.sin(t * 0.3 + d.ph) * 0.3, d.y + Math.sin(t * 0.5 + d.ph) * 0.3, d.z); m.scale.setScalar(d.s * (0.35 + tw * 1.0)); m.material.opacity = 0.2 + tw * 0.8; });
+
+  /* overlays */
+  overlays.forEach(el => {
+    const a = parseFloat(el.dataset.in), b = parseFloat(el.dataset.out);
+    const inn = sstep((t - a) / 0.7), out = sstep((t - (b - 0.5)) / 0.5);
+    const o = inn * (1 - out);
+    el.style.opacity = o.toFixed(3);
+    const ty = (1 - inn) * 36 + out * -14;
+    const id = el.id;
+    if (tags[id]) {
+      tmpV.copy(tags[id]); house.localToWorld(tmpV); tmpV.project(camera);
+      const x = (tmpV.x * 0.5 + 0.5) * W, y = (-tmpV.y * 0.5 + 0.5) * H;
+      el.style.transform = `translate(${x - el.offsetWidth / 2}px, ${y - el.offsetHeight / 2 + ty}px)`;
+    } else el.style.transform = `translateY(${ty.toFixed(1)}px)`;
+    el.style.filter = o > 0.99 ? 'none' : `blur(${((1 - o) * 8).toFixed(1)}px)`;
+  });
+}
+
+function renderFrame(t) { update(t); renderer.render(scene, camera); }
+window.renderFrame = renderFrame; window.DURATION = DURATION; window.ready = true;
+
+// live preview when opened directly
+if (!location.search.includes('capture')) {
+  const stage = document.getElementById('stage');
+  const fit = () => { const s = Math.min(innerWidth / W, innerHeight / H); stage.style.transform = `scale(${s})`; };
+  fit(); addEventListener('resize', fit);
+  const t0 = performance.now();
+  (function loop() { renderFrame(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); })();
+}
+</script>
+</body>
+</html>
