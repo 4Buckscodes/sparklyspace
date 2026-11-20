@@ -20,6 +20,6 @@ const server = http.createServer((q, r) => {
   const mode = process.argv[2], out = process.env.OUT || '/tmp/frames'; fs.mkdirSync(out, { recursive: true });
   const shoot = async (t, file) => { await page.evaluate(t => window.renderFrame(t), t); await page.screenshot({ path: file }); };
   if (mode === 'still') for (const t of process.argv[3].split(',')) await shoot(+t, `${out}/still_${t}.png`);
-  else { const fps = 30, n = Math.round(21 * fps); for (let i = 0; i < n; i++) { await shoot(i / fps, `${out}/f_${String(i).padStart(4, '0')}.png`); if (i % 60 === 0) console.log(i, '/', n); } }
+  else { const fps = 30, n = Math.round(23 * fps); for (let i = +(process.env.START||0); i < n; i++) { await shoot(i / fps, `${out}/f_${String(i).padStart(4, '0')}.png`); if (i % 60 === 0) console.log(i, '/', n); } }
   await browser.close(); server.close();
 })();
