@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Sparkly Space – Imagine (3D storybook promo)</title>
+<style>
+  html,body{margin:0;background:#bfe6ff;overflow:hidden}
+  #stage{position:relative;width:1920px;height:1080px;transform-origin:0 0;font-family:Inter,system-ui,sans-serif;color:#0b2540}
+  canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+  #mood{position:absolute;inset:0;background:#8f98a8;mix-blend-mode:multiply;opacity:.3;pointer-events:none}
+  .t{position:absolute;opacity:0;will-change:transform,opacity}
+  .eyebrow{font-weight:700;font-size:26px;letter-spacing:.22em;text-transform:uppercase;color:#075985}
+  .h{font-weight:800;font-size:100px;line-height:1.02;letter-spacing:-.03em;text-shadow:0 2px 30px rgba(255,255,255,.55)}
+  .h em{font-style:normal;color:#0369a1}
+  .h .g{color:#b8860b}
+  .h .m{color:#6b5a46}
+  .sub{font-weight:500;font-size:34px;color:#1e3a5f;line-height:1.35}
+  .btn{display:inline-flex;background:#0284c7;color:#fff;font-weight:800;font-size:38px;border-radius:28px;padding:26px 54px;box-shadow:0 24px 50px rgba(2,132,199,.35)}
+  .url{font-weight:800;font-size:56px;letter-spacing:-.02em}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+  <div id="mood"></div>
+
+  <div class="t" data-in="0.8" data-out="4.3" style="left:110px;top:180px;width:900px">
+    <div class="eyebrow">Imagine…</div>
+    <div class="h" style="margin-top:16px">A home that<br>feels <em>brand new.</em></div>
+  </div>
+
+  <div class="t" data-in="4.9" data-out="8.8" style="left:110px;top:180px;width:900px">
+    <div class="eyebrow">But life gets messy</div>
+    <div class="h" style="margin-top:16px">Dust. Clutter.<br><span class="m">Chaos.</span></div>
+  </div>
+
+  <div class="t" data-in="9.0" data-out="12.9" style="left:110px;top:180px;width:900px">
+    <div class="eyebrow">Then…</div>
+    <div class="h" style="margin-top:16px">A little<br><span class="g">sparkle.</span></div>
+  </div>
+
+  <div class="t" data-in="13.4" data-out="18.0" style="left:110px;top:170px;width:900px">
+    <div class="eyebrow">Sparkly Space</div>
+    <div class="h" style="margin-top:16px;font-size:92px">Vetted.<br>Insured.<br><span class="g">Spotless.</span></div>
+  </div>
+  <div class="t" data-in="14.4" data-out="18.0" style="left:110px;top:720px;width:900px">
+    <div class="sub">Bournemouth · Poole · Christchurch</div>
+  </div>
+
+  <div class="t" data-in="19.0" data-out="99" style="left:110px;top:190px;width:900px">
+    <div class="h" style="font-size:108px">Book your<br><em>sparkle.</em></div>
+  </div>
+  <div class="t" data-in="19.6" data-out="99" style="left:110px;top:560px;width:900px">
+    <div class="sub" style="font-size:32px;width:1000px">Fast personalised quote · Book in minutes via WhatsApp</div>
+  </div>
+  <div class="t" data-in="20.1" data-out="99" style="left:110px;top:690px">
+    <div class="btn">Request a Quote</div>
+  </div>
+  <div class="t" data-in="20.6" data-out="99" style="left:110px;top:850px">
+    <div class="url">sparklyspace.co.uk</div>
+    <div class="url" style="color:#0284c7;margin-top:6px">07552 427880</div>
+  </div>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const W = 1920, H = 1080, DURATION = 26;
+let seed = 11;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const sstep = x => { x = clamp(x); return x * x * x * (x * (x * 6 - 15) + 10); };
+const easeOutBack = x => { x = clamp(x); const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+const lerp = (a, b, x) => a + (b - a) * x;
+const V = (x, y, z) => new THREE.Vector3(x, y, z);
+
+/* ---------- renderer / scene ---------- */
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1); renderer.setSize(W, H, false);
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+{ // dreamy sky gradient
+  const c = document.createElement('canvas'); c.width = 8; c.height = 512; const x = c.getContext('2d');
+  const g = x.createLinearGradient(0, 0, 0, 512);
+  g.addColorStop(0, '#6cc4f5'); g.addColorStop(0.5, '#bfe6ff'); g.addColorStop(0.82, '#ffe9cf'); g.addColorStop(1, '#ffd6e0');
+  x.fillStyle = g; x.fillRect(0, 0, 8, 512);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; scene.background = t;
+}
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; scene.environmentIntensity = 0.8;
+const camera = new THREE.PerspectiveCamera(32, W / H, 0.1, 300);
+
+scene.add(new THREE.HemisphereLight(0xdff1ff, 0xffe9d0, 0.9));
+const sun = new THREE.DirectionalLight(0xfff1d6, 2.4); sun.position.set(9, 16, 12); sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005; sun.shadow.radius = 5;
+Object.assign(sun.shadow.camera, { left: -9, right: 9, top: 9, bottom: -9, near: 1, far: 45 });
+scene.add(sun, sun.target);
+const warm = new THREE.PointLight(0xffd49a, 0, 40, 1.6); warm.position.set(0, 4.5, 2); scene.add(warm);
+
+/* ---------- materials / helpers ---------- */
+const DIRTY = new THREE.Color(0x7a6b58);
+const tints = [];
+const nxOf = x => clamp((x + 4.5) / 9);
+function tm(color, nx, o = {}) {
+  const m = new THREE.MeshPhysicalMaterial({ color, roughness: 0.55, clearcoat: 0.25, ...o });
+  tints.push({ m, clean: new THREE.Color(color), nx }); return m;
+}
+const goldMat = new THREE.MeshStandardMaterial({ color: 0xe2b93b, metalness: 1, roughness: 0.25, envMapIntensity: 1.4 });
+const dio = new THREE.Group(); scene.add(dio);
+function rb(w, h, d, mat, x, y, z, r = 0.08, parent = dio) {
+  const m = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, 4, Math.min(r, w / 2 - 0.001, h / 2 - 0.001, d / 2 - 0.001)), mat);
+  m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; parent.add(m); return m;
+}
+function cyl(rt, rb_, h, mat, x, y, z, seg = 40, parent = dio) {
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb_, h, seg), mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; parent.add(m); return m;
+}
+const starShape = (o = 1, i = 0.26) => { const s = new THREE.Shape(); for (let k = 0; k < 8; k++) { const a = k / 8 * 6.2832 + 1.5708, r = k % 2 ? i : o; k ? s.lineTo(Math.cos(a) * r, Math.sin(a) * r) : s.moveTo(Math.cos(a) * r, Math.sin(a) * r); } s.closePath(); return s; };
+const starGeo = new THREE.ExtrudeGeometry(starShape(), { depth: 0.16, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.03, bevelSegments: 3 }); starGeo.center();
+
+const logoTex = await new THREE.TextureLoader().loadAsync('../public/logo.png'); logoTex.colorSpace = THREE.SRGBColorSpace; logoTex.anisotropy = 8;
+const logoMat = new THREE.MeshBasicMaterial({ map: logoTex, transparent: true, toneMapped: false, fog: false });
+const makeLogo = h => new THREE.Mesh(new THREE.PlaneGeometry(h * 408 / 612, h), logoMat);
+const discMat = new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.35, clearcoat: 0.8 });
+
+/* ---------- the little room ---------- */
+// floor planks + rock underneath
+for (let i = 0; i < 6; i++) { const x = -3.75 + i * 1.5; rb(1.46, 0.5, 9, tm(i % 2 ? 0xf2dfb8 : 0xead2a0, nxOf(x)), x, -0.25, 0, 0.05); }
+const rock = new THREE.Mesh(new THREE.ConeGeometry(4.9, 5.2, 7, 1), new THREE.MeshStandardMaterial({ color: 0xa79a8c, roughness: 0.9, flatShading: true }));
+rock.rotation.x = Math.PI; rock.position.y = -3.1; rock.castShadow = true; dio.add(rock);
+const rockMini = [[-3.2, -1.2, 2.4, 0.7], [3.0, -3.6, 1.2, 0.5], [0.5, -5.8, -1.0, 0.45]].map(([x, y, z, r]) => { const m = new THREE.Mesh(new THREE.DodecahedronGeometry(r, 0), rock.material); m.position.set(x, y, z); dio.add(m); return m; });
+// walls
+for (let i = 0; i < 6; i++) { const x = -3.75 + i * 1.5; rb(1.5, 5, 0.3, tm(0xe6f3ff, nxOf(x)), x, 2.5, -4.35, 0.02); }
+rb(0.3, 5, 9, tm(0xf1f7ff, 0.0), -4.35, 2.5, 0, 0.02);
+rb(9, 0.28, 0.2, goldMat, 0, 0.14, -4.12, 0.05); rb(0.2, 0.28, 8.8, goldMat, -4.12, 0.14, 0, 0.05);
+// window
+rb(2.7, 2.9, 0.2, tm(0xffffff, nxOf(2)), 2, 3.1, -4.15, 0.05);
+const glassMat = new THREE.MeshBasicMaterial({ color: 0x8d97a0, toneMapped: false });
+const glass = new THREE.Mesh(new THREE.PlaneGeometry(2.3, 2.5), glassMat); glass.position.set(2, 3.1, -4.03); dio.add(glass);
+rb(0.1, 2.5, 0.12, tm(0xffffff, nxOf(2)), 2, 3.1, -4.0, 0.02); rb(2.3, 0.1, 0.12, tm(0xffffff, nxOf(2)), 2, 3.1, -4.0, 0.02);
+// framed logo
+const frame = new THREE.Group(); frame.position.set(-1.7, 3.5, -4.05); dio.add(frame);
+{ const d = new THREE.Mesh(new THREE.CylinderGeometry(1.0, 1.0, 0.12, 64), discMat); d.rotation.x = Math.PI / 2; frame.add(d);
+  const r = new THREE.Mesh(new THREE.TorusGeometry(1.0, 0.07, 24, 96), goldMat); frame.add(r);
+  const l = makeLogo(1.5); l.position.z = 0.09; frame.add(l); }
+// rug
+const rug = cyl(2.3, 2.3, 0.06, tm(0x38bdf8, 0.55), 0.3, 0.03, 0.9, 64);
+const rugRing = new THREE.Mesh(new THREE.TorusGeometry(2.3, 0.05, 16, 96), goldMat); rugRing.rotation.x = Math.PI / 2; rugRing.position.set(0.3, 0.06, 0.9); dio.add(rugRing);
+// sofa
+rb(3.6, 0.8, 1.5, tm(0x0284c7, nxOf(-1.9), { roughness: 0.4 }), -1.9, 0.4, -3.2, 0.2);
+rb(3.6, 1.3, 0.5, tm(0x0369a1, nxOf(-1.9), { roughness: 0.4 }), -1.9, 1.15, -3.75, 0.2);
+rb(0.45, 1.05, 1.5, tm(0x0369a1, nxOf(-3.5)), -3.55, 0.7, -3.2, 0.18); rb(0.45, 1.05, 1.5, tm(0x0369a1, nxOf(-0.3)), -0.3, 0.7, -3.2, 0.18);
+const cu1 = rb(0.9, 0.85, 0.3, tm(0xf4cf5d, nxOf(-2.6)), -2.6, 1.15, -2.9, 0.12); cu1.rotation.z = 0.2;
+const cu2 = rb(0.9, 0.85, 0.3, tm(0xffffff, nxOf(-1.2)), -1.2, 1.15, -2.9, 0.12); cu2.rotation.z = -0.15;
+// coffee table
+rb(2.0, 0.14, 1.1, tm(0xffffff, nxOf(0.3)), 0.3, 0.7, 1.0, 0.06);
+[[-0.6, 0.55], [1.2, 0.55], [-0.6, 1.45], [1.2, 1.45]].forEach(([x, z]) => cyl(0.06, 0.06, 0.66, goldMat, x, 0.35, z, 12));
+// lamp
+cyl(0.45, 0.5, 0.12, goldMat, 3.4, 0.06, -3.2, 32); cyl(0.05, 0.05, 3.2, goldMat, 3.4, 1.7, -3.2, 12);
+const shadeMat = new THREE.MeshStandardMaterial({ color: 0xfff3d6, emissive: 0xffd27a, emissiveIntensity: 0, roughness: 0.8 });
+cyl(0.55, 0.8, 0.9, shadeMat, 3.4, 3.4, -3.2, 40);
+// plant
+cyl(0.5, 0.38, 0.8, tm(0xffffff, nxOf(3.4)), 3.5, 0.4, -1.2, 32);
+const leaves = [];
+for (let i = 0; i < 8; i++) {
+  const m = new THREE.Mesh(new THREE.SphereGeometry(0.5, 20, 20), tm(0x4ade80, 0.97)); m.scale.set(0.34, 0.95, 0.1); m.castShadow = true;
+  const a = i / 8 * 6.2832; m.position.set(3.5 + Math.cos(a) * 0.35, 1.5, -1.2 + Math.sin(a) * 0.35); m.userData = { a, base: 0.5 + (i % 3) * 0.12 }; dio.add(m); leaves.push(m);
+}
+// clutter (vanishes with the sparkle wave)
+const clutter = [];
+function addClutter(mesh, x, y, z, rot) { mesh.position.set(x, y, z); mesh.rotation.set(...rot); mesh.castShadow = true; dio.add(mesh); clutter.push({ mesh, x, y, z, rot, nx: nxOf(x), sc: mesh.scale.x, ph: rnd() * 6 }); }
+const cardboard = new THREE.MeshStandardMaterial({ color: 0xb98b5a, roughness: 0.9 });
+const paper = new THREE.MeshStandardMaterial({ color: 0xe8e6df, roughness: 0.95, flatShading: true });
+[[-3.2, 0.5, 1.8, 1.2, 1.0, 1.0, 0.3], [-3.3, 1.5, 1.9, 0.9, 0.8, 0.8, -0.4], [-2.2, 0.4, 3.2, 0.9, 0.8, 0.8, 0.9], [3.2, 0.5, 2.6, 1.1, 1.0, 1.0, 0.5]].forEach(([x, y, z, w, h, d, r]) => addClutter(new THREE.Mesh(new THREE.BoxGeometry(w, h, d), cardboard), x, y, z, [0, r, 0]));
+[[-1.6, 0.25, 2.8], [-0.2, 0.25, 3.3], [1.9, 0.25, 2.2], [0.9, 0.78, 1.0], [2.8, 0.25, 0.4], [-3.1, 0.25, -0.5]].forEach(([x, y, z]) => addClutter(new THREE.Mesh(new THREE.DodecahedronGeometry(0.26, 0), paper), x, y, z, [rnd() * 3, rnd() * 3, 0]));
+[[0.0, 0.84, 1.1, 0xf9a8d4], [-1.0, 0.1, 1.7, 0x94a3b8], [3.0, 0.1, 1.3, 0xfbbf24]].forEach(([x, y, z, c]) => { const m = new THREE.Mesh(new THREE.SphereGeometry(0.5, 16, 16), new THREE.MeshStandardMaterial({ color: c, roughness: 1 })); m.scale.set(1, 0.3, 0.8); addClutter(m, x, y + 0.08, z, [0, rnd() * 3, 0]); });
+[[0.7, 0.9, 0.8], [-0.2, 0.9, 1.3]].forEach(([x, y, z]) => addClutter(new THREE.Mesh(new THREE.CylinderGeometry(0.14, 0.11, 0.3, 16), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.5 })), x, y + 0.08, z, [0.2, 0, 0.7]));
+// dust bunnies
+const bunnies = [];
+for (let i = 0; i < 12; i++) {
+  const m = new THREE.Mesh(new THREE.IcosahedronGeometry(0.3, 1), new THREE.MeshStandardMaterial({ color: 0x8a8f98, roughness: 1 })); m.castShadow = true;
+  const x = -4 + rnd() * 8, z = -2.5 + rnd() * 6; m.position.set(x, 0.3, z); dio.add(m);
+  bunnies.push({ mesh: m, x, z, nx: nxOf(x), ph: rnd() * 6 });
+}
+// stains
+const stains = [];
+[[-2.5, 0.01, 1.0, 0.9], [1.5, 0.07, 1.8, 0.7], [-0.5, 0.01, 3.5, 0.8], [3.0, 0.01, 2.2, 0.6]].forEach(([x, y, z, r]) => {
+  const m = new THREE.Mesh(new THREE.CircleGeometry(r, 32), new THREE.MeshBasicMaterial({ color: 0x4a3a2a, transparent: true, opacity: 0.55, depthWrite: false }));
+  m.rotation.x = -Math.PI / 2; m.position.set(x, y + 0.005 + (y > 0.05 ? 0.0 : 0), z); dio.add(m); stains.push({ m, nx: nxOf(x) });
+});
+// star bursts where clutter pops
+const burstStars = clutter.map(() => { const m = new THREE.Mesh(starGeo, goldMat); m.castShadow = true; dio.add(m); return m; });
+
+/* ---------- sky: clouds ---------- */
+const cloudMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 1, emissive: 0xffffff, emissiveIntensity: 0.4 });
+const clouds = [];
+for (let i = 0; i < 22; i++) {
+  const g = new THREE.Group(); const n = 4 + Math.floor(rnd() * 3);
+  for (let k = 0; k < n; k++) { const m = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 24), cloudMat); const r = 1.4 + rnd() * 1.6; m.scale.setScalar(r); m.position.set((k - n / 2) * 1.8 * (0.8 + rnd() * 0.3), rnd() * 0.9, rnd() * 1.4); g.add(m); }
+  const near = i < 6;
+  g.userData = { x: (rnd() - 0.5) * 90, y: near ? -11 - rnd() * 3 : -6 + rnd() * 22, z: near ? 4 + rnd() * 6 : -10 - rnd() * 34, sp: 0.25 + rnd() * 0.3, sc: near ? 0.8 : 0.45 + rnd() * 0.5 };
+  scene.add(g); clouds.push(g);
+}
+
+/* ---------- comet + sparkle dust ---------- */
+function sparkleSprite() { const c = document.createElement('canvas'); c.width = c.height = 128; const x = c.getContext('2d'); const g = x.createRadialGradient(64, 64, 0, 64, 64, 64); g.addColorStop(0, 'rgba(255,245,200,1)'); g.addColorStop(0.2, 'rgba(255,222,120,.9)'); g.addColorStop(1, 'rgba(255,220,100,0)'); x.fillStyle = g; x.fillRect(0, 0, 128, 128); x.fillStyle = 'rgba(255,248,215,.95)'; x.beginPath(); x.moveTo(64, 2); x.quadraticCurveTo(68, 60, 126, 64); x.quadraticCurveTo(68, 68, 64, 126); x.quadraticCurveTo(60, 68, 2, 64); x.quadraticCurveTo(60, 60, 64, 2); x.fill(); return new THREE.CanvasTexture(c); }
+const dustTex = sparkleSprite();
+const spr = (col = 0xffd966) => new THREE.Sprite(new THREE.SpriteMaterial({ map: dustTex, transparent: true, depthWrite: false, color: col }));
+const trail = []; for (let i = 0; i < 46; i++) { const s = spr(i === 0 ? 0xffffff : 0xffd24d); dio.add(s); trail.push(s); }
+const cometStars = []; for (let i = 0; i < 7; i++) { const m = new THREE.Mesh(starGeo, goldMat); dio.add(m); cometStars.push(m); }
+const cometPos = c => V(-4.5 + 9 * c + 0.9, 2.3 + Math.sin(c * 15) * 1.2, 1.0 + Math.cos(c * 15) * 2.2);
+const roomDust = [];
+for (let i = 0; i < 70; i++) { const s = spr(); s.userData = { x: -4.3 + rnd() * 8.6, y: 0.4 + rnd() * 4.2, z: -3.8 + rnd() * 7.6, sc: 0.25 + rnd() * 0.5, ph: rnd() * 10, sp: 1.2 + rnd() * 2.2 }; dio.add(s); roomDust.push(s); }
+
+/* ---------- snow globe + CTA ---------- */
+const globe = new THREE.Mesh(new THREE.SphereGeometry(4.3, 64, 64), new THREE.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.02, metalness: 0, transparent: true, opacity: 0.14, clearcoat: 1, envMapIntensity: 2.8, depthWrite: false }));
+scene.add(globe);
+const gBase = new THREE.Mesh(new THREE.CylinderGeometry(3.4, 3.9, 1.5, 72), goldMat); gBase.castShadow = true; scene.add(gBase);
+const mound = new THREE.Mesh(new THREE.CylinderGeometry(3.4, 3.4, 1.3, 72), new THREE.MeshPhysicalMaterial({ color: 0xfffaf0, roughness: 0.5, clearcoat: 0.6 })); scene.add(mound);
+const gBaseRing = new THREE.Mesh(new THREE.TorusGeometry(3.4, 0.08, 24, 96), goldMat); gBaseRing.rotation.x = Math.PI / 2; scene.add(gBaseRing);
+const logoG = new THREE.Group(); scene.add(logoG);
+{ const d = new THREE.Mesh(new THREE.CylinderGeometry(1.9, 1.9, 0.16, 96), discMat); d.rotation.x = Math.PI / 2; d.position.z = -0.4; logoG.add(d); const l = makeLogo(3.4); logoG.add(l); const r = new THREE.Mesh(new THREE.TorusGeometry(1.9, 0.07, 24, 120), goldMat); logoG.add(r); }
+const snow = []; for (let i = 0; i < 70; i++) { const s = spr(0xfff0b0); s.userData = { a: rnd() * 6.28, r: rnd() * 3.9, y0: rnd() * 8, sp: 0.4 + rnd() * 0.6, sc: 0.12 + rnd() * 0.2 }; scene.add(s); snow.push(s); }
+
+/* ---------- camera ---------- */
+const keys = [
+  [0.0, V(7, 17, 34), V(-1, 8, 0)],
+  [4.0, V(7.5, 6.6, 22), V(-2.6, 2.4, 0)],
+  [8.8, V(6.5, 5.6, 21), V(-2.8, 2.4, 0)],
+  [12.0, V(9.5, 5.6, 21), V(-2.4, 2.4, 0)],
+  [13.6, V(5, 5.8, 21.5), V(-2.8, 2.5, 0)],
+  [18.0, V(-0.5, 5.4, 21), V(-3.2, 2.5, 0)],
+  [20.0, V(0.5, 5.2, 28), V(-3.9, 4.4, 0)],
+  [26.0, V(1.2, 5.4, 27), V(-3.9, 4.4, 0)],
+];
+function camAt(t) { let i = 0; while (i < keys.length - 2 && t > keys[i + 1][0]) i++; const [t0, p0, l0] = keys[i], [t1, p1, l1] = keys[i + 1]; const u = sstep((t - t0) / (t1 - t0)); return [p0.clone().lerp(p1, u), l0.clone().lerp(l1, u)]; }
+
+/* ---------- update ---------- */
+const overlays = [...document.querySelectorAll('.t')]; const mood = document.getElementById('mood'); const tmp = new THREE.Vector3();
+function update(t) {
+  const [p, l] = camAt(t); p.x += Math.sin(t * 0.5) * 0.15; p.y += Math.sin(t * 0.4) * 0.1;
+  camera.position.copy(p); camera.lookAt(l);
+
+  const s = sstep((t - 9.0) / 3.0), s2 = s * 1.5;
+  const P = nx => sstep((s2 - nx) / 0.35);       // 0 messy → 1 clean at this x
+  const clean = sstep((t - 10.5) / 2.5);
+
+  // diorama float + intro + globe shrink
+  const intro = easeOutBack((t - 0.2) / 1.6);
+  const gk = sstep((t - 18.2) / 1.5);
+  const ds = lerp(1, 0.45, gk);
+  dio.scale.setScalar(Math.max(0.0001, intro * ds));
+  dio.position.set(0, lerp(Math.sin(t * 0.8) * 0.2, 0.42, gk), 0); dio.rotation.y = lerp(Math.sin(t * 0.3) * 0.05, 0, gk);
+  rock.scale.setScalar(1 - gk); rockMini.forEach(m => m.scale.setScalar(1 - gk));
+
+  tints.forEach(o => o.m.color.copy(o.clean).lerp(DIRTY, 0.6 * (1 - P(o.nx))));
+  glassMat.color.setRGB(0, 0, 0).lerpColors(new THREE.Color(0x8d97a0), new THREE.Color(0xcdeeff), P(0.8));
+  shadeMat.emissiveIntensity = 1.4 * clean; warm.intensity = 55 * clean * (1 - gk * 0.4);
+  warm.position.set(0, 4.5 * ds + dio.position.y, 2 * ds);
+  renderer.toneMappingExposure = lerp(0.95, 1.25, clean);
+  frame.rotation.z = 0.35 * (1 - P(0.3));
+  leaves.forEach(m => { const d = m.userData; const wilt = 1 - P(0.97); const tilt = lerp(d.base, 1.15, wilt) * 0.9; m.position.y = lerp(1.55 + 0.1 * Math.sin(t * 2 + d.a), 1.25, wilt); m.rotation.set(Math.sin(d.a) * tilt, 0, -Math.cos(d.a) * tilt); m.scale.y = lerp(0.95 + 0.06 * Math.sin(t * 2.5 + d.a) * clean, 0.7, wilt); });
+  mood.style.opacity = (0.32 * (1 - sstep((t - 9.2) / 2.8))).toFixed(3);
+
+  clutter.forEach((c, i) => { const q = P(c.nx); c.mesh.visible = q < 0.999; const sc = c.sc * (1 - q); c.mesh.scale.setScalar(Math.max(0.0001, sc)); c.mesh.position.set(c.x, c.y + q * 2.2 + Math.sin(t * 2 + c.ph) * 0.02 * (1 - q), c.z); c.mesh.rotation.set(c.rot[0], c.rot[1] + q * 7, c.rot[2]);
+    const b = burstStars[i]; b.position.set(c.x, c.y + q * 2.2 + 0.4, c.z); b.scale.setScalar(Math.max(0.0001, Math.sin(clamp(q) * Math.PI) * 0.55)); b.rotation.set(0.2, t * 4 + i, 0); });
+  bunnies.forEach((b, i) => { const q = P(b.nx); b.mesh.visible = q < 0.999; const hop = Math.abs(Math.sin(t * 3.2 + b.ph)); b.mesh.position.set(b.x + Math.sin(t * 0.8 + b.ph) * 0.4 + q * 0, 0.28 + hop * 0.45 + q * 2.5, b.z); b.mesh.scale.set(1 + (1 - hop) * 0.15, 1 - (1 - hop) * 0.15, 1).multiplyScalar(Math.max(0.0001, 1 - q)); b.mesh.rotation.y = t * 2 + b.ph; });
+  stains.forEach(o => { o.m.material.opacity = 0.55 * (1 - P(o.nx)); o.m.visible = o.m.material.opacity > 0.01; });
+
+  // comet
+  const cOn = t > 8.8 && s2 < 1.18; const cc = clamp(s2);
+  trail.forEach((sp, i) => { const c = cc - i * 0.006; const pos = cometPos(Math.max(0, c)); sp.position.copy(pos); const f = cOn ? 1 - i / trail.length : 0; sp.scale.setScalar(Math.max(0.0001, (i === 0 ? 2.4 : 0.9) * f * (1 + 0.2 * Math.sin(t * 20 + i)))); sp.material.opacity = f; });
+  cometStars.forEach((m, i) => { const c = cc - (i + 1) * 0.022; const pos = cometPos(Math.max(0, c)); pos.y += Math.sin(t * 6 + i) * 0.25; m.position.copy(pos); m.scale.setScalar(cOn ? 0.3 * (1 - i / 8) : 0.0001); m.rotation.set(0, t * 5 + i, t * 2); });
+
+  // room sparkle dust
+  roomDust.forEach(sp => { const d = sp.userData; const on = sstep((s2 - nxOf(d.x)) / 0.3); const tw = 0.5 + 0.5 * Math.sin(t * d.sp + d.ph); sp.position.set(d.x, d.y + Math.sin(t * 0.7 + d.ph) * 0.2, d.z); sp.scale.setScalar(Math.max(0.0001, d.sc * on * (0.4 + tw))); sp.material.opacity = on * (0.3 + 0.7 * tw); });
+
+  // clouds
+  clouds.forEach(g => { const d = g.userData; g.position.set(((d.x + t * d.sp + 60) % 120) - 60, d.y + Math.sin(t * 0.3 + d.x) * 0.3, d.z); g.scale.setScalar(d.sc); });
+
+  // globe finale
+  const gp = easeOutBack((t - 18.3) / 1.3);
+  const gy = 2.6; globe.position.set(0, gy, 0); globe.scale.setScalar(Math.max(0.0001, gp));
+  gBase.position.set(0, gy - 4.4, 0); mound.position.set(0, gy - 3.0, 0); mound.scale.setScalar(Math.max(0.0001, sstep((t - 18.4) / 1.0))); gBase.scale.setScalar(Math.max(0.0001, sstep((t - 18.4) / 1.0))); gBaseRing.position.set(0, gy - 2.35, 0); gBaseRing.scale.setScalar(Math.max(0.0001, sstep((t - 18.4) / 1.0)));
+  logoG.position.set(0, gy + 6.9 + Math.sin(t * 1.1) * 0.12, 0); logoG.scale.setScalar(Math.max(0.0001, easeOutBack((t - 19.0) / 1.2))); logoG.rotation.y = Math.sin(t * 0.9) * 0.18;
+  snow.forEach(sp => { const d = sp.userData; const y = 7.0 - ((t * d.sp * 1.2 + d.y0) % 7); const r = Math.min(d.r, 3.2) * Math.sqrt(Math.max(0, 1 - Math.pow((y - 3.5) / 3.8, 2))); const a = d.a + t * 0.4; sp.position.set(Math.cos(a) * r, gy - 3.4 + y * 0.95, Math.sin(a) * r); sp.scale.setScalar(Math.max(0.0001, d.sc * gk)); sp.material.opacity = gk * (0.5 + 0.5 * Math.sin(t * 3 + d.a * 5)); });
+
+  // overlays
+  overlays.forEach(el => { const a = parseFloat(el.dataset.in), b = parseFloat(el.dataset.out); const inn = sstep((t - a) / 0.8), out = sstep((t - (b - 0.5)) / 0.5); const o = inn * (1 - out); el.style.opacity = o.toFixed(3); el.style.transform = `translateY(${((1 - inn) * 34 - out * 14).toFixed(1)}px)`; el.style.filter = o > 0.99 ? 'none' : `blur(${((1 - o) * 8).toFixed(1)}px)`; });
+}
+
+await document.fonts.load('800 40px Inter');
+function renderFrame(t) { update(t); renderer.render(scene, camera); }
+window.renderFrame = renderFrame; window.DURATION = DURATION; window.ready = true;
+if (!location.search.includes('capture')) {
+  const stage = document.getElementById('stage'); const fit = () => { stage.style.transform = `scale(${Math.min(innerWidth / W, innerHeight / H)})`; }; fit(); addEventListener('resize', fit);
+  const t0 = performance.now(); (function loop() { renderFrame(((performance.now() - t0) / 1000) % DURATION); requestAnimationFrame(loop); })();
+}
+</script>
+</body>
+</html>

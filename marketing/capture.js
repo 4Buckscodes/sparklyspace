@@ -15,11 +15,11 @@ const server = http.createServer((q, r) => {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   page.on('console', m => m.type() === 'error' && console.log('ERR', m.text()));
   page.on('pageerror', e => console.log('PAGEERR', e.message));
-  await page.goto(`http://localhost:${port}/marketing/index.html?capture`);
+  await page.goto(`http://localhost:${port}/marketing/${process.env.PAGE||'index.html'}?capture`);
   await page.waitForFunction('window.ready', null, { timeout: 60000 });
   const mode = process.argv[2], out = process.env.OUT || '/tmp/frames'; fs.mkdirSync(out, { recursive: true });
   const shoot = async (t, file) => { await page.evaluate(t => window.renderFrame(t), t); await page.screenshot({ path: file }); };
   if (mode === 'still') for (const t of process.argv[3].split(',')) await shoot(+t, `${out}/still_${t}.png`);
-  else { const fps = 30, n = Math.round(23 * fps); for (let i = +(process.env.START||0); i < n; i++) { await shoot(i / fps, `${out}/f_${String(i).padStart(4, '0')}.png`); if (i % 60 === 0) console.log(i, '/', n); } }
+  else { const fps = 30, n = Math.round((await page.evaluate('window.DURATION')) * fps); for (let i = +(process.env.START||0); i < n; i++) { await shoot(i / fps, `${out}/f_${String(i).padStart(4, '0')}.png`); if (i % 60 === 0) console.log(i, '/', n); } }
   await browser.close(); server.close();
 })();
