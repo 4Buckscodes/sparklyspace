@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Sparkly Space – Commercial flyer 1 (Corporate)</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  .hdr{position:absolute;left:0;right:0;top:0;height:128px;background:linear-gradient(120deg,var(--navy-d),var(--navy));color:#fff;padding:30px 48px;display:flex;justify-content:space-between;align-items:center}
+  .hdr .wm b{color:#fff} .hdr .wm i{color:var(--gold)}
+  .tagp{border:1.5px solid rgba(212,175,55,.7);color:var(--gold-l);border-radius:99px;padding:9px 18px;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+  .hero{position:absolute;left:0;right:0;top:128px;height:450px;background:linear-gradient(120deg,var(--navy),#0b3a86)}
+  .photo{position:absolute;right:0;top:0;width:430px;height:450px;clip-path:polygon(16% 0,100% 0,100% 100%,0 100%);background:url(img/office-clean.jpg) 62% center/cover}
+  .photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,42,102,.55),rgba(10,42,102,0) 55%)}
+  h1{position:absolute;left:48px;top:34px;width:360px;font-size:56px;line-height:1.0;font-weight:800;letter-spacing:-.035em;color:#fff}
+  .lede{position:absolute;left:48px;top:268px;width:330px;color:#cfe3ff;font-size:16px;line-height:1.5;font-weight:400}
+  .chips{position:absolute;left:48px;top:372px;display:flex;gap:10px}
+  .chips span{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);color:#fff;border-radius:99px;padding:8px 14px;font-weight:600;font-size:12.5px}
+  .chips span em{display:inline-block;width:16px;height:16px;color:var(--gold)}
+  .seal{position:absolute;right:44px;top:482px;width:176px;height:176px;border-radius:50%;padding:7px;box-shadow:0 18px 40px rgba(6,26,66,.45)}
+  .seal>div{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 30% 25%,#14408f,var(--navy-d));display:flex;flex-direction:column;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.35);color:#fff;text-align:center}
+  .seal small{font-size:10.5px;letter-spacing:.2em;font-weight:700;color:var(--gold-l);text-transform:uppercase}
+  .seal b{font-size:70px;font-weight:800;line-height:.95;letter-spacing:-.04em;margin-top:2px}
+  .seal b sup{font-size:34px;vertical-align:top;position:relative;top:6px}
+  .seal span{font-size:19px;font-weight:800;letter-spacing:.3em;color:var(--gold);margin-top:2px;padding-left:.3em}
+  .svc{position:absolute;left:48px;right:48px;top:600px}
+  .svc h2{font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--sky);font-weight:800}
+  .svc h3{font-size:28px;letter-spacing:-.02em;color:var(--navy);font-weight:800;margin-top:4px;width:470px;line-height:1.1}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;margin-top:34px}
+  .it{display:flex;gap:12px;align-items:center}
+  .it .ic{width:38px;height:38px;border-radius:11px;background:var(--navy);color:var(--gold);padding:8px;flex:none}
+  .it b{display:block;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.2}
+  .it p{font-size:11px;color:var(--slate);margin-top:2px;line-height:1.3}
+  .cta{position:absolute;left:0;right:0;bottom:0;height:172px;background:linear-gradient(120deg,var(--navy-d),var(--navy));color:#fff;padding:26px 48px;display:flex;justify-content:space-between;align-items:center}
+  .cta:before{content:"";position:absolute;left:0;right:0;top:0;height:4px}
+  .cta h4{font-size:15px;font-weight:600;color:#cfe3ff}
+  .cta .ph{display:flex;align-items:center;gap:12px;margin-top:6px}
+  .cta .ph .ic{width:34px;height:34px;color:var(--navy);padding:7px;border-radius:50%}
+  .cta .ph b{font-size:34px;font-weight:800;letter-spacing:-.02em}
+  .cta .ph small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-l);font-weight:700}
+  .cta .ct{display:flex;gap:22px;margin-top:12px;font-size:13px;font-weight:600;color:#fff}
+  .cta .ct span{display:flex;align-items:center;gap:7px} .cta .ct i{width:15px;height:15px;color:var(--gold);display:inline-block}
+  .cta .loc{margin-top:12px;font-size:11.5px;color:#9fc0f0;letter-spacing:.04em}
+  .scan{text-align:center;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-l);margin-top:8px}
+</style></head>
+<body><div class="page">
+  <div class="hdr">
+    <div class="brand"><img src="img/logo-mark.png"><div class="wm"><b>SPARKLY</b><i>Space · Cleaning Services</i></div></div>
+    <div class="tagp">Commercial Cleaning</div>
+  </div>
+  <div class="hero">
+    <div class="photo"></div>
+    <h1>A spotless workplace.<br><span class="gold-text">Zero disruption.</span></h1>
+    <p class="lede">Professional, reliable cleaning for offices, retail units and gyms &mdash; scheduled around your team, not in the way of it.</p>
+    <div class="chips"><span><em data-i="building"></em>Offices</span><span><em data-i="store"></em>Retail</span><span><em data-i="gym"></em>Gyms</span></div>
+  </div>
+  <div class="seal gold-grad"><div><small>Launch offer</small><b>25<sup>%</sup></b><span>OFF</span></div></div>
+
+  <div class="svc">
+    <h2>Commercial cleaning, handled</h2>
+    <h3>Everything your workplace needs, nothing it doesn&rsquo;t.</h3>
+    <div class="grid">
+      <div class="it"><div class="ic" data-i="desk"></div><div><b>Desk &amp; surface sanitisation</b><p>Keyboards, phones &amp; high-touch points</p></div></div>
+      <div class="it"><div class="ic" data-i="kitchen"></div><div><b>Kitchen &amp; breakroom deep clean</b><p>A fresh space your team will notice</p></div></div>
+      <div class="it"><div class="ic" data-i="sparkle"></div><div><b>Fast, quiet service</b><p>Even while you&rsquo;re out at lunch</p></div></div>
+      <div class="it"><div class="ic" data-i="clock"></div><div><b>Flexible out-of-hours</b><p>Early mornings, evenings &amp; weekends</p></div></div>
+      <div class="it"><div class="ic" data-i="floor"></div><div><b>Floor maintenance &amp; polishing</b><p>Vacuuming, mopping &amp; shine</p></div></div>
+      <div class="it"><div class="ic" data-i="shield"></div><div><b>Vetted &amp; fully insured</b><p>Peace of mind on every visit</p></div></div>
+      <div class="it"><div class="ic" data-i="reclean"></div><div><b>24-hour re-clean guarantee</b><p>Not right? We&rsquo;ll put it right, free</p></div></div>
+      <div class="it"><div class="ic" data-i="leaf"></div><div><b>Eco-friendly options</b><p>Greener products on request</p></div></div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div>
+      <h4>Get your fast, personalised quote today</h4>
+      <div class="ph"><div class="ic gold-grad" data-i="phone" data-w="2.2"></div><div><small>Call or WhatsApp</small><b>07552 427880</b></div></div>
+      <div class="ct"><span><i data-i="globe"></i>www.sparklyspace.co.uk</span><span><i data-i="mail"></i>bookings@sparklyspace.co.uk</span></div>
+      <div class="loc">Serving Bournemouth, Poole &amp; Christchurch</div>
+    </div>
+    <div><div class="qr"><img src="img/qr-v1.svg"></div><div class="scan">Scan to book</div></div>
+  </div>
+</div><script src="common.js"></script></body></html>

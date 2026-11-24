@@ -1,0 +1,21 @@
+@page { size: 210mm 297mm; margin: 0; }
+:root{
+  --navy:#0a2a66; --navy-d:#061a42; --sky:#0284c7; --sky-l:#e0f2fe;
+  --gold:#d4af37; --gold-d:#a8841a; --gold-l:#f4e3a1; --cream:#fffdf6; --ink:#0f172a; --slate:#475569;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#d8dde6}
+body{font-family:Inter,system-ui,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{position:relative;width:794px;height:1123px;overflow:hidden;background:var(--cream);color:var(--ink)}
+.ico{width:1em;height:1em;display:inline-block;vertical-align:middle;flex:none}
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{height:62px;width:auto;display:block}
+.wm{line-height:1}
+.wm b{display:block;font-weight:800;font-size:30px;letter-spacing:.14em}
+.wm i{display:block;font-style:normal;font-weight:600;font-size:10.5px;letter-spacing:.42em;margin-top:6px;text-transform:uppercase}
+.gold-grad{background:linear-gradient(135deg,#f4e3a1 0%,#d4af37 45%,#a8841a 100%)}
+.gold-text{background:linear-gradient(135deg,#f6e7ad,#d4af37 50%,#b8901f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.spark{position:absolute;color:var(--gold)}
+.qr{background:#fff;padding:10px;border-radius:14px;display:inline-block;line-height:0}
+.qr img{width:104px;height:104px;display:block}
+.small{font-size:10px;line-height:1.35}
