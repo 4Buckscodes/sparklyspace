@@ -1,18 +1,25 @@
 import React from "react";
+import Image from "next/image";
 
 interface LogoProps {
   className?: string;
   iconOnly?: boolean;
   lightText?: boolean;
+  /** Load immediately. Use for the header logo; leave off for the footer. */
+  priority?: boolean;
 }
 
-export default function Logo({ className = "h-10 w-auto", iconOnly = false, lightText = false }: LogoProps) {
+export default function Logo({ className = "h-10 w-auto", iconOnly = false, lightText = false, priority = false }: LogoProps) {
   return (
     <div className={`flex items-center gap-3 select-none ${className}`}>
-      {/* Logo Image from public directory */}
-      <img
+      {/* Logo image. The source file is large, so next/image serves a small WebP.
+          Decorative when the brand name is shown beside it. */}
+      <Image
         src="/logo.png"
-        alt="Sparkly Space Logo"
+        alt={iconOnly ? "Sparkly Space" : ""}
+        width={44}
+        height={66}
+        priority={priority}
         className="h-11 w-auto object-contain flex-shrink-0 scale-[1.3] origin-center drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
       />
 
