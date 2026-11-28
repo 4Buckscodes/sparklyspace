@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const guide = getGuide(slug);
   if (!guide) return { title: "Guide Not Found" };
   return {
-    title: guide.shortTitle,
+    // Absolute so the long site suffix is not added; keeps titles near Google's display length.
+    title: { absolute: `${guide.shortTitle} | Sparkly Space` },
     description: guide.metaDescription,
     alternates: { canonical: `/guides/${guide.slug}` },
     openGraph: {

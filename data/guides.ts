@@ -25,6 +25,8 @@ export interface Guide {
   /** Service page this guide links through to. */
   serviceSlug: string;
   serviceLabel: string;
+  /** Other service pages that should also link to this guide. */
+  alsoServiceSlugs?: string[];
 }
 
 export const guides: Guide[] = [
@@ -319,6 +321,94 @@ export const guides: Guide[] = [
     ],
     serviceSlug: "airbnb-cleaning",
     serviceLabel: "Airbnb & Holiday Let Cleaning",
+  },
+  {
+    slug: "end-of-tenancy-carpet-cleaning",
+    title: "Do You Have to Clean the Carpets at the End of a Tenancy?",
+    shortTitle: "Carpet Cleaning at the End of a Tenancy",
+    metaDescription:
+      "Do you have to clean the carpets when you move out? What landlords can and cannot ask for, wear and tear versus damage, and how to protect your deposit.",
+    excerpt:
+      "What you are expected to do with the carpets, what counts as wear and tear, and how to avoid a deposit dispute.",
+    readMinutes: 4,
+    updated: "2026-11-28",
+    intro:
+      "Carpets are one of the most common areas of argument at the end of a tenancy. This guide explains in plain terms what you are normally expected to do, what a landlord can and cannot ask for, and how to protect your deposit. It covers assured shorthold tenancies in England and is general information, not legal advice. Rules differ in Scotland, Wales and Northern Ireland.",
+    sections: [
+      {
+        heading: "The short answer",
+        paragraphs: [
+          "In most cases you are expected to hand the carpets back in the same state of cleanliness as when you moved in, allowing for fair wear and tear. In England, a landlord or agent generally cannot require you to pay for a professional carpet clean as a condition of the tenancy, because the Tenant Fees Act 2019 limits what can be charged. If you are unsure, check the government’s current guidance on the Act.",
+          "That does not mean carpets can be left dirty. A landlord can still make a reasonable deduction from the deposit if you leave them in a worse state than the check-in inventory shows, and they should be able to evidence it.",
+        ],
+      },
+      {
+        heading: "Wear and tear, or damage?",
+        paragraphs: [
+          "Fair wear and tear is the ordinary ageing that comes from living in a home. Damage is something beyond that. Only damage, or a clear drop in cleanliness since the start of the tenancy, is normally chargeable.",
+        ],
+        bullets: [
+          "Usually wear and tear: flattened or worn pile in busy areas such as hallways and stairs, and light fading from sunlight",
+          "Usually treated as damage: stains, burns, pet accidents, rips, snags and marks from paint or glue",
+          "A carpet that was professionally cleaned at the start and is visibly dirty at the end may justify a fair cleaning charge",
+        ],
+      },
+      {
+        heading: "When a professional clean is worth it",
+        paragraphs: [
+          "You are not always required to hire one, but it can be a sensible way to avoid an argument.",
+        ],
+        bullets: [
+          "The inventory says the carpets were professionally cleaned when you moved in",
+          "There are stains you cannot remove yourself",
+          "You have had pets, or smokers in the home",
+          "Your agent is pressing for it, and you would rather settle it than risk a dispute. Ask them to point to the clause in your agreement",
+        ],
+      },
+      {
+        heading: "What to do before you move out",
+        bullets: [
+          "Read your tenancy agreement and the check-in inventory, and note what it says about the carpets",
+          "Vacuum thoroughly once the rooms are empty, including edges and under where furniture stood",
+          "Deal with stains early, and blot spills instead of scrubbing, which can spread the mark and damage the pile",
+          "If you book a professional clean, leave time for the carpets to dry before the inspection and keep windows open. Hot water extraction leaves carpets damp for a few hours",
+          "Photograph every room after cleaning, with dates, and keep the receipt for any professional clean",
+        ],
+      },
+      {
+        heading: "If your landlord proposes a deduction",
+        paragraphs: [
+          "Ask for the reasons and the evidence in writing, such as a comparison with the check-in inventory, photos and an invoice for any cleaning. If you disagree, use the free dispute service of the deposit scheme that holds your money. Our guide to getting your deposit back explains the basics.",
+        ],
+      },
+      {
+        heading: "Carpet cleaning with Sparkly Space",
+        paragraphs: [
+          "We can add a carpet deep clean, using hot water extraction, to an end of tenancy clean in Bournemouth, Poole and Christchurch. Tell us which rooms when you request a quote.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Do I have to pay for professional carpet cleaning when I move out?",
+        a: "Generally, in England, a landlord or agent cannot require you to pay for it as a fee. You are still expected to leave the carpets in the same state of cleanliness as at the start, allowing for fair wear and tear. Check your agreement and the government’s guidance on the Tenant Fees Act.",
+      },
+      {
+        q: "Can a landlord deduct from my deposit for dirty carpets?",
+        a: "They can make a fair deduction if the carpets are left less clean than at the start and they can evidence it, for example with the check-in inventory and photos. They cannot deduct for fair wear and tear.",
+      },
+      {
+        q: "What if the carpets were already stained or worn when I moved in?",
+        a: "The check-in inventory is the baseline. Marks and wear recorded at the start should not be charged to you at the end.",
+      },
+      {
+        q: "Should I keep the receipt for a professional clean?",
+        a: "Yes. A receipt shows what was done and when, and it helps if there is a dispute about the deposit.",
+      },
+    ],
+    serviceSlug: "end-of-tenancy-cleaning",
+    serviceLabel: "End of Tenancy Cleaning",
+    alsoServiceSlugs: ["custom-cleaning"],
   },
 ];
 
