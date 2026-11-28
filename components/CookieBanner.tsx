@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { TRACKING_ENABLED } from "@/lib/tracking";
 
 export const CONSENT_KEY = "ss_cookie_consent";
 export const OPEN_SETTINGS_EVENT = "open-cookie-settings";
@@ -14,13 +15,13 @@ function applyConsent(choice: Choice) {
 }
 
 /**
- * Cookie consent banner. Only shown when Google Analytics is configured
- * (NEXT_PUBLIC_GA_ID); without it the site sets no non-essential cookies.
+ * Cookie consent banner. Only shown when Google tracking is configured
+ * (GTM or GA4, see lib/tracking.ts); without it the site sets no non-essential cookies.
  * The saved choice is read by the consent-default script in GoogleAnalytics,
  * so a returning visitor's choice applies before any analytics runs.
  */
 export default function CookieBanner() {
-  const enabled = Boolean(process.env.NEXT_PUBLIC_GA_ID);
+  const enabled = TRACKING_ENABLED;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
