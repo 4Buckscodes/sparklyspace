@@ -233,6 +233,7 @@ export function locationJsonLd(location: LocationArea) {
       { name: "Home", path: "/" },
       { name: location.name, path: `/${location.slug}` },
     ]),
+    faqPageJsonLd(location.faqs),
   ];
 }
 
