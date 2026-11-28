@@ -228,7 +228,9 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
           {/* Related guides and audiences — internal links */}
           {(() => {
-            const related = guides.filter((g) => g.serviceSlug === service.slug);
+            const related = guides.filter(
+              (g) => g.serviceSlug === service.slug || g.alsoServiceSlugs?.includes(service.slug),
+            );
             if (related.length === 0 && service.slug !== "end-of-tenancy-cleaning") return null;
             return (
               <div className="border-t border-slate-100 pt-8 mb-10 text-sm text-slate-600">
