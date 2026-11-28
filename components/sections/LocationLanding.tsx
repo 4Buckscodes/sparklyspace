@@ -140,7 +140,7 @@ export default function LocationLanding({ location }: { location: LocationArea }
             Areas We Cover in {name}
           </h2>
           <p className="mt-3 text-sm text-slate-500 max-w-2xl mx-auto">
-            We regularly clean homes, rentals, and workplaces across these {name} neighbourhoods and postcodes.
+            {location.areaIntro}
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-2.5">
             {neighbourhoods.map((area) => (
@@ -194,7 +194,7 @@ export default function LocationLanding({ location }: { location: LocationArea }
             {name} Cleaning — Frequently Asked
           </h2>
           <div className="space-y-3">
-            {faqs.map((faq) => (
+            {[...location.faqs, ...faqs].map((faq) => (
               <details
                 key={faq.q}
                 className="group rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4 [&_summary]:cursor-pointer"
