@@ -80,7 +80,7 @@ export const services: ServiceItem[] = [
     id: "end-of-tenancy",
     name: "End of Tenancy Cleaning",
     slug: "end-of-tenancy-cleaning",
-    tagline: "Secure your full tenancy deposit back, guaranteed.",
+    tagline: "Cleaned to your landlord's or agent's checkout checklist.",
     description: "An agency-approved deep clean following a comprehensive checkout checklist. Designed to meet strict landlord, agent, and inventory checkout standards.",
     basePrice: 0,
     pricePerBedroom: 0,
