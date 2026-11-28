@@ -4,10 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { services } from "@/data/services";
 import { guides } from "@/data/guides";
+import { locations } from "@/data/locations";
+import { serviceSeo } from "@/data/service-seo";
 import { servicePhotos } from "@/lib/images";
 import { Check, Calendar, ArrowLeft, Shield, AlertCircle, ShoppingCart } from "lucide-react";
 import type { Metadata } from "next";
-import { serviceJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { serviceJsonLd, breadcrumbJsonLd, faqPageJsonLd, SITE_URL } from "@/lib/seo";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -31,10 +33,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const seo = serviceSeo[service.slug];
+
   return {
-    title: `${service.name} in Bournemouth, Poole & Christchurch`,
-    description: `${service.name} in Bournemouth, Poole & Christchurch. ${service.tagline} Request a personalised quote today.`,
+    title: seo ? { absolute: seo.title } : `${service.name} in Bournemouth, Poole & Christchurch`,
+    description:
+      seo?.description ??
+      `${service.name} in Bournemouth, Poole & Christchurch. ${service.tagline} Request a personalised quote today.`,
     alternates: { canonical: `/services/${service.slug}` },
+    openGraph: seo
+      ? {
+          title: seo.title,
+          description: seo.description,
+          url: `${SITE_URL}/services/${service.slug}`,
+          type: "website",
+        }
+      : undefined,
   };
 }
 
@@ -47,9 +61,11 @@ export default async function ServiceDetailPage({ params }: PageProps) {
   }
 
   const photo = servicePhotos[service.id];
+  const seo = serviceSeo[service.slug];
 
   const jsonLd = [
     serviceJsonLd(service),
+    ...(seo ? [faqPageJsonLd(seo.faqs)] : []),
     breadcrumbJsonLd([
       { name: "Home", path: "/" },
       { name: "Services", path: "/services" },
@@ -104,10 +120,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               <span>{service.tagline}</span>
             </span>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              {service.name}
+              {seo?.h1 ?? service.name}
             </h1>
             <p className="mt-4 text-slate-500 text-base leading-relaxed">
-              {service.description}
+              {seo?.intro ?? service.description}
             </p>
           </div>
 
@@ -177,6 +193,38 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             </div>
           )}
+
+          {/* FAQs — also emitted as FAQPage schema */}
+          {seo && (
+            <div className="border-t border-slate-100 pt-8 mb-10">
+              <h2 className="text-lg font-bold text-slate-900 mb-4">Frequently asked questions</h2>
+              <dl className="space-y-5">
+                {seo.faqs.map((f) => (
+                  <div key={f.q}>
+                    <dt className="font-bold text-slate-800">{f.q}</dt>
+                    <dd className="mt-1 text-sm text-slate-600 leading-relaxed">{f.a}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
+
+          {/* Areas covered — internal links to the town pages */}
+          <div className="border-t border-slate-100 pt-8 mb-10 text-sm text-slate-600">
+            <h2 className="text-lg font-bold text-slate-900 mb-3">Where we work</h2>
+            <p>
+              We provide this service across{" "}
+              {locations.map((l, i) => (
+                <React.Fragment key={l.slug}>
+                  {i > 0 && (i === locations.length - 1 ? " and " : ", ")}
+                  <Link href={`/${l.slug}`} className="text-sky-700 font-semibold hover:underline">
+                    {l.name}
+                  </Link>
+                </React.Fragment>
+              ))}
+              .
+            </p>
+          </div>
 
           {/* Related guides and audiences — internal links */}
           {(() => {
