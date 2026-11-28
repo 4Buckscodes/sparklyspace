@@ -235,3 +235,40 @@ export function locationJsonLd(location: LocationArea) {
     ]),
   ];
 }
+
+/** FAQPage schema from plain question/answer pairs. */
+export function faqPageJsonLd(faqs: { q: string; a: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+}
+
+/** Article schema for a guide, with the business as publisher. */
+export function articleJsonLd(article: {
+  slug: string;
+  title: string;
+  description: string;
+  updated: string;
+}) {
+  const url = `${SITE_URL}/guides/${article.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    headline: article.title,
+    description: article.description,
+    url,
+    mainEntityOfPage: url,
+    dateModified: article.updated,
+    inLanguage: "en-GB",
+    author: { "@id": BUSINESS_ID },
+    publisher: { "@id": BUSINESS_ID },
+    image: `${SITE_URL}/opengraph-image`,
+  };
+}

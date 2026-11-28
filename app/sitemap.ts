@@ -1,11 +1,12 @@
 import { MetadataRoute } from "next";
 import { services } from "@/data/services";
 import { locations } from "@/data/locations";
+import { guides } from "@/data/guides";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://sparklyspace.co.uk";
 
-  const routes = ["", "/services", "/book", "/about", "/contact", "/privacy", "/terms"].map((route) => ({
+  const routes = ["", "/services", "/landlords", "/guides", "/book", "/about", "/contact", "/privacy", "/terms"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
@@ -26,5 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...routes, ...locationRoutes, ...serviceRoutes];
+  const guideRoutes = guides.map((guide) => ({
+    url: `${baseUrl}/guides/${guide.slug}`,
+    lastModified: new Date(guide.updated),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...routes, ...locationRoutes, ...serviceRoutes, ...guideRoutes];
 }

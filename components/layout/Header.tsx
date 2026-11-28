@@ -39,6 +39,7 @@ export default function Header() {
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
+    { name: "Guides", href: "/guides" },
     { name: "Our Work", href: "/#our-work" },
     { name: "About Us", href: "/about" },
     { name: "Contact", href: "/contact" },
@@ -70,14 +71,14 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-3 lg:gap-8">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium transition-colors duration-200 py-2 hover:text-sky-600 focus-visible:outline-sky-500 focus-visible:outline-2 rounded px-2 ${
+                  className={`whitespace-nowrap text-sm font-medium transition-colors duration-200 py-2 hover:text-sky-600 focus-visible:outline-sky-500 focus-visible:outline-2 rounded px-2 ${
                     isActive
                       ? "text-sky-600 border-b-2 border-sky-500 font-semibold"
                       : "text-slate-600 hover:text-slate-900"
@@ -90,11 +91,11 @@ export default function Header() {
           </nav>
 
           {/* Desktop CTA Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2 lg:gap-4">
             <a
               href="tel:+447552427880"
               onClick={handlePhoneClick}
-              className="flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors py-2 px-3 focus-visible:outline-sky-500 focus-visible:outline-2 rounded min-w-[44px] min-h-[44px]"
+              className="flex items-center gap-2 whitespace-nowrap text-sm font-medium text-slate-700 hover:text-sky-600 transition-colors py-2 px-3 focus-visible:outline-sky-500 focus-visible:outline-2 rounded min-w-[44px] min-h-[44px]"
             >
               <Phone className="h-4 w-4 text-sky-500" />
               <span>07552 427880</span>
@@ -102,7 +103,7 @@ export default function Header() {
             <Link
               href="/book"
               onClick={handleBookClick}
-              className="flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm py-2.5 px-5 rounded-xl transition-all shadow-md shadow-sky-200 active:scale-95 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-sky-500 hover:shadow-sky-100 min-h-[44px]"
+              className="flex items-center gap-2 whitespace-nowrap bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm py-2.5 px-4 lg:px-5 rounded-xl transition-all shadow-md shadow-sky-200 active:scale-95 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-sky-500 hover:shadow-sky-100 min-h-[44px]"
             >
               <Calendar className="h-4 w-4" />
               <span>Request a Quote</span>

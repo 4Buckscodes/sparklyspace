@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Mail, Phone, Clock } from "lucide-react";
 import Logo from "./Logo";
 import { analytics } from "@/lib/analytics";
+import { OPEN_SETTINGS_EVENT } from "@/components/CookieBanner";
+import { TRACKING_ENABLED } from "@/lib/tracking";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -74,6 +76,15 @@ export default function Footer() {
           </div>
         </nav>
 
+        {/* More ways to find us — internal links */}
+        <nav aria-label="Helpful pages" className="mt-5 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm">
+            <Link href="/landlords" className="text-slate-300 hover:text-white transition-colors">Landlords &amp; Letting Agents</Link>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <Link href="/guides" className="text-slate-300 hover:text-white transition-colors">Cleaning Guides</Link>
+          </div>
+        </nav>
+
         {/* Brand + socials */}
         <div className="mt-10 border-t border-white/[0.06] pt-7 flex flex-col sm:flex-row items-center justify-between gap-6">
           <Link href="/" aria-label="Sparkly Space home" className="inline-block">
@@ -131,6 +142,15 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-slate-300 transition-colors">
               Terms &amp; Conditions
             </Link>
+            {TRACKING_ENABLED && (
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
+                className="hover:text-slate-300 transition-colors"
+              >
+                Cookie settings
+              </button>
+            )}
           </div>
         </div>
       </div>

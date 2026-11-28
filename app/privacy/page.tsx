@@ -62,9 +62,12 @@ export default function PrivacyPage() {
             We retain your booking details only for as long as necessary to manage your booking, perform the service, handle accounting records, and resolve queries, after which they are deleted from our booking system. Details you send via WhatsApp are additionally retained in our business chat records under WhatsApp's own terms.
           </p>
 
-          <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">5. Cookies and Analytics</h2>
+          <h2 id="cookies" className="text-lg font-bold text-slate-800 mt-8 mb-3">5. Cookies and Analytics</h2>
           <p>
             We use privacy-conscious analytics tools to measure website usage (e.g., tracking form progress and conversion rates). These tools do NOT capture sensitive customer details, names, addresses, or emails.
+          </p>
+          <p className="mt-3">
+            Where we use Google Analytics, it only sets analytics cookies if you click Accept on our cookie banner. If you reject, or do not choose, it does not set analytics cookies. You can change your choice at any time using &quot;Cookie settings&quot; in the website footer.
           </p>
 
           <h2 className="text-lg font-bold text-slate-800 mt-8 mb-3">6. Your Rights</h2>
