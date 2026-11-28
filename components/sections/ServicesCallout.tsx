@@ -28,7 +28,7 @@ const serviceCards = [
     tile: "bg-amber-500",
     Icon: Mop,
     title: "End of Tenancy",
-    desc: "Fully guaranteed checkout cleaning. Includes inside fridge, internal windows, and cabinets. Meet landlord requirements.",
+    desc: "Checkout cleaning to your landlord's or agent's checklist. Includes inside fridge, internal windows, and cabinets.",
     href: "/book?service=end-of-tenancy",
   },
   {

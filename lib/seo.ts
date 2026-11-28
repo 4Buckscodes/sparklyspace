@@ -84,7 +84,7 @@ export function localBusinessJsonLd() {
     knowsAbout: [
       "Domestic Cleaning",
       "Deep Cleaning",
-      "End of Tenancy Deposit Guarantee Cleaning",
+      "End of Tenancy Cleaning",
       "Airbnb & Holiday Let Turnover Cleaning",
       "Commercial & Office Sanitization",
       "Eco-Friendly Non-Toxic Cleaning",
