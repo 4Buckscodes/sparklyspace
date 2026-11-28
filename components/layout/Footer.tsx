@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Mail, Phone, Clock } from "lucide-react";
 import Logo from "./Logo";
 import { analytics } from "@/lib/analytics";
+import { OPEN_SETTINGS_EVENT } from "@/components/CookieBanner";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -140,6 +141,15 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-slate-300 transition-colors">
               Terms &amp; Conditions
             </Link>
+            {process.env.NEXT_PUBLIC_GA_ID && (
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new Event(OPEN_SETTINGS_EVENT))}
+                className="hover:text-slate-300 transition-colors"
+              >
+                Cookie settings
+              </button>
+            )}
           </div>
         </div>
       </div>

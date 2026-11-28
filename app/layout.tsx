@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import CookieBanner from "@/components/CookieBanner";
 import { localBusinessJsonLd } from "@/lib/seo";
 
 const inter = Inter({
@@ -92,6 +93,7 @@ export default function RootLayout({
         <Footer />
         <Analytics />
         <GoogleAnalytics />
+        <CookieBanner />
 
         {/* Floating Quick Action Contacts for Mobile */}
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-200 px-4 py-3 flex gap-3 shadow-lg">
