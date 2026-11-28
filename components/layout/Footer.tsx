@@ -74,6 +74,15 @@ export default function Footer() {
           </div>
         </nav>
 
+        {/* More ways to find us — internal links */}
+        <nav aria-label="Helpful pages" className="mt-5 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-sm">
+            <Link href="/landlords" className="text-slate-300 hover:text-white transition-colors">Landlords &amp; Letting Agents</Link>
+            <span aria-hidden="true" className="text-slate-600">·</span>
+            <Link href="/guides" className="text-slate-300 hover:text-white transition-colors">Cleaning Guides</Link>
+          </div>
+        </nav>
+
         {/* Brand + socials */}
         <div className="mt-10 border-t border-white/[0.06] pt-7 flex flex-col sm:flex-row items-center justify-between gap-6">
           <Link href="/" aria-label="Sparkly Space home" className="inline-block">

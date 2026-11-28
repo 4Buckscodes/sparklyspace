@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/next";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { localBusinessJsonLd } from "@/lib/seo";
 
 const inter = Inter({
@@ -64,6 +65,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Google Search Console HTML-tag verification. Set NEXT_PUBLIC_GSC_VERIFICATION to the token.
+  verification: process.env.NEXT_PUBLIC_GSC_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION }
+    : undefined,
 };
 
 export default function RootLayout({
@@ -86,6 +91,7 @@ export default function RootLayout({
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />
         <Analytics />
+        <GoogleAnalytics />
 
         {/* Floating Quick Action Contacts for Mobile */}
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-t border-slate-200 px-4 py-3 flex gap-3 shadow-lg">

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { services } from "@/data/services";
+import { guides } from "@/data/guides";
 import { servicePhotos } from "@/lib/images";
 import { Check, Calendar, ArrowLeft, Shield, AlertCircle, ShoppingCart } from "lucide-react";
 import type { Metadata } from "next";
@@ -176,6 +177,33 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               </div>
             </div>
           )}
+
+          {/* Related guides and audiences — internal links */}
+          {(() => {
+            const related = guides.filter((g) => g.serviceSlug === service.slug);
+            if (related.length === 0 && service.slug !== "end-of-tenancy-cleaning") return null;
+            return (
+              <div className="border-t border-slate-100 pt-8 mb-10 text-sm text-slate-600">
+                <h2 className="text-lg font-bold text-slate-900 mb-3">Helpful reading</h2>
+                <ul className="space-y-1.5">
+                  {related.map((g) => (
+                    <li key={g.slug}>
+                      <Link href={`/guides/${g.slug}`} className="text-sky-700 font-semibold hover:underline">
+                        {g.shortTitle}
+                      </Link>
+                    </li>
+                  ))}
+                  {["end-of-tenancy-cleaning", "airbnb-cleaning", "commercial-cleaning"].includes(service.slug) && (
+                    <li>
+                      <Link href="/landlords" className="text-sky-700 font-semibold hover:underline">
+                        Cleaning for landlords &amp; letting agents
+                      </Link>
+                    </li>
+                  )}
+                </ul>
+              </div>
+            );
+          })()}
 
           {/* Call to Action Banner */}
           <div className="border-t border-slate-100 pt-8 flex flex-col sm:flex-row items-center justify-between gap-6">
