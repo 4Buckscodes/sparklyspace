@@ -67,7 +67,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="focus-visible:outline-2 focus-visible:outline-sky-500 rounded-lg">
-            <Logo />
+            <Logo priority />
           </Link>
 
           {/* Desktop Navigation */}
